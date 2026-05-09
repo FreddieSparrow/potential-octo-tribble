@@ -1,0 +1,1935 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Red 1 Airsoft Booking System — Shopify Embedded App</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;900&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ── Reset & base ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:       #0d0d0d;
+  --panel:    #1a1a1a;
+  --border:   #2a2a2a;
+  --primary:  #d32f2f;
+  --primary-hover: #b71c1c;
+  --warning:  #ffa726;
+  --success:  #43a047;
+  --text:     #e0e0e0;
+  --muted:    #888;
+  --light:    #2c2c2c;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Barlow', sans-serif;
+  font-size: 15px;
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+h1, h2, h3, h4, h5, h6,
+.nav-brand,
+.badge,
+.stat-number,
+.step-label,
+.site-tab,
+.price-card-amount,
+.section-heading,
+.session-card-title,
+.review-author {
+  font-family: 'Barlow Condensed', sans-serif;
+}
+
+a { color: var(--primary); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* ── Nav ── */
+.nav {
+  background: #111;
+  border-bottom: 2px solid var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  height: 56px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.nav-brand {
+  font-size: 22px;
+  font-weight: 900;
+  letter-spacing: 1px;
+  color: #fff;
+  text-transform: uppercase;
+}
+.nav-brand span { color: var(--primary); }
+.nav-links { display: flex; gap: 20px; }
+.nav-links a {
+  color: var(--muted);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: #fff; }
+
+/* ── Hero ── */
+.hero {
+  background: linear-gradient(180deg, #1a0000 0%, #0d0d0d 100%);
+  border-bottom: 1px solid var(--border);
+  padding: 60px 24px 48px;
+  text-align: center;
+}
+.hero-eyebrow {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--primary);
+  margin-bottom: 12px;
+}
+.hero h1 {
+  font-size: clamp(36px, 6vw, 72px);
+  font-weight: 900;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #fff;
+  line-height: 1.05;
+  margin-bottom: 14px;
+}
+.hero-sub {
+  font-size: 16px;
+  color: var(--muted);
+  max-width: 540px;
+  margin: 0 auto 40px;
+}
+
+/* ── Pricing cards ── */
+.pricing-row {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 36px;
+}
+.price-card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 24px 28px;
+  width: 200px;
+  text-align: center;
+  transition: border-color 0.2s, transform 0.15s;
+}
+.price-card:hover { border-color: var(--primary); transform: translateY(-2px); }
+.price-card.featured { border-color: var(--primary); }
+.price-card-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+.price-card-amount {
+  font-size: 38px;
+  font-weight: 900;
+  color: #fff;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.price-card-amount .currency { font-size: 22px; vertical-align: super; }
+.price-card-sub {
+  font-size: 12px;
+  color: var(--muted);
+  margin-bottom: 10px;
+}
+.badge {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: 4px;
+  background: var(--primary);
+  color: #fff;
+}
+.badge.green { background: var(--success); }
+.badge.amber { background: var(--warning); color: #111; }
+.badge.grey { background: #333; color: var(--muted); }
+
+/* ── FPS rules ── */
+.fps-box {
+  display: inline-flex;
+  gap: 0;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 36px;
+}
+.fps-item {
+  padding: 10px 20px;
+  border-right: 1px solid var(--border);
+  text-align: center;
+}
+.fps-item:last-child { border-right: none; }
+.fps-item-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--muted);
+  display: block;
+  margin-bottom: 2px;
+}
+.fps-item-val {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: #fff;
+}
+
+/* ── Site cards ── */
+.sites-row {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.site-info-card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px 20px;
+  text-align: left;
+  width: 260px;
+}
+.site-info-card-name {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 17px;
+  font-weight: 700;
+  color: #fff;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+.site-info-card-addr {
+  font-size: 12px;
+  color: var(--muted);
+  margin-bottom: 8px;
+  line-height: 1.4;
+}
+.site-info-card a {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--primary);
+}
+
+/* ── Booking widget wrapper ── */
+.booking-section {
+  max-width: 900px;
+  margin: 48px auto;
+  padding: 0 16px;
+}
+.booking-section-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 32px;
+  font-weight: 900;
+  text-transform: uppercase;
+  color: #fff;
+  margin-bottom: 4px;
+  letter-spacing: 0.5px;
+}
+.booking-section-sub {
+  color: var(--muted);
+  font-size: 14px;
+  margin-bottom: 24px;
+}
+
+/* ── Stepper ── */
+.stepper {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  margin-bottom: 28px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 16px 20px;
+}
+.step {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  position: relative;
+}
+.step::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: calc(100% - 120px);
+  height: 2px;
+  background: var(--border);
+}
+.step:last-child::after { display: none; }
+.step-dot {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  background: var(--bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--muted);
+  flex-shrink: 0;
+  z-index: 1;
+  transition: all 0.2s;
+}
+.step.active .step-dot {
+  border-color: var(--primary);
+  background: var(--primary);
+  color: #fff;
+}
+.step.done .step-dot {
+  border-color: var(--success);
+  background: var(--success);
+  color: #fff;
+}
+.step-label {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: var(--muted);
+  white-space: nowrap;
+}
+.step.active .step-label { color: #fff; }
+.step.done .step-label { color: var(--success); }
+
+/* ── Step panels ── */
+.step-panel { display: none; }
+.step-panel.active { display: block; }
+
+/* ── Site tabs ── */
+.site-tabs {
+  display: flex;
+  gap: 0;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 28px;
+}
+.site-tab {
+  flex: 1;
+  padding: 14px 16px;
+  background: var(--panel);
+  border: none;
+  border-right: 1px solid var(--border);
+  color: var(--muted);
+  cursor: pointer;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  transition: background 0.2s, color 0.2s;
+  text-align: center;
+}
+.site-tab:last-child { border-right: none; }
+.site-tab:hover { background: var(--light); color: var(--text); }
+.site-tab.active { background: var(--primary); color: #fff; }
+.site-tab-sub {
+  display: block;
+  font-size: 10px;
+  font-weight: 400;
+  font-family: 'Barlow', sans-serif;
+  letter-spacing: 0;
+  text-transform: none;
+  color: inherit;
+  opacity: 0.75;
+  margin-top: 2px;
+}
+
+/* ── Calendar ── */
+.calendar-container {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.calendar-month {
+  flex: 1;
+  min-width: 280px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+}
+.cal-header {
+  background: var(--light);
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--border);
+}
+.cal-month-name {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #fff;
+  letter-spacing: 0.5px;
+}
+.cal-year {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 14px;
+  color: var(--muted);
+  margin-left: 6px;
+}
+.cal-legend {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  font-size: 11px;
+  color: var(--muted);
+}
+.cal-legend-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+}
+.cal-grid {
+  padding: 12px;
+}
+.cal-weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  margin-bottom: 4px;
+}
+.cal-weekday {
+  text-align: center;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--muted);
+  padding: 4px 0;
+  text-transform: uppercase;
+}
+.cal-days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+}
+.cal-day {
+  aspect-ratio: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  position: relative;
+  cursor: default;
+  color: var(--muted);
+  opacity: 0.3;
+  transition: background 0.15s, color 0.15s;
+}
+.cal-day.in-month {
+  opacity: 1;
+  color: var(--text);
+}
+.cal-day.has-session {
+  cursor: pointer;
+  color: #fff;
+  font-weight: 600;
+}
+.cal-day.has-session:hover { background: rgba(211, 47, 47, 0.15); }
+.cal-day.session-full { cursor: not-allowed; }
+.cal-day.selected {
+  background: var(--primary);
+  color: #fff;
+  border-radius: 6px;
+}
+.cal-day.today { background: rgba(255,255,255,0.06); }
+.cal-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--primary);
+  position: absolute;
+  bottom: 3px;
+}
+.cal-day.session-full .cal-dot { background: #555; }
+.cal-day.selected .cal-dot { background: rgba(255,255,255,0.7); }
+
+/* ── Session card ── */
+.session-card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+.session-card-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 4px;
+}
+.session-card-date {
+  font-size: 15px;
+  color: var(--primary);
+  font-weight: 600;
+  margin-bottom: 14px;
+}
+.session-times {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+.session-time-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--muted);
+}
+.session-time-val {
+  color: var(--text);
+  font-weight: 600;
+}
+.capacity-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 4px;
+}
+.cap-bar-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.cap-bar-label {
+  font-size: 12px;
+  color: var(--muted);
+  width: 90px;
+  flex-shrink: 0;
+}
+.cap-bar-track {
+  flex: 1;
+  height: 8px;
+  background: var(--light);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.cap-bar-fill {
+  height: 100%;
+  border-radius: 4px;
+  background: var(--success);
+  transition: width 0.4s;
+}
+.cap-bar-fill.amber { background: var(--warning); }
+.cap-bar-fill.red { background: var(--primary); }
+.cap-bar-count {
+  font-size: 12px;
+  color: var(--muted);
+  width: 60px;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+/* ── Type selector cards ── */
+.type-cards {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+.type-card {
+  flex: 1;
+  min-width: 200px;
+  background: var(--panel);
+  border: 2px solid var(--border);
+  border-radius: 10px;
+  padding: 20px;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.15s;
+}
+.type-card:hover { border-color: #555; background: #1f1f1f; }
+.type-card.selected { border-color: var(--primary); background: rgba(211,47,47,0.08); }
+.type-card-name {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 24px;
+  font-weight: 900;
+  text-transform: uppercase;
+  color: #fff;
+  margin-bottom: 4px;
+}
+.type-card-price {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 32px;
+  font-weight: 900;
+  color: var(--primary);
+  margin-bottom: 8px;
+}
+.type-card-price-sub {
+  font-size: 13px;
+  color: var(--muted);
+  margin-bottom: 12px;
+  line-height: 1.4;
+}
+.type-card-includes {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.7;
+}
+.type-card-includes span {
+  display: block;
+}
+.type-card-includes span::before {
+  content: '✓ ';
+  color: var(--success);
+  font-weight: 700;
+}
+.type-card-radio {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+.type-radio-dot {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.2s;
+}
+.type-card.selected .type-radio-dot { border-color: var(--primary); }
+.type-radio-inner {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--primary);
+  display: none;
+}
+.type-card.selected .type-radio-inner { display: block; }
+
+/* ── Form ── */
+.form-panel {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 24px;
+  margin-bottom: 16px;
+}
+.form-panel-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #fff;
+  letter-spacing: 0.5px;
+  margin-bottom: 16px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+}
+.form-row {
+  display: flex;
+  gap: 14px;
+  margin-bottom: 14px;
+  flex-wrap: wrap;
+}
+.form-group {
+  flex: 1;
+  min-width: 180px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.form-group label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.form-group input,
+.form-group textarea,
+.form-group select {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text);
+  font-family: 'Barlow', sans-serif;
+  font-size: 14px;
+  padding: 10px 12px;
+  outline: none;
+  transition: border-color 0.2s;
+  width: 100%;
+}
+.form-group input:focus,
+.form-group textarea:focus { border-color: var(--primary); }
+.form-group textarea { min-height: 80px; resize: vertical; }
+
+/* ── Spinner ── */
+.spinner-group {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  overflow: hidden;
+  width: fit-content;
+}
+.spinner-btn {
+  background: var(--light);
+  border: none;
+  color: var(--text);
+  cursor: pointer;
+  font-size: 18px;
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s;
+  line-height: 1;
+}
+.spinner-btn:hover { background: #3a3a3a; }
+.spinner-val {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  width: 46px;
+  text-align: center;
+  padding: 6px 0;
+  border-left: 1px solid var(--border);
+  border-right: 1px solid var(--border);
+}
+.qty-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 12px;
+}
+.qty-row-label {
+  font-size: 13px;
+  color: var(--text);
+  flex: 1;
+}
+
+/* ── Toggle checkbox ── */
+.toggle-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+.toggle-row input[type=checkbox] {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--primary);
+  cursor: pointer;
+}
+.toggle-row label {
+  font-size: 14px;
+  color: var(--text);
+  cursor: pointer;
+}
+
+/* ── Info note ── */
+.info-note {
+  background: rgba(255,167,38,0.1);
+  border: 1px solid rgba(255,167,38,0.3);
+  border-radius: 6px;
+  padding: 10px 14px;
+  font-size: 13px;
+  color: var(--warning);
+  margin-top: 10px;
+  margin-bottom: 4px;
+}
+.info-note.blue {
+  background: rgba(66,165,245,0.1);
+  border-color: rgba(66,165,245,0.3);
+  color: #90caf9;
+}
+
+/* ── Summary ── */
+.summary-panel {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 24px;
+  margin-bottom: 16px;
+}
+.summary-panel-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #fff;
+  letter-spacing: 0.5px;
+  margin-bottom: 16px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+}
+.summary-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 9px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 14px;
+}
+.summary-item:last-child { border-bottom: none; }
+.summary-item-label { color: var(--muted); }
+.summary-item-val { color: var(--text); font-weight: 600; }
+.summary-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 2px solid var(--border);
+}
+.summary-total-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #fff;
+}
+.summary-total-val {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 28px;
+  font-weight: 900;
+  color: var(--success);
+}
+
+/* ── Buttons ── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 13px 28px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s, opacity 0.2s;
+}
+.btn:active { transform: scale(0.98); }
+.btn-primary {
+  background: var(--primary);
+  color: #fff;
+}
+.btn-primary:hover { background: var(--primary-hover); }
+.btn-success {
+  background: var(--success);
+  color: #fff;
+  font-size: 18px;
+  padding: 16px 36px;
+  width: 100%;
+}
+.btn-success:hover { background: #388e3c; }
+.btn-ghost {
+  background: transparent;
+  color: var(--muted);
+  border: 1px solid var(--border);
+}
+.btn-ghost:hover { background: var(--light); color: var(--text); }
+.btn-sm { font-size: 13px; padding: 8px 16px; }
+.btn-nav-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+  gap: 12px;
+}
+
+/* ── Success screen ── */
+.success-screen {
+  text-align: center;
+  padding: 40px 24px;
+}
+.success-icon {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: rgba(67,160,71,0.15);
+  border: 2px solid var(--success);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+  font-size: 30px;
+}
+.success-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 36px;
+  font-weight: 900;
+  text-transform: uppercase;
+  color: var(--success);
+  margin-bottom: 6px;
+}
+.success-ref {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 20px;
+  letter-spacing: 2px;
+}
+.success-details {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 20px;
+  margin: 0 auto 20px;
+  max-width: 460px;
+  text-align: left;
+}
+.success-detail-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 7px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 13px;
+}
+.success-detail-row:last-child { border-bottom: none; }
+.success-detail-label { color: var(--muted); }
+.success-detail-val { color: var(--text); font-weight: 600; }
+.success-note {
+  font-size: 13px;
+  color: var(--muted);
+  max-width: 460px;
+  margin: 0 auto 10px;
+  padding: 12px 16px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  text-align: left;
+}
+.success-note strong { color: var(--warning); }
+
+/* ── Reviews ── */
+.reviews-section {
+  max-width: 900px;
+  margin: 0 auto 60px;
+  padding: 0 16px;
+}
+.section-heading {
+  font-size: 30px;
+  font-weight: 900;
+  text-transform: uppercase;
+  color: #fff;
+  letter-spacing: 0.5px;
+  margin-bottom: 20px;
+}
+.reviews-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+.review-card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: border-color 0.2s;
+}
+.review-card:hover { border-color: #3a3a3a; }
+.review-card.featured {
+  grid-column: span 2;
+  border-color: var(--primary);
+  background: rgba(211,47,47,0.05);
+}
+.review-stars {
+  color: #ffc107;
+  font-size: 14px;
+  letter-spacing: 1px;
+}
+.review-text {
+  font-size: 14px;
+  color: var(--text);
+  line-height: 1.6;
+  flex: 1;
+}
+.review-author {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.review-card.featured .review-author { color: var(--primary); }
+
+/* ── Footer ── */
+.footer {
+  border-top: 1px solid var(--border);
+  padding: 24px;
+  text-align: center;
+  font-size: 12px;
+  color: var(--muted);
+}
+.footer a { color: var(--muted); }
+
+/* ── Responsive ── */
+@media (max-width: 640px) {
+  .stepper { gap: 4px; padding: 12px; }
+  .step-label { display: none; }
+  .step::after { display: none; }
+  .reviews-grid { grid-template-columns: 1fr; }
+  .review-card.featured { grid-column: span 1; }
+  .site-tab-sub { display: none; }
+  .type-cards { flex-direction: column; }
+  .fps-box { flex-wrap: wrap; }
+  .calendar-container { flex-direction: column; }
+}
+</style>
+</head>
+<body>
+
+<!-- Nav -->
+<nav class="nav">
+  <div class="nav-brand"><span>RED 1</span> AIRSOFT</div>
+  <div class="nav-links">
+    <a href="#">Sites</a>
+    <a href="#">Events</a>
+    <a href="#">Rental</a>
+    <a href="#">Contact</a>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-eyebrow">South East England's Premier Airsoft</div>
+  <h1>Book Your<br>Game Day Online</h1>
+  <p class="hero-sub">Three unique sites, real-time availability, instant confirmation. Walk-on or full rental — we've got you covered.</p>
+
+  <div class="pricing-row">
+    <div class="price-card featured">
+      <div class="price-card-label">Walk-On</div>
+      <div class="price-card-amount"><span class="currency">£</span>30</div>
+      <div class="price-card-sub">per player</div>
+      <span class="badge green">Available</span>
+    </div>
+    <div class="price-card">
+      <div class="price-card-label">Adult Rental</div>
+      <div class="price-card-amount"><span class="currency">£</span>60</div>
+      <div class="price-card-sub">entry + M4 + BBs + protection + lunch</div>
+      <span class="badge amber">Limited slots</span>
+    </div>
+    <div class="price-card">
+      <div class="price-card-label">Junior Rental</div>
+      <div class="price-card-amount"><span class="currency">£</span>45</div>
+      <div class="price-card-sub">junior-sized kit + same includes</div>
+      <span class="badge amber">Limited slots</span>
+    </div>
+    <div class="price-card">
+      <div class="price-card-label">Private Hire</div>
+      <div class="price-card-amount" style="font-size:22px;line-height:1.4;">Contact<br>Us</div>
+      <div class="price-card-sub">full-site exclusive</div>
+      <span class="badge grey">Enquire</span>
+    </div>
+  </div>
+
+  <div class="fps-box">
+    <div class="fps-item">
+      <span class="fps-item-label">AEG</span>
+      <span class="fps-item-val">350fps</span>
+    </div>
+    <div class="fps-item">
+      <span class="fps-item-label">DMR</span>
+      <span class="fps-item-val">450fps</span>
+    </div>
+    <div class="fps-item">
+      <span class="fps-item-label">Sniper</span>
+      <span class="fps-item-val">500fps</span>
+    </div>
+    <div class="fps-item">
+      <span class="fps-item-label">Sniper MED</span>
+      <span class="fps-item-val">30m</span>
+    </div>
+  </div>
+
+  <div class="sites-row">
+    <div class="site-info-card">
+      <div class="site-info-card-name">Red 1 CQB</div>
+      <div class="site-info-card-addr">Langleybury Lane, Sarratt<br>Kings Langley WD4 8RN</div>
+      <a href="https://maps.google.com/?q=WD4+8RN" target="_blank" rel="noopener">View on Google Maps ↗</a>
+    </div>
+    <div class="site-info-card">
+      <div class="site-info-card-name">Oblivion Airsoft</div>
+      <div class="site-info-card-addr">Berrybushes Farm, Langleybury Lane<br>Kings Langley WD4 8RL</div>
+      <a href="https://maps.google.com/?q=WD4+8RL" target="_blank" rel="noopener">View on Google Maps ↗</a>
+    </div>
+    <div class="site-info-card">
+      <div class="site-info-card-name">Red 1 Fawkham</div>
+      <div class="site-info-card-addr">School Lane, Horton Kirby<br>Longfield DA3 8ER</div>
+      <a href="https://maps.google.com/?q=DA3+8ER" target="_blank" rel="noopener">View on Google Maps ↗</a>
+    </div>
+  </div>
+</section>
+
+<!-- Booking Widget -->
+<div class="booking-section">
+  <div class="booking-section-title">Book a Session</div>
+  <div class="booking-section-sub">Select your site, choose a date, pick your booking type and confirm.</div>
+
+  <!-- Stepper -->
+  <div class="stepper" id="stepper">
+    <div class="step active" id="step-ind-1">
+      <div class="step-dot">1</div>
+      <span class="step-label">Site &amp; Date</span>
+    </div>
+    <div class="step" id="step-ind-2">
+      <div class="step-dot">2</div>
+      <span class="step-label">Session Type</span>
+    </div>
+    <div class="step" id="step-ind-3">
+      <div class="step-dot">3</div>
+      <span class="step-label">Your Details</span>
+    </div>
+    <div class="step" id="step-ind-4">
+      <div class="step-dot">4</div>
+      <span class="step-label">Confirm</span>
+    </div>
+  </div>
+
+  <!-- Step 1: Site selector + calendar -->
+  <div class="step-panel active" id="panel-1">
+    <div class="site-tabs" id="site-tabs">
+      <button class="site-tab active" data-site="0">
+        Red 1 CQB
+        <span class="site-tab-sub">Kings Langley</span>
+      </button>
+      <button class="site-tab" data-site="1">
+        Oblivion Airsoft
+        <span class="site-tab-sub">Kings Langley</span>
+      </button>
+      <button class="site-tab" data-site="2">
+        Red 1 Fawkham
+        <span class="site-tab-sub">Horton Kirby</span>
+      </button>
+    </div>
+
+    <div class="calendar-container" id="calendar-container"></div>
+
+    <div class="btn-nav-row" style="justify-content:flex-end;margin-top:14px;">
+      <span id="cal-hint" style="font-size:13px;color:var(--muted);">Select a highlighted date to continue</span>
+    </div>
+  </div>
+
+  <!-- Step 2: Session + type -->
+  <div class="step-panel" id="panel-2">
+    <div class="session-card" id="session-info-card"></div>
+
+    <div class="type-cards" id="type-cards">
+      <div class="type-card" id="card-walkon" onclick="selectType('walkon')">
+        <div class="type-card-radio">
+          <div class="type-radio-dot"><div class="type-radio-inner"></div></div>
+          <div class="type-card-name">Walk-On</div>
+        </div>
+        <div class="type-card-price">£30<span style="font-size:16px;font-weight:400;color:var(--muted);"> / player</span></div>
+        <div class="type-card-price-sub">Bring your own AEG &amp; kit. Adults and juniors same price.</div>
+        <div class="type-card-includes">
+          <span>Entry &amp; full day games</span>
+          <span>Lunch break (site dependent)</span>
+          <span>Marshal support</span>
+        </div>
+      </div>
+      <div class="type-card" id="card-rental" onclick="selectType('rental')">
+        <div class="type-card-radio">
+          <div class="type-radio-dot"><div class="type-radio-inner"></div></div>
+          <div class="type-card-name">Rental</div>
+        </div>
+        <div class="type-card-price">£60 <span style="font-size:16px;font-weight:400;color:var(--muted);">adult</span></div>
+        <div class="type-card-price-sub">Junior rental £45. Includes everything below.</div>
+        <div class="type-card-includes">
+          <span>Entry &amp; full day games</span>
+          <span>M4 rifle + 3000 BBs</span>
+          <span>Full-face protection</span>
+          <span>Lunch included</span>
+          <span>Marshal support</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="btn-nav-row">
+      <button class="btn btn-ghost btn-sm" onclick="goStep(1)">&#8592; Back</button>
+      <button class="btn btn-primary btn-sm" id="step2-next" onclick="goStep(3)" disabled>Next: Your Details &#8594;</button>
+    </div>
+  </div>
+
+  <!-- Step 3: Details form -->
+  <div class="step-panel" id="panel-3">
+    <div class="form-panel">
+      <div class="form-panel-title">Your Details</div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="f-name">Full Name *</label>
+          <input type="text" id="f-name" placeholder="Jane Smith">
+        </div>
+        <div class="form-group">
+          <label for="f-email">Email Address *</label>
+          <input type="email" id="f-email" placeholder="jane@example.com">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="f-phone">Phone Number *</label>
+          <input type="tel" id="f-phone" placeholder="+44 7700 000000">
+        </div>
+      </div>
+
+      <div class="toggle-row">
+        <input type="checkbox" id="guest-toggle">
+        <label for="guest-toggle">Booking for someone else?</label>
+      </div>
+
+      <div id="guest-fields" style="display:none;">
+        <div class="info-note blue" style="margin-bottom:14px;">Your details (booker) will be on the confirmation. Your guest's name will be on the day.</div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="g-name">Guest Name *</label>
+            <input type="text" id="g-name" placeholder="Guest's full name">
+          </div>
+          <div class="form-group">
+            <label for="g-email">Guest Email *</label>
+            <input type="email" id="g-email" placeholder="guest@example.com">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="g-phone">Guest Phone</label>
+            <input type="tel" id="g-phone" placeholder="+44 7700 000001">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-panel" id="qty-panel">
+      <div class="form-panel-title" id="qty-panel-title">Player Count</div>
+      <div id="qty-fields"></div>
+    </div>
+
+    <div class="form-panel">
+      <div class="form-panel-title">Additional</div>
+      <div class="form-group" style="margin-bottom:14px;">
+        <label for="f-notes">Notes / Special Requirements</label>
+        <textarea id="f-notes" placeholder="Allergies, accessibility needs, group name, etc."></textarea>
+      </div>
+      <div class="toggle-row">
+        <input type="checkbox" id="waiver-cb">
+        <label for="waiver-cb">I agree to the <a href="#" style="color:var(--primary);">waiver &amp; site rules</a>. I confirm all players meet age requirements and will follow marshal instructions.</label>
+      </div>
+    </div>
+
+    <div class="btn-nav-row">
+      <button class="btn btn-ghost btn-sm" onclick="goStep(2)">&#8592; Back</button>
+      <button class="btn btn-primary btn-sm" onclick="goStep(4)">Review Booking &#8594;</button>
+    </div>
+  </div>
+
+  <!-- Step 4: Summary + confirm -->
+  <div class="step-panel" id="panel-4">
+    <div class="summary-panel" id="summary-panel"></div>
+
+    <div class="info-note blue" style="margin-bottom:16px;">
+      On the real site, this adds to your Shopify basket — you can also purchase BBs, accessories, and other items before checking out.
+    </div>
+
+    <div class="form-panel" style="padding:16px 20px;">
+      <div class="toggle-row" style="margin-bottom:0;">
+        <input type="checkbox" id="confirm-waiver-cb">
+        <label for="confirm-waiver-cb">I confirm all details are correct and agree to the cancellation policy.</label>
+      </div>
+    </div>
+
+    <button class="btn btn-success" style="margin-top:16px;" onclick="submitBooking()">&#10003; Confirm Booking</button>
+
+    <div class="btn-nav-row" style="justify-content:flex-start;margin-top:12px;">
+      <button class="btn btn-ghost btn-sm" onclick="goStep(3)">&#8592; Edit Details</button>
+    </div>
+  </div>
+
+  <!-- Step 5: Success -->
+  <div class="step-panel" id="panel-5">
+    <div class="success-screen" id="success-screen"></div>
+  </div>
+</div>
+
+<!-- Reviews -->
+<div class="reviews-section">
+  <div class="section-heading">What Players Say</div>
+  <div class="reviews-grid">
+    <div class="review-card">
+      <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+      <div class="review-text">"Brilliant site, well organised marshals and great varied games. Been going for a few years now and always love it."</div>
+      <div class="review-author">TheSponge77</div>
+    </div>
+    <div class="review-card">
+      <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+      <div class="review-text">"Great experience at Red 1 CQB. The jungle area is amazing."</div>
+      <div class="review-author">Dawid L</div>
+    </div>
+    <div class="review-card">
+      <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+      <div class="review-text">"Came as a first timer with the rental gear — everything was explained so well, gear was great condition. Will definitely be back!"</div>
+      <div class="review-author">Sarah B</div>
+    </div>
+    <div class="review-card featured">
+      <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733; <span class="badge" style="vertical-align:middle;margin-left:6px;">Featured</span></div>
+      <div class="review-text">"Our team has been using Red 1 sites for over 3 years. The variety across CQB, Oblivion and Fawkham keeps every game day fresh. The marshals are professional, safety is always paramount, and the rental gear is high quality. Red 1 is simply the best airsoft operation in the south-east. Cannot recommend highly enough."</div>
+      <div class="review-author">The Dark Marksmen</div>
+    </div>
+    <div class="review-card">
+      <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+      <div class="review-text">"Fawkham's village area is an incredible setup. Best airsoft day I've had in years."</div>
+      <div class="review-author">Cameron Aburrow</div>
+    </div>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer class="footer">
+  <p>Red 1 Airsoft &mdash; Demo booking widget &mdash; Powered by <strong>StyleIdeas Shopify Events Plugin</strong></p>
+  <p style="margin-top:6px;"><a href="#">Privacy Policy</a> &middot; <a href="#">Terms &amp; Conditions</a> &middot; <a href="#">Contact</a></p>
+</footer>
+
+<script>
+// ─────────────────────────────────────────────────────────────────────────────
+// BOOKING RULE (do not change):
+// Walk-on → decrements player_capacity_used ONLY
+// Rental  → decrements BOTH player_capacity_used AND rental_capacity_used
+// (rental includes entry fee — the player takes a player slot AND a kit slot)
+// ─────────────────────────────────────────────────────────────────────────────
+
+const BOOKING_FEE_PCT        = 1.5;
+const BOOKING_FEE_FLAT_PENCE = 20;
+
+const WALKON_PRICE_PENCE  = 3000;
+const RENTAL_ADULT_PENCE  = 6000;
+const RENTAL_JUNIOR_PENCE = 4500;
+
+// ── Site definitions ──────────────────────────────────────────────────────────
+const SITES = [
+  {
+    id: 'red1-cqb',
+    name: 'Red 1 CQB',
+    address: 'Langleybury Lane, Sarratt, Kings Langley WD4 8RN',
+    fps: 'AEG 350fps / DMR 450fps / Sniper 500fps (30m MED)',
+  },
+  {
+    id: 'oblivion',
+    name: 'Oblivion Airsoft',
+    address: 'Berrybushes Farm, Langleybury Lane, Kings Langley WD4 8RL',
+    fps: 'AEG 350fps / DMR 450fps / Sniper 500fps (30m MED)',
+  },
+  {
+    id: 'red1-fawkham',
+    name: 'Red 1 Fawkham',
+    address: 'School Lane, Horton Kirby, Longfield DA3 8ER',
+    fps: 'AEG 350fps / DMR 450fps / Sniper 500fps (30m MED)',
+  },
+];
+
+// ── Mock sessions ─────────────────────────────────────────────────────────────
+const SESSIONS = [
+  {
+    id: 'S001',
+    site_index: 0,
+    date: '2026-05-23',
+    gates: '08:00', start: '09:30', end: '15:30',
+    player_capacity: 70, player_capacity_used: 65,
+    rental_capacity: 10, rental_capacity_used: 8,
+    notes: null,
+  },
+  {
+    id: 'S002',
+    site_index: 0,
+    date: '2026-06-13',
+    gates: '08:00', start: '09:30', end: '15:30',
+    player_capacity: 70, player_capacity_used: 22,
+    rental_capacity: 10, rental_capacity_used: 3,
+    notes: null,
+  },
+  {
+    id: 'S003',
+    site_index: 1,
+    date: '2026-05-30',
+    gates: '08:00', start: '09:30', end: '16:00',
+    player_capacity: 70, player_capacity_used: 30,
+    rental_capacity: 10, rental_capacity_used: 4,
+    notes: 'Large field — great for squad play.',
+  },
+  {
+    id: 'S004',
+    site_index: 2,
+    date: '2026-06-06',
+    gates: '08:00', chrono: '09:00', start: '09:30', end: '15:30', lunch: '12:30',
+    player_capacity: 70, player_capacity_used: 18,
+    rental_capacity: 10, rental_capacity_used: 2,
+    notes: 'Village + tower combat. Hotdog or cheeseburger lunch included.',
+  },
+  {
+    id: 'S005',
+    site_index: 2,
+    date: '2026-06-20',
+    gates: '08:00', chrono: '09:00', start: '09:30', end: '15:30', lunch: '12:30',
+    player_capacity: 70, player_capacity_used: 5,
+    rental_capacity: 10, rental_capacity_used: 1,
+    notes: 'Village + tower combat. Hotdog or cheeseburger lunch included.',
+  },
+];
+
+// ── State ─────────────────────────────────────────────────────────────────────
+const state = {
+  currentSite: 0,
+  currentStep: 1,
+  selectedSession: null,
+  selectedType: null,  // 'walkon' | 'rental'
+  adultQty: 1,
+  juniorQty: 0,
+};
+
+// ── Utility ───────────────────────────────────────────────────────────────────
+function pence(p) {
+  return '£' + (p / 100).toFixed(2);
+}
+
+function formatDate(dateStr) {
+  const d = new Date(dateStr + 'T12:00:00');
+  return d.toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+}
+
+function bookingFee(subtotalPence) {
+  return Math.round(subtotalPence * BOOKING_FEE_PCT / 100) + BOOKING_FEE_FLAT_PENCE;
+}
+
+function calcSubtotal() {
+  const s = state;
+  if (!s.selectedSession || !s.selectedType) return 0;
+  if (s.selectedType === 'walkon') {
+    return (s.adultQty + s.juniorQty) * WALKON_PRICE_PENCE;
+  } else {
+    return s.adultQty * RENTAL_ADULT_PENCE + s.juniorQty * RENTAL_JUNIOR_PENCE;
+  }
+}
+
+function genRef() {
+  const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+  let r = 'R1W-';
+  for (let i = 0; i < 8; i++) r += chars[Math.floor(Math.random() * chars.length)];
+  return r;
+}
+
+function sessionForDate(siteIndex, dateStr) {
+  return SESSIONS.find(s => s.site_index === siteIndex && s.date === dateStr) || null;
+}
+
+function sessionsForSite(siteIndex) {
+  return SESSIONS.filter(s => s.site_index === siteIndex);
+}
+
+// ── Step navigation ───────────────────────────────────────────────────────────
+function goStep(n) {
+  // Validation
+  if (n === 3 && !state.selectedType) {
+    alert('Please select a booking type (Walk-On or Rental).');
+    return;
+  }
+  if (n === 4) {
+    const name  = document.getElementById('f-name').value.trim();
+    const email = document.getElementById('f-email').value.trim();
+    const phone = document.getElementById('f-phone').value.trim();
+    if (!name || !email || !phone) {
+      alert('Please fill in your Name, Email and Phone.');
+      return;
+    }
+    const guestOn = document.getElementById('guest-toggle').checked;
+    if (guestOn) {
+      const gn = document.getElementById('g-name').value.trim();
+      const ge = document.getElementById('g-email').value.trim();
+      if (!gn || !ge) {
+        alert('Please fill in the guest name and email.');
+        return;
+      }
+    }
+    if (!document.getElementById('waiver-cb').checked) {
+      alert('Please agree to the waiver and site rules.');
+      return;
+    }
+    buildSummary();
+  }
+
+  // Hide all panels
+  document.querySelectorAll('.step-panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('panel-' + n).classList.add('active');
+
+  // Update stepper
+  document.querySelectorAll('.step').forEach((el, i) => {
+    el.classList.remove('active', 'done');
+    const num = i + 1;
+    if (num < n) el.classList.add('done');
+    else if (num === n) el.classList.add('active');
+  });
+
+  state.currentStep = n;
+
+  // Replace step-dot check marks
+  document.querySelectorAll('.step.done .step-dot').forEach(dot => {
+    dot.textContent = '✓';
+  });
+  document.querySelectorAll('.step:not(.done) .step-dot').forEach((dot, i) => {
+    dot.textContent = i + 1 + (document.querySelectorAll('.step.done').length);
+  });
+  // Re-number correctly
+  let doneCount = document.querySelectorAll('.step.done').length;
+  document.querySelectorAll('.step').forEach((el, i) => {
+    const dot = el.querySelector('.step-dot');
+    if (el.classList.contains('done')) {
+      dot.textContent = '✓';
+    } else {
+      dot.textContent = i + 1;
+    }
+  });
+
+  window.scrollTo({ top: document.querySelector('.booking-section').offsetTop - 70, behavior: 'smooth' });
+}
+
+// ── Calendar render ───────────────────────────────────────────────────────────
+function renderCalendars() {
+  const container = document.getElementById('calendar-container');
+  container.innerHTML = '';
+  const site = state.currentSite;
+
+  // Show current month (May 2026) and next month (June 2026)
+  const months = [
+    { year: 2026, month: 4 }, // May (0-indexed)
+    { year: 2026, month: 5 }, // June
+  ];
+
+  months.forEach(({ year, month }) => {
+    container.appendChild(buildMonthCalendar(year, month, site));
+  });
+}
+
+function buildMonthCalendar(year, month, siteIndex) {
+  const monthNames = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  const weekdays = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+
+  const firstDay = new Date(year, month, 1);
+  const lastDay  = new Date(year, month + 1, 0);
+  const totalDays = lastDay.getDate();
+
+  // Monday-first offset
+  let startOffset = firstDay.getDay() - 1;
+  if (startOffset < 0) startOffset = 6;
+
+  const siteSessions = sessionsForSite(siteIndex);
+  const sessionDates = new Set(siteSessions.map(s => s.date));
+
+  const today = new Date();
+  const todayStr = today.toISOString().slice(0, 10);
+
+  const wrap = document.createElement('div');
+  wrap.className = 'calendar-month';
+
+  // Header
+  wrap.innerHTML = `
+    <div class="cal-header">
+      <div>
+        <span class="cal-month-name">${monthNames[month]}</span>
+        <span class="cal-year">${year}</span>
+      </div>
+      <div class="cal-legend">
+        <span><span class="cal-legend-dot" style="background:var(--primary);"></span> Session</span>
+        <span><span class="cal-legend-dot" style="background:#555;"></span> Full</span>
+      </div>
+    </div>
+    <div class="cal-grid">
+      <div class="cal-weekdays">
+        ${weekdays.map(d => `<div class="cal-weekday">${d}</div>`).join('')}
+      </div>
+      <div class="cal-days" id="cal-days-${year}-${month}"></div>
+    </div>
+  `;
+
+  const daysContainer = wrap.querySelector(`#cal-days-${year}-${month}`);
+
+  // Empty cells before first day
+  for (let i = 0; i < startOffset; i++) {
+    const blank = document.createElement('div');
+    blank.className = 'cal-day';
+    daysContainer.appendChild(blank);
+  }
+
+  // Day cells
+  for (let d = 1; d <= totalDays; d++) {
+    const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
+    const hasSession = sessionDates.has(dateStr);
+    const sess = hasSession ? SESSIONS.find(s => s.site_index === siteIndex && s.date === dateStr) : null;
+    const isFull = sess && (sess.player_capacity_used >= sess.player_capacity);
+    const isToday = dateStr === todayStr;
+    const isSelected = state.selectedSession && state.selectedSession.date === dateStr;
+
+    const cell = document.createElement('div');
+    let cls = 'cal-day in-month';
+    if (isToday) cls += ' today';
+    if (hasSession && !isFull) cls += ' has-session';
+    if (hasSession && isFull) cls += ' has-session session-full';
+    if (isSelected) cls += ' selected';
+    cell.className = cls;
+    cell.textContent = d;
+
+    if (hasSession) {
+      const dot = document.createElement('div');
+      dot.className = 'cal-dot';
+      cell.appendChild(dot);
+
+      if (!isFull) {
+        cell.title = `Session available — click to select`;
+        cell.addEventListener('click', () => selectDate(sess));
+      } else {
+        cell.title = 'Session full';
+      }
+    }
+
+    daysContainer.appendChild(cell);
+  }
+
+  return wrap;
+}
+
+// ── Date selection ────────────────────────────────────────────────────────────
+function selectDate(sess) {
+  state.selectedSession = sess;
+  renderCalendars(); // re-render to update selected state
+  buildSessionCard();
+  goStep(2);
+}
+
+// ── Site tab switch ───────────────────────────────────────────────────────────
+document.getElementById('site-tabs').addEventListener('click', e => {
+  const tab = e.target.closest('.site-tab');
+  if (!tab) return;
+  const idx = parseInt(tab.dataset.site, 10);
+  state.currentSite = idx;
+  state.selectedSession = null;
+  document.querySelectorAll('.site-tab').forEach(t => t.classList.remove('active'));
+  tab.classList.add('active');
+  renderCalendars();
+});
+
+// ── Session card build ────────────────────────────────────────────────────────
+function capBarColour(used, total) {
+  const pct = used / total;
+  if (pct >= 0.9) return 'red';
+  if (pct >= 0.7) return 'amber';
+  return '';
+}
+
+function buildSessionCard() {
+  const sess = state.selectedSession;
+  if (!sess) return;
+  const site = SITES[sess.site_index];
+
+  const playerLeft  = sess.player_capacity - sess.player_capacity_used;
+  const rentalLeft  = sess.rental_capacity - sess.rental_capacity_used;
+  const playerPct   = Math.round((sess.player_capacity_used / sess.player_capacity) * 100);
+  const rentalPct   = Math.round((sess.rental_capacity_used / sess.rental_capacity) * 100);
+  const playerCol   = capBarColour(sess.player_capacity_used, sess.player_capacity);
+  const rentalCol   = capBarColour(sess.rental_capacity_used, sess.rental_capacity);
+
+  let timesHtml = `
+    <div class="session-time-item">Gates open: <span class="session-time-val">&nbsp;${sess.gates}</span></div>
+    ${sess.chrono ? `<div class="session-time-item">Chrono: <span class="session-time-val">&nbsp;${sess.chrono}</span></div>` : ''}
+    <div class="session-time-item">Game start: <span class="session-time-val">&nbsp;${sess.start}</span></div>
+    <div class="session-time-item">End: <span class="session-time-val">&nbsp;${sess.end}</span></div>
+    ${sess.lunch ? `<div class="session-time-item">Lunch: <span class="session-time-val">&nbsp;${sess.lunch}</span></div>` : ''}
+  `;
+
+  const card = document.getElementById('session-info-card');
+  card.innerHTML = `
+    <div class="session-card-title">${site.name}</div>
+    <div class="session-card-date">${formatDate(sess.date)}</div>
+    <div class="session-times">${timesHtml}</div>
+    <div class="capacity-bars">
+      <div class="cap-bar-row">
+        <div class="cap-bar-label">Player slots</div>
+        <div class="cap-bar-track"><div class="cap-bar-fill ${playerCol}" style="width:${playerPct}%"></div></div>
+        <div class="cap-bar-count">${playerLeft} left</div>
+      </div>
+      <div class="cap-bar-row">
+        <div class="cap-bar-label">Rental kits</div>
+        <div class="cap-bar-track"><div class="cap-bar-fill ${rentalCol}" style="width:${rentalPct}%"></div></div>
+        <div class="cap-bar-count">${rentalLeft} left</div>
+      </div>
+    </div>
+    ${sess.notes ? `<div style="margin-top:12px;font-size:13px;color:var(--muted);">${sess.notes}</div>` : ''}
+  `;
+}
+
+// ── Type selector ─────────────────────────────────────────────────────────────
+function selectType(type) {
+  state.selectedType = type;
+  document.getElementById('card-walkon').classList.toggle('selected', type === 'walkon');
+  document.getElementById('card-rental').classList.toggle('selected', type === 'rental');
+  document.getElementById('step2-next').disabled = false;
+  buildQtyFields();
+}
+
+// ── Qty fields ────────────────────────────────────────────────────────────────
+function buildQtyFields() {
+  const panel = document.getElementById('qty-panel');
+  const title = document.getElementById('qty-panel-title');
+  const fields = document.getElementById('qty-fields');
+
+  if (state.selectedType === 'walkon') {
+    title.textContent = 'Player Count (Walk-On)';
+    fields.innerHTML = `
+      <div class="qty-row">
+        <div class="qty-row-label">Adults <span style="color:var(--muted);font-size:12px;">(£30 each)</span></div>
+        <div class="spinner-group">
+          <button class="spinner-btn" onclick="changeQty('adult',-1)">−</button>
+          <div class="spinner-val" id="adult-val">1</div>
+          <button class="spinner-btn" onclick="changeQty('adult',1)">+</button>
+        </div>
+      </div>
+      <div class="qty-row">
+        <div class="qty-row-label">Juniors <span style="color:var(--muted);font-size:12px;">(£30 each)</span></div>
+        <div class="spinner-group">
+          <button class="spinner-btn" onclick="changeQty('junior',-1)">−</button>
+          <div class="spinner-val" id="junior-val">0</div>
+          <button class="spinner-btn" onclick="changeQty('junior',1)">+</button>
+        </div>
+      </div>
+    `;
+  } else {
+    title.textContent = 'Rental Kit Count';
+    fields.innerHTML = `
+      <div class="qty-row">
+        <div class="qty-row-label">Adult kits <span style="color:var(--muted);font-size:12px;">(£60 each)</span></div>
+        <div class="spinner-group">
+          <button class="spinner-btn" onclick="changeQty('adult',-1)">−</button>
+          <div class="spinner-val" id="adult-val">1</div>
+          <button class="spinner-btn" onclick="changeQty('adult',1)">+</button>
+        </div>
+      </div>
+      <div class="qty-row">
+        <div class="qty-row-label">Junior kits <span style="color:var(--muted);font-size:12px;">(£45 each)</span></div>
+        <div class="spinner-group">
+          <button class="spinner-btn" onclick="changeQty('junior',-1)">−</button>
+          <div class="spinner-val" id="junior-val">0</div>
+          <button class="spinner-btn" onclick="changeQty('junior',1)">+</button>
+        </div>
+      </div>
+      <div id="junior-rental-note" style="display:none;" class="info-note">Under-18s must be accompanied by a parent or guardian.</div>
+    `;
+  }
+
+  state.adultQty  = 1;
+  state.juniorQty = 0;
+}
+
+function changeQty(type, delta) {
+  if (type === 'adult') {
+    state.adultQty = Math.max(0, state.adultQty + delta);
+    // At least 1 total
+    if (state.adultQty === 0 && state.juniorQty === 0) state.adultQty = 1;
+    const el = document.getElementById('adult-val');
+    if (el) el.textContent = state.adultQty;
+  } else {
+    state.juniorQty = Math.max(0, state.juniorQty + delta);
+    if (state.adultQty === 0 && state.juniorQty === 0) state.juniorQty = 1;
+    const el = document.getElementById('junior-val');
+    if (el) el.textContent = state.juniorQty;
+  }
+
+  // Show/hide junior note for rental
+  if (state.selectedType === 'rental') {
+    const note = document.getElementById('junior-rental-note');
+    if (note) note.style.display = state.juniorQty > 0 ? 'block' : 'none';
+  }
+}
+
+// ── Guest fields toggle ───────────────────────────────────────────────────────
+document.getElementById('guest-toggle').addEventListener('change', function() {
+  document.getElementById('guest-fields').style.display = this.checked ? 'block' : 'none';
+});
+
+// ── Summary ───────────────────────────────────────────────────────────────────
+function buildSummary() {
+  const sess = state.selectedSession;
+  const site = SITES[sess.site_index];
+  const sub  = calcSubtotal();
+  const fee  = bookingFee(sub);
+  const total = sub + fee;
+
+  const feeDisplay = `${BOOKING_FEE_PCT}% + ${BOOKING_FEE_FLAT_PENCE}p`;
+
+  let lineItems = '';
+  if (state.selectedType === 'walkon') {
+    const total_players = state.adultQty + state.juniorQty;
+    lineItems += `<div class="summary-item"><span class="summary-item-label">Walk-On × ${total_players} player${total_players !== 1 ? 's' : ''}</span><span class="summary-item-val">${pence(total_players * WALKON_PRICE_PENCE)}</span></div>`;
+  } else {
+    if (state.adultQty > 0) {
+      lineItems += `<div class="summary-item"><span class="summary-item-label">Adult Rental × ${state.adultQty}</span><span class="summary-item-val">${pence(state.adultQty * RENTAL_ADULT_PENCE)}</span></div>`;
+    }
+    if (state.juniorQty > 0) {
+      lineItems += `<div class="summary-item"><span class="summary-item-label">Junior Rental × ${state.juniorQty}</span><span class="summary-item-val">${pence(state.juniorQty * RENTAL_JUNIOR_PENCE)}</span></div>`;
+    }
+  }
+
+  const guestOn = document.getElementById('guest-toggle').checked;
+  const nameDisplay = guestOn
+    ? `${document.getElementById('f-name').value.trim()} (booker) / ${document.getElementById('g-name').value.trim()} (guest on day)`
+    : document.getElementById('f-name').value.trim();
+
+  document.getElementById('summary-panel').innerHTML = `
+    <div class="summary-panel-title">Booking Summary</div>
+    <div class="summary-item"><span class="summary-item-label">Site</span><span class="summary-item-val">${site.name}</span></div>
+    <div class="summary-item"><span class="summary-item-label">Date</span><span class="summary-item-val">${formatDate(sess.date)}</span></div>
+    <div class="summary-item"><span class="summary-item-label">Session</span><span class="summary-item-val">${sess.start} – ${sess.end}</span></div>
+    <div class="summary-item"><span class="summary-item-label">Type</span><span class="summary-item-val">${state.selectedType === 'walkon' ? 'Walk-On' : 'Rental'}</span></div>
+    <div class="summary-item"><span class="summary-item-label">Name</span><span class="summary-item-val">${nameDisplay}</span></div>
+    <div class="summary-item"><span class="summary-item-label">Email</span><span class="summary-item-val">${document.getElementById('f-email').value.trim()}</span></div>
+    ${lineItems}
+    <div class="summary-item"><span class="summary-item-label">Subtotal</span><span class="summary-item-val">${pence(sub)}</span></div>
+    <div class="summary-item"><span class="summary-item-label">Booking fee (${feeDisplay})</span><span class="summary-item-val">${pence(fee)}</span></div>
+    <div class="summary-total">
+      <span class="summary-total-label">Total</span>
+      <span class="summary-total-val">${pence(total)}</span>
+    </div>
+  `;
+}
+
+// ── Submit ────────────────────────────────────────────────────────────────────
+function submitBooking() {
+  if (!document.getElementById('confirm-waiver-cb').checked) {
+    alert('Please confirm your details and agree to the cancellation policy.');
+    return;
+  }
+
+  const sess = state.selectedSession;
+  const site = SITES[sess.site_index];
+  const sub  = calcSubtotal();
+  const fee  = bookingFee(sub);
+  const total = sub + fee;
+  const ref  = genRef();
+  const email = document.getElementById('f-email').value.trim();
+
+  // ── Update mock capacities ────────────────────────────────────────────────
+  // Walk-on → decrements player_capacity_used ONLY
+  // Rental  → decrements BOTH player_capacity_used AND rental_capacity_used
+  const totalPlayers = state.adultQty + state.juniorQty;
+  const sessObj = SESSIONS.find(s => s.id === sess.id);
+  if (sessObj) {
+    sessObj.player_capacity_used += totalPlayers;
+    if (state.selectedType === 'rental') {
+      sessObj.rental_capacity_used += totalPlayers;
+    }
+    state.selectedSession = sessObj; // update reference
+  }
+
+  const typeLabel = state.selectedType === 'walkon' ? 'Walk-On' : 'Rental';
+
+  document.getElementById('success-screen').innerHTML = `
+    <div class="success-icon">&#10003;</div>
+    <div class="success-title">Booking Confirmed</div>
+    <div class="success-ref">${ref}</div>
+
+    <div class="success-details">
+      <div class="success-detail-row"><span class="success-detail-label">Site</span><span class="success-detail-val">${site.name}</span></div>
+      <div class="success-detail-row"><span class="success-detail-label">Date</span><span class="success-detail-val">${formatDate(sess.date)}</span></div>
+      <div class="success-detail-row"><span class="success-detail-label">Gates open</span><span class="success-detail-val">${sess.gates}</span></div>
+      <div class="success-detail-row"><span class="success-detail-label">Game start</span><span class="success-detail-val">${sess.start}</span></div>
+      <div class="success-detail-row"><span class="success-detail-label">Type</span><span class="success-detail-val">${typeLabel}</span></div>
+      <div class="success-detail-row"><span class="success-detail-label">Players</span><span class="success-detail-val">${state.adultQty > 0 ? state.adultQty + ' adult' + (state.adultQty > 1 ? 's' : '') : ''}${state.juniorQty > 0 ? (state.adultQty > 0 ? ', ' : '') + state.juniorQty + ' junior' + (state.juniorQty > 1 ? 's' : '') : ''}</span></div>
+      <div class="success-detail-row"><span class="success-detail-label">Total paid</span><span class="success-detail-val">${pence(total)}</span></div>
+    </div>
+
+    <div class="success-note">
+      <strong>&#9888; Cancellation policy:</strong> Cancellations within 48 hours of game start incur a 50% fee. Please contact us as soon as possible if you need to cancel.
+    </div>
+    <div class="success-note" style="margin-top:8px;">
+      A confirmation email has been sent to <strong style="color:var(--text);">${email}</strong>. Please check your spam folder if you don't see it within a few minutes.
+    </div>
+    <button class="btn btn-ghost" style="margin-top:24px;" onclick="resetBooking()">&#8592; Book Another Session</button>
+  `;
+
+  // Hide stepper on success
+  document.getElementById('stepper').style.display = 'none';
+  document.querySelectorAll('.step-panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('panel-5').classList.add('active');
+  window.scrollTo({ top: document.querySelector('.booking-section').offsetTop - 70, behavior: 'smooth' });
+}
+
+// ── Reset ─────────────────────────────────────────────────────────────────────
+function resetBooking() {
+  state.currentSite     = 0;
+  state.currentStep     = 1;
+  state.selectedSession = null;
+  state.selectedType    = null;
+  state.adultQty        = 1;
+  state.juniorQty       = 0;
+
+  document.getElementById('stepper').style.display = '';
+  document.getElementById('f-name').value  = '';
+  document.getElementById('f-email').value = '';
+  document.getElementById('f-phone').value = '';
+  document.getElementById('f-notes').value = '';
+  document.getElementById('waiver-cb').checked = false;
+  document.getElementById('guest-toggle').checked = false;
+  document.getElementById('guest-fields').style.display = 'none';
+  document.querySelectorAll('.site-tab').forEach((t, i) => t.classList.toggle('active', i === 0));
+
+  renderCalendars();
+  goStep(1);
+}
+
+// ── Init ──────────────────────────────────────────────────────────────────────
+renderCalendars();
+</script>
+</body>
+</html>
