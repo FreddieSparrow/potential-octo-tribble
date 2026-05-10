@@ -3,1933 +3,2104 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Red 1 Airsoft Booking System — Shopify Embedded App</title>
+<title>Red 1 Airsoft — Booking Platform Demo</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;900&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-/* ── Reset & base ── */
+/* ── Reset & Base ── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --bg:       #0d0d0d;
-  --panel:    #1a1a1a;
-  --border:   #2a2a2a;
-  --primary:  #d32f2f;
-  --primary-hover: #b71c1c;
-  --warning:  #ffa726;
-  --success:  #43a047;
-  --text:     #e0e0e0;
-  --muted:    #888;
-  --light:    #2c2c2c;
+  --bg:         #0d0d0d;
+  --panel:      #1a1a1a;
+  --panel2:     #141414;
+  --panel3:     #111;
+  --border:     #2a2a2a;
+  --border2:    #333;
+  --red:        #d32f2f;
+  --red-dark:   #b71c1c;
+  --red-glow:   rgba(211,47,47,0.2);
+  --accent:     #ffa726;
+  --success:    #43a047;
+  --info:       #1e88e5;
+  --text:       #e0e0e0;
+  --muted:      #888;
+  --nav-h:      56px;
 }
 
+html { height: 100%; }
 body {
   background: var(--bg);
   color: var(--text);
   font-family: 'Barlow', sans-serif;
-  font-size: 15px;
+  font-size: 14px;
   line-height: 1.6;
   min-height: 100vh;
-}
-
-h1, h2, h3, h4, h5, h6,
-.nav-brand,
-.badge,
-.stat-number,
-.step-label,
-.site-tab,
-.price-card-amount,
-.section-heading,
-.session-card-title,
-.review-author {
-  font-family: 'Barlow Condensed', sans-serif;
-}
-
-a { color: var(--primary); text-decoration: none; }
-a:hover { text-decoration: underline; }
-
-/* ── Nav ── */
-.nav {
-  background: #111;
-  border-bottom: 2px solid var(--primary);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 24px;
-  height: 56px;
-  position: sticky;
-  top: 0;
-  z-index: 100;
-}
-.nav-brand {
-  font-size: 22px;
-  font-weight: 900;
-  letter-spacing: 1px;
-  color: #fff;
-  text-transform: uppercase;
-}
-.nav-brand span { color: var(--primary); }
-.nav-links { display: flex; gap: 20px; }
-.nav-links a {
-  color: var(--muted);
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 15px;
-  font-weight: 600;
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
-  text-decoration: none;
-  transition: color 0.2s;
-}
-.nav-links a:hover { color: #fff; }
-
-/* ── Hero ── */
-.hero {
-  background: linear-gradient(180deg, #1a0000 0%, #0d0d0d 100%);
-  border-bottom: 1px solid var(--border);
-  padding: 60px 24px 48px;
-  text-align: center;
-}
-.hero-eyebrow {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  color: var(--primary);
-  margin-bottom: 12px;
-}
-.hero h1 {
-  font-size: clamp(36px, 6vw, 72px);
-  font-weight: 900;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  color: #fff;
-  line-height: 1.05;
-  margin-bottom: 14px;
-}
-.hero-sub {
-  font-size: 16px;
-  color: var(--muted);
-  max-width: 540px;
-  margin: 0 auto 40px;
-}
-
-/* ── Pricing cards ── */
-.pricing-row {
-  display: flex;
-  gap: 16px;
-  justify-content: center;
-  flex-wrap: wrap;
-  margin-bottom: 36px;
-}
-.price-card {
-  background: var(--panel);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 24px 28px;
-  width: 200px;
-  text-align: center;
-  transition: border-color 0.2s, transform 0.15s;
-}
-.price-card:hover { border-color: var(--primary); transform: translateY(-2px); }
-.price-card.featured { border-color: var(--primary); }
-.price-card-label {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: var(--muted);
-  margin-bottom: 8px;
-}
-.price-card-amount {
-  font-size: 38px;
-  font-weight: 900;
-  color: #fff;
-  line-height: 1;
-  margin-bottom: 4px;
-}
-.price-card-amount .currency { font-size: 22px; vertical-align: super; }
-.price-card-sub {
-  font-size: 12px;
-  color: var(--muted);
-  margin-bottom: 10px;
-}
-.badge {
-  display: inline-block;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  padding: 3px 8px;
-  border-radius: 4px;
-  background: var(--primary);
-  color: #fff;
-}
-.badge.green { background: var(--success); }
-.badge.amber { background: var(--warning); color: #111; }
-.badge.grey { background: #333; color: var(--muted); }
-
-/* ── FPS rules ── */
-.fps-box {
-  display: inline-flex;
-  gap: 0;
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  overflow: hidden;
-  margin-bottom: 36px;
-}
-.fps-item {
-  padding: 10px 20px;
-  border-right: 1px solid var(--border);
-  text-align: center;
-}
-.fps-item:last-child { border-right: none; }
-.fps-item-label {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  color: var(--muted);
-  display: block;
-  margin-bottom: 2px;
-}
-.fps-item-val {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 20px;
-  font-weight: 700;
-  color: #fff;
-}
-
-/* ── Site cards ── */
-.sites-row {
-  display: flex;
-  gap: 16px;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-.site-info-card {
-  background: var(--panel);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 16px 20px;
-  text-align: left;
-  width: 260px;
-}
-.site-info-card-name {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 17px;
-  font-weight: 700;
-  color: #fff;
-  text-transform: uppercase;
-  margin-bottom: 4px;
-}
-.site-info-card-addr {
-  font-size: 12px;
-  color: var(--muted);
-  margin-bottom: 8px;
-  line-height: 1.4;
-}
-.site-info-card a {
-  font-size: 12px;
-  font-weight: 500;
-  color: var(--primary);
-}
-
-/* ── Booking widget wrapper ── */
-.booking-section {
-  max-width: 900px;
-  margin: 48px auto;
-  padding: 0 16px;
-}
-.booking-section-title {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 32px;
-  font-weight: 900;
-  text-transform: uppercase;
-  color: #fff;
-  margin-bottom: 4px;
-  letter-spacing: 0.5px;
-}
-.booking-section-sub {
-  color: var(--muted);
-  font-size: 14px;
-  margin-bottom: 24px;
-}
-
-/* ── Stepper ── */
-.stepper {
-  display: flex;
-  align-items: center;
-  gap: 0;
-  margin-bottom: 28px;
-  background: var(--panel);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 16px 20px;
-}
-.step {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  flex: 1;
-  position: relative;
-}
-.step::after {
-  content: '';
-  position: absolute;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  width: calc(100% - 120px);
-  height: 2px;
-  background: var(--border);
-}
-.step:last-child::after { display: none; }
-.step-dot {
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  border: 2px solid var(--border);
-  background: var(--bg);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 13px;
-  font-weight: 700;
-  color: var(--muted);
-  flex-shrink: 0;
-  z-index: 1;
-  transition: all 0.2s;
-}
-.step.active .step-dot {
-  border-color: var(--primary);
-  background: var(--primary);
-  color: #fff;
-}
-.step.done .step-dot {
-  border-color: var(--success);
-  background: var(--success);
-  color: #fff;
-}
-.step-label {
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
-  color: var(--muted);
-  white-space: nowrap;
-}
-.step.active .step-label { color: #fff; }
-.step.done .step-label { color: var(--success); }
-
-/* ── Step panels ── */
-.step-panel { display: none; }
-.step-panel.active { display: block; }
-
-/* ── Site tabs ── */
-.site-tabs {
-  display: flex;
-  gap: 0;
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  overflow: hidden;
-  margin-bottom: 28px;
-}
-.site-tab {
-  flex: 1;
-  padding: 14px 16px;
-  background: var(--panel);
-  border: none;
-  border-right: 1px solid var(--border);
-  color: var(--muted);
-  cursor: pointer;
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 15px;
-  font-weight: 700;
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
-  transition: background 0.2s, color 0.2s;
-  text-align: center;
-}
-.site-tab:last-child { border-right: none; }
-.site-tab:hover { background: var(--light); color: var(--text); }
-.site-tab.active { background: var(--primary); color: #fff; }
-.site-tab-sub {
-  display: block;
-  font-size: 10px;
-  font-weight: 400;
-  font-family: 'Barlow', sans-serif;
-  letter-spacing: 0;
-  text-transform: none;
-  color: inherit;
-  opacity: 0.75;
-  margin-top: 2px;
-}
-
-/* ── Calendar ── */
-.calendar-container {
-  display: flex;
-  gap: 20px;
-  flex-wrap: wrap;
-}
-.calendar-month {
-  flex: 1;
-  min-width: 280px;
-  background: var(--panel);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  overflow: hidden;
-}
-.cal-header {
-  background: var(--light);
-  padding: 14px 16px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  border-bottom: 1px solid var(--border);
-}
-.cal-month-name {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 18px;
-  font-weight: 700;
-  text-transform: uppercase;
-  color: #fff;
-  letter-spacing: 0.5px;
-}
-.cal-year {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 14px;
-  color: var(--muted);
-  margin-left: 6px;
-}
-.cal-legend {
-  display: flex;
-  gap: 12px;
-  align-items: center;
-  font-size: 11px;
-  color: var(--muted);
-}
-.cal-legend-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  display: inline-block;
-}
-.cal-grid {
-  padding: 12px;
-}
-.cal-weekdays {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  margin-bottom: 4px;
-}
-.cal-weekday {
-  text-align: center;
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 12px;
-  font-weight: 700;
-  color: var(--muted);
-  padding: 4px 0;
-  text-transform: uppercase;
-}
-.cal-days {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  gap: 2px;
-}
-.cal-day {
-  aspect-ratio: 1;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  border-radius: 6px;
-  font-size: 13px;
-  font-weight: 500;
-  position: relative;
-  cursor: default;
-  color: var(--muted);
-  opacity: 0.3;
-  transition: background 0.15s, color 0.15s;
 }
-.cal-day.in-month {
-  opacity: 1;
-  color: var(--text);
-}
-.cal-day.has-session {
-  cursor: pointer;
-  color: #fff;
-  font-weight: 600;
-}
-.cal-day.has-session:hover { background: rgba(211, 47, 47, 0.15); }
-.cal-day.session-full { cursor: not-allowed; }
-.cal-day.selected {
-  background: var(--primary);
-  color: #fff;
-  border-radius: 6px;
-}
-.cal-day.today { background: rgba(255,255,255,0.06); }
-.cal-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--primary);
-  position: absolute;
-  bottom: 3px;
-}
-.cal-day.session-full .cal-dot { background: #555; }
-.cal-day.selected .cal-dot { background: rgba(255,255,255,0.7); }
 
-/* ── Session card ── */
-.session-card {
-  background: var(--panel);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 20px;
-  margin-bottom: 20px;
+h1,h2,h3,h4,h5,
+.nav-brand, .stat-val, .badge, .tab-label,
+.card-title, .modal-title, .price-big,
+.session-site, .checkin-ref, .health-val {
+  font-family: 'Barlow Condensed', sans-serif;
+  letter-spacing: 0.02em;
 }
-.session-card-title {
-  font-size: 22px;
-  font-weight: 700;
-  color: #fff;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  margin-bottom: 4px;
-}
-.session-card-date {
-  font-size: 15px;
-  color: var(--primary);
-  font-weight: 600;
-  margin-bottom: 14px;
-}
-.session-times {
+
+/* ── NAV ── */
+#top-nav {
+  height: var(--nav-h);
+  background: var(--panel2);
+  border-bottom: 1px solid var(--border);
   display: flex;
-  gap: 16px;
-  flex-wrap: wrap;
-  margin-bottom: 16px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  position: sticky;
+  top: 0;
+  z-index: 800;
+  flex-shrink: 0;
 }
-.session-time-item {
+.nav-brand {
+  font-size: 18px;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.nav-brand-red { color: var(--red); }
+.nav-separator {
+  width: 1px; height: 20px;
+  background: var(--border2);
+  margin: 0 4px;
+}
+.nav-subtitle {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.live-badge {
   display: flex;
   align-items: center;
   gap: 6px;
+  background: rgba(67,160,71,0.1);
+  border: 1px solid rgba(67,160,71,0.25);
+  border-radius: 100px;
+  padding: 4px 12px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--success);
+}
+.live-dot {
+  width: 7px; height: 7px;
+  background: var(--success);
+  border-radius: 50%;
+  animation: blink 1.4s ease-in-out infinite;
+}
+@keyframes blink {
+  0%,100% { opacity: 1; }
+  50%      { opacity: 0.25; }
+}
+
+/* ── TAB BAR ── */
+#tab-bar {
+  background: var(--panel);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  padding: 0 20px;
+  flex-shrink: 0;
+  overflow-x: auto;
+}
+.tab {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 20px;
+  height: 46px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  white-space: nowrap;
+  transition: color 0.15s, border-color 0.15s;
+  user-select: none;
+  flex-shrink: 0;
+}
+.tab:hover { color: var(--text); }
+.tab.active { color: #fff; border-bottom-color: var(--red); }
+.tab-icon { font-size: 14px; }
+
+/* ── VIEWS ── */
+.view { display: none; flex: 1; overflow-y: auto; }
+.view.active { display: flex; flex-direction: column; }
+
+/* ── STOREFRONT ── */
+#view-storefront { background: var(--bg); }
+
+.sf-hero {
+  background: linear-gradient(135deg, #110808, #0d0d0d 60%, #080d11);
+  border-bottom: 1px solid var(--border);
+  padding: 40px 28px 32px;
+  position: relative;
+  overflow: hidden;
+}
+.sf-hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 70% 120% at 90% 50%, rgba(211,47,47,0.06) 0%, transparent 60%);
+  pointer-events: none;
+}
+.sf-hero-deco {
+  position: absolute;
+  right: -10px; top: 50%;
+  transform: translateY(-50%);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 140px;
+  font-weight: 900;
+  color: rgba(211,47,47,0.04);
+  user-select: none;
+  pointer-events: none;
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+.sf-hero-eyebrow {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.sf-hero-eyebrow::before {
+  content: '';
+  display: block;
+  width: 24px; height: 2px;
+  background: var(--red);
+}
+.sf-hero h1 {
+  font-size: clamp(28px, 5vw, 48px);
+  font-weight: 900;
+  text-transform: uppercase;
+  color: #fff;
+  line-height: 1;
+  margin-bottom: 6px;
+}
+.sf-hero h1 span { color: var(--red); }
+.sf-hero-sub {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 15px;
+  color: rgba(255,255,255,0.4);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+.sf-hero-pills {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 5px 12px;
+  border-radius: 100px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  color: rgba(255,255,255,0.55);
+}
+
+.sf-content { padding: 24px 20px; max-width: 1000px; }
+.sf-section-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 16px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+}
+
+/* Session cards */
+.sessions-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+  margin-bottom: 32px;
+}
+.session-card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: border-color 0.2s, transform 0.2s;
+}
+.session-card:hover {
+  border-color: rgba(211,47,47,0.5);
+  transform: translateY(-2px);
+}
+.session-card.sold-out { opacity: 0.5; cursor: not-allowed; }
+.session-card-top {
+  padding: 16px 16px 12px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.session-site {
+  font-size: 17px;
+  font-weight: 900;
+  text-transform: uppercase;
+  color: #fff;
+  margin-bottom: 2px;
+}
+.session-date {
   font-size: 13px;
   color: var(--muted);
 }
-.session-time-val {
-  color: var(--text);
-  font-weight: 600;
+.session-type-badge {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 3px 9px;
+  border-radius: 2px;
+  flex-shrink: 0;
 }
-.capacity-bars {
+.type-cqb   { background: rgba(211,47,47,0.15); color: #ef5350; border: 1px solid rgba(211,47,47,0.25); }
+.type-field { background: rgba(67,160,71,0.1);  color: #66bb6a;  border: 1px solid rgba(67,160,71,0.2); }
+.type-urban { background: rgba(255,167,38,0.1); color: var(--accent); border: 1px solid rgba(255,167,38,0.2); }
+
+.session-card-body { padding: 14px 16px; }
+.cap-row {
   display: flex;
-  flex-direction: column;
-  gap: 10px;
-  margin-bottom: 4px;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
 }
-.cap-bar-row {
+.cap-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.cap-count {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  color: rgba(255,255,255,0.6);
+}
+.cap-count.low { color: var(--accent); }
+.cap-count.full { color: var(--red); }
+.progress-bar {
+  height: 5px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 3px;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+.progress-fill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+}
+.fill-walkon  { background: linear-gradient(90deg, #1e88e5, #42a5f5); }
+.fill-rental  { background: linear-gradient(90deg, var(--success), #66bb6a); }
+.fill-warning { background: linear-gradient(90deg, var(--accent), #ffca28); }
+.fill-danger  { background: linear-gradient(90deg, var(--red), #ef5350); }
+
+.session-card-footer {
+  padding: 12px 16px;
+  border-top: 1px solid var(--border);
   display: flex;
   align-items: center;
-  gap: 10px;
+  justify-content: space-between;
 }
-.cap-bar-label {
-  font-size: 12px;
-  color: var(--muted);
-  width: 90px;
-  flex-shrink: 0;
+.session-price {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 22px;
+  font-weight: 900;
+  color: #fff;
 }
-.cap-bar-track {
-  flex: 1;
-  height: 8px;
-  background: var(--light);
-  border-radius: 4px;
+.session-price span { font-size: 13px; color: var(--muted); font-weight: 400; }
+.session-book-btn {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  background: var(--red);
+  color: #fff;
+  border: none;
+  padding: 8px 20px;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.session-book-btn:hover { background: var(--red-dark); }
+
+/* ── BOOKING MODAL ── */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.75);
+  backdrop-filter: blur(4px);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+.modal-overlay.open { display: flex; }
+.modal {
+  background: var(--panel);
+  border: 1px solid var(--border2);
+  border-radius: 8px;
+  width: 100%;
+  max-width: 480px;
   overflow: hidden;
+  animation: modal-in 0.25s ease;
 }
-.cap-bar-fill {
-  height: 100%;
-  border-radius: 4px;
-  background: var(--success);
-  transition: width 0.4s;
+@keyframes modal-in {
+  from { opacity: 0; transform: scale(0.95) translateY(12px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
 }
-.cap-bar-fill.amber { background: var(--warning); }
-.cap-bar-fill.red { background: var(--primary); }
-.cap-bar-count {
+.modal-header {
+  padding: 20px 24px 16px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+.modal-title { font-size: 20px; font-weight: 900; text-transform: uppercase; color: #fff; }
+.modal-site {
   font-size: 12px;
   color: var(--muted);
-  width: 60px;
-  text-align: right;
-  flex-shrink: 0;
+  margin-top: 2px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.modal-close {
+  background: none;
+  border: none;
+  color: var(--muted);
+  font-size: 22px;
+  cursor: pointer;
+  padding: 0 4px;
+  line-height: 1;
+  transition: color 0.15s;
+}
+.modal-close:hover { color: #fff; }
+.modal-body { padding: 24px; }
+.modal-footer {
+  padding: 16px 24px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
 }
 
-/* ── Type selector cards ── */
-.type-cards {
+/* Steps indicator */
+.modal-steps {
   display: flex;
-  gap: 16px;
-  flex-wrap: wrap;
+  gap: 0;
+  margin-bottom: 24px;
+}
+.modal-step {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--border);
+  transition: all 0.2s;
+}
+.modal-step.active { color: #fff; border-bottom-color: var(--red); }
+.modal-step.done   { color: var(--success); border-bottom-color: var(--success); }
+.modal-step-num {
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.07);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px;
+  flex-shrink: 0;
+  transition: background 0.2s;
+}
+.modal-step.active .modal-step-num { background: var(--red); color: #fff; }
+.modal-step.done   .modal-step-num { background: var(--success); color: #fff; }
+
+/* Qty selector */
+.booking-type-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
   margin-bottom: 20px;
 }
-.type-card {
-  flex: 1;
-  min-width: 200px;
-  background: var(--panel);
+.booking-type-card {
+  background: var(--panel2);
   border: 2px solid var(--border);
-  border-radius: 10px;
-  padding: 20px;
+  border-radius: 5px;
+  padding: 16px;
   cursor: pointer;
-  transition: border-color 0.2s, background 0.15s;
+  transition: border-color 0.2s;
 }
-.type-card:hover { border-color: #555; background: #1f1f1f; }
-.type-card.selected { border-color: var(--primary); background: rgba(211,47,47,0.08); }
-.type-card-name {
+.booking-type-card:hover   { border-color: rgba(211,47,47,0.4); }
+.booking-type-card.selected { border-color: var(--red); background: rgba(211,47,47,0.06); }
+.booking-type-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #fff;
+  margin-bottom: 2px;
+}
+.booking-type-price {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 22px;
+  font-weight: 900;
+  color: var(--accent);
+}
+.booking-type-desc { font-size: 12px; color: var(--muted); margin-top: 4px; }
+
+.qty-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--panel2);
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  padding: 12px 16px;
+  margin-bottom: 16px;
+}
+.qty-label { font-size: 14px; color: var(--text); }
+.qty-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.qty-btn {
+  width: 32px; height: 32px;
+  background: rgba(255,255,255,0.07);
+  border: 1px solid var(--border2);
+  border-radius: 4px;
+  color: #fff;
+  font-size: 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s;
+  font-family: monospace;
+}
+.qty-btn:hover { background: rgba(255,255,255,0.12); }
+.qty-num {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 24px;
+  font-weight: 900;
+  color: #fff;
+  min-width: 28px;
+  text-align: center;
+}
+.booking-total {
+  background: rgba(211,47,47,0.07);
+  border: 1px solid rgba(211,47,47,0.18);
+  border-radius: 5px;
+  padding: 12px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
+}
+.booking-total-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.booking-total-val {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 28px;
+  font-weight: 900;
+  color: #fff;
+}
+
+/* Step 2: details form */
+.form-group { margin-bottom: 16px; }
+.form-label {
+  display: block;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+.form-input {
+  width: 100%;
+  background: var(--panel2);
+  border: 1px solid var(--border2);
+  border-radius: 4px;
+  padding: 10px 12px;
+  color: var(--text);
+  font-family: 'Barlow', sans-serif;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.15s;
+}
+.form-input:focus { border-color: var(--red); }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+/* Loading / success states */
+.modal-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 24px;
+  gap: 16px;
+}
+.spinner {
+  width: 40px; height: 40px;
+  border: 3px solid rgba(255,255,255,0.1);
+  border-top-color: var(--red);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.loading-text {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.modal-success {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 40px 24px;
+  gap: 12px;
+}
+.success-icon {
+  width: 64px; height: 64px;
+  background: rgba(67,160,71,0.12);
+  border: 2px solid var(--success);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+}
+.success-title {
   font-family: 'Barlow Condensed', sans-serif;
   font-size: 24px;
   font-weight: 900;
   text-transform: uppercase;
   color: #fff;
-  margin-bottom: 4px;
 }
-.type-card-price {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 32px;
-  font-weight: 900;
-  color: var(--primary);
-  margin-bottom: 8px;
-}
-.type-card-price-sub {
-  font-size: 13px;
-  color: var(--muted);
-  margin-bottom: 12px;
-  line-height: 1.4;
-}
-.type-card-includes {
-  font-size: 12px;
-  color: var(--muted);
-  line-height: 1.7;
-}
-.type-card-includes span {
-  display: block;
-}
-.type-card-includes span::before {
-  content: '✓ ';
-  color: var(--success);
-  font-weight: 700;
-}
-.type-card-radio {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 10px;
-}
-.type-radio-dot {
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
-  border: 2px solid var(--border);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: border-color 0.2s;
-}
-.type-card.selected .type-radio-dot { border-color: var(--primary); }
-.type-radio-inner {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--primary);
-  display: none;
-}
-.type-card.selected .type-radio-inner { display: block; }
-
-/* ── Form ── */
-.form-panel {
-  background: var(--panel);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 24px;
-  margin-bottom: 16px;
-}
-.form-panel-title {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 18px;
-  font-weight: 700;
-  text-transform: uppercase;
-  color: #fff;
-  letter-spacing: 0.5px;
-  margin-bottom: 16px;
-  padding-bottom: 10px;
-  border-bottom: 1px solid var(--border);
-}
-.form-row {
-  display: flex;
-  gap: 14px;
-  margin-bottom: 14px;
-  flex-wrap: wrap;
-}
-.form-group {
-  flex: 1;
-  min-width: 180px;
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-}
-.form-group label {
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--muted);
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-.form-group input,
-.form-group textarea,
-.form-group select {
-  background: var(--bg);
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  color: var(--text);
-  font-family: 'Barlow', sans-serif;
-  font-size: 14px;
-  padding: 10px 12px;
-  outline: none;
-  transition: border-color 0.2s;
-  width: 100%;
-}
-.form-group input:focus,
-.form-group textarea:focus { border-color: var(--primary); }
-.form-group textarea { min-height: 80px; resize: vertical; }
-
-/* ── Spinner ── */
-.spinner-group {
-  display: flex;
-  align-items: center;
-  gap: 0;
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  overflow: hidden;
-  width: fit-content;
-}
-.spinner-btn {
-  background: var(--light);
-  border: none;
-  color: var(--text);
-  cursor: pointer;
-  font-size: 18px;
-  width: 38px;
-  height: 38px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background 0.15s;
-  line-height: 1;
-}
-.spinner-btn:hover { background: #3a3a3a; }
-.spinner-val {
-  background: var(--bg);
-  color: var(--text);
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 18px;
-  font-weight: 700;
-  width: 46px;
-  text-align: center;
-  padding: 6px 0;
-  border-left: 1px solid var(--border);
-  border-right: 1px solid var(--border);
-}
-.qty-row {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  margin-bottom: 12px;
-}
-.qty-row-label {
-  font-size: 13px;
-  color: var(--text);
-  flex: 1;
-}
-
-/* ── Toggle checkbox ── */
-.toggle-row {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 16px;
-}
-.toggle-row input[type=checkbox] {
-  width: 18px;
-  height: 18px;
-  accent-color: var(--primary);
-  cursor: pointer;
-}
-.toggle-row label {
-  font-size: 14px;
-  color: var(--text);
-  cursor: pointer;
-}
-
-/* ── Info note ── */
-.info-note {
-  background: rgba(255,167,38,0.1);
-  border: 1px solid rgba(255,167,38,0.3);
-  border-radius: 6px;
-  padding: 10px 14px;
-  font-size: 13px;
-  color: var(--warning);
-  margin-top: 10px;
-  margin-bottom: 4px;
-}
-.info-note.blue {
-  background: rgba(66,165,245,0.1);
-  border-color: rgba(66,165,245,0.3);
-  color: #90caf9;
-}
-
-/* ── Summary ── */
-.summary-panel {
-  background: var(--panel);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 24px;
-  margin-bottom: 16px;
-}
-.summary-panel-title {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 18px;
-  font-weight: 700;
-  text-transform: uppercase;
-  color: #fff;
-  letter-spacing: 0.5px;
-  margin-bottom: 16px;
-  padding-bottom: 10px;
-  border-bottom: 1px solid var(--border);
-}
-.summary-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 9px 0;
-  border-bottom: 1px solid var(--border);
-  font-size: 14px;
-}
-.summary-item:last-child { border-bottom: none; }
-.summary-item-label { color: var(--muted); }
-.summary-item-val { color: var(--text); font-weight: 600; }
-.summary-total {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 12px;
-  padding-top: 12px;
-  border-top: 2px solid var(--border);
-}
-.summary-total-label {
-  font-family: 'Barlow Condensed', sans-serif;
+.success-ref {
+  font-family: 'Barlow Condensed', monospace;
   font-size: 20px;
   font-weight: 700;
-  text-transform: uppercase;
-  color: #fff;
+  color: var(--success);
+  background: rgba(67,160,71,0.08);
+  border: 1px solid rgba(67,160,71,0.2);
+  border-radius: 4px;
+  padding: 8px 20px;
+  letter-spacing: 0.12em;
 }
-.summary-total-val {
+.success-text { font-size: 13px; color: var(--muted); }
+
+/* Buttons */
+.btn {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 10px 22px;
+  border-radius: 3px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.btn-primary   { background: var(--red);  color: #fff; }
+.btn-primary:hover { background: var(--red-dark); }
+.btn-secondary { background: rgba(255,255,255,0.07); color: var(--text); border: 1px solid var(--border2); }
+.btn-secondary:hover { background: rgba(255,255,255,0.1); }
+.btn-success   { background: var(--success); color: #fff; }
+.btn-success:hover { background: #388e3c; }
+.btn-sm { padding: 7px 16px; font-size: 12px; }
+
+/* ── ADMIN DASHBOARD ── */
+#view-admin { background: var(--bg); padding: 0; }
+.admin-content { padding: 24px 20px; max-width: 1100px; }
+
+.page-header {
+  margin-bottom: 28px;
+}
+.page-title {
   font-family: 'Barlow Condensed', sans-serif;
   font-size: 28px;
   font-weight: 900;
-  color: var(--success);
-}
-
-/* ── Buttons ── */
-.btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 16px;
-  font-weight: 700;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  padding: 13px 28px;
-  border-radius: 8px;
-  border: none;
-  cursor: pointer;
-  transition: background 0.2s, transform 0.1s, opacity 0.2s;
-}
-.btn:active { transform: scale(0.98); }
-.btn-primary {
-  background: var(--primary);
-  color: #fff;
-}
-.btn-primary:hover { background: var(--primary-hover); }
-.btn-success {
-  background: var(--success);
-  color: #fff;
-  font-size: 18px;
-  padding: 16px 36px;
-  width: 100%;
-}
-.btn-success:hover { background: #388e3c; }
-.btn-ghost {
-  background: transparent;
-  color: var(--muted);
-  border: 1px solid var(--border);
-}
-.btn-ghost:hover { background: var(--light); color: var(--text); }
-.btn-sm { font-size: 13px; padding: 8px 16px; }
-.btn-nav-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 20px;
-  gap: 12px;
-}
-
-/* ── Success screen ── */
-.success-screen {
-  text-align: center;
-  padding: 40px 24px;
-}
-.success-icon {
-  width: 70px;
-  height: 70px;
-  border-radius: 50%;
-  background: rgba(67,160,71,0.15);
-  border: 2px solid var(--success);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto 20px;
-  font-size: 30px;
-}
-.success-title {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 36px;
-  font-weight: 900;
-  text-transform: uppercase;
-  color: var(--success);
-  margin-bottom: 6px;
-}
-.success-ref {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 20px;
-  font-weight: 700;
-  color: var(--text);
-  margin-bottom: 20px;
-  letter-spacing: 2px;
-}
-.success-details {
-  background: var(--panel);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 20px;
-  margin: 0 auto 20px;
-  max-width: 460px;
-  text-align: left;
-}
-.success-detail-row {
-  display: flex;
-  justify-content: space-between;
-  padding: 7px 0;
-  border-bottom: 1px solid var(--border);
-  font-size: 13px;
-}
-.success-detail-row:last-child { border-bottom: none; }
-.success-detail-label { color: var(--muted); }
-.success-detail-val { color: var(--text); font-weight: 600; }
-.success-note {
-  font-size: 13px;
-  color: var(--muted);
-  max-width: 460px;
-  margin: 0 auto 10px;
-  padding: 12px 16px;
-  background: var(--panel);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  text-align: left;
-}
-.success-note strong { color: var(--warning); }
-
-/* ── Reviews ── */
-.reviews-section {
-  max-width: 900px;
-  margin: 0 auto 60px;
-  padding: 0 16px;
-}
-.section-heading {
-  font-size: 30px;
-  font-weight: 900;
   text-transform: uppercase;
   color: #fff;
-  letter-spacing: 0.5px;
-  margin-bottom: 20px;
+  margin-bottom: 4px;
 }
-.reviews-grid {
+.page-sub { font-size: 13px; color: var(--muted); }
+
+/* Stat cards */
+.stats-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 14px;
+  margin-bottom: 28px;
 }
-.review-card {
+.stat-card {
   background: var(--panel);
   border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 18px;
+  border-radius: 6px;
+  padding: 20px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 6px;
   transition: border-color 0.2s;
 }
-.review-card:hover { border-color: #3a3a3a; }
-.review-card.featured {
-  grid-column: span 2;
-  border-color: var(--primary);
-  background: rgba(211,47,47,0.05);
-}
-.review-stars {
-  color: #ffc107;
-  font-size: 14px;
-  letter-spacing: 1px;
-}
-.review-text {
-  font-size: 14px;
-  color: var(--text);
-  line-height: 1.6;
-  flex: 1;
-}
-.review-author {
-  font-size: 13px;
+.stat-card:hover { border-color: var(--border2); }
+.stat-card-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px;
   font-weight: 700;
-  color: var(--muted);
+  letter-spacing: 0.15em;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  color: var(--muted);
 }
-.review-card.featured .review-author { color: var(--primary); }
-
-/* ── Footer ── */
-.footer {
-  border-top: 1px solid var(--border);
-  padding: 24px;
-  text-align: center;
+.stat-val {
+  font-size: 36px;
+  font-weight: 900;
+  color: #fff;
+  line-height: 1;
+}
+.stat-val.green { color: var(--success); }
+.stat-val.amber { color: var(--accent); }
+.stat-val.blue  { color: #42a5f5; }
+.stat-sub {
   font-size: 12px;
   color: var(--muted);
+  margin-top: 2px;
 }
-.footer a { color: var(--muted); }
+.stat-trend {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 2px;
+  margin-top: 2px;
+}
+.trend-up { background: rgba(67,160,71,0.1); color: var(--success); }
 
-/* ── Responsive ── */
-@media (max-width: 640px) {
-  .stepper { gap: 4px; padding: 12px; }
-  .step-label { display: none; }
-  .step::after { display: none; }
-  .reviews-grid { grid-template-columns: 1fr; }
-  .review-card.featured { grid-column: span 1; }
-  .site-tab-sub { display: none; }
-  .type-cards { flex-direction: column; }
-  .fps-box { flex-wrap: wrap; }
-  .calendar-container { flex-direction: column; }
+/* Kill switch */
+.kill-switch-panel {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 20px;
+  margin-bottom: 28px;
+}
+.kill-switch-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+.kill-switch-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.kill-switch-status {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 4px 12px;
+  border-radius: 100px;
+}
+.ks-normal   { background: rgba(67,160,71,0.12); color: var(--success); border: 1px solid rgba(67,160,71,0.25); }
+.ks-soft     { background: rgba(255,167,38,0.12); color: var(--accent); border: 1px solid rgba(255,167,38,0.25); }
+.ks-emergency { background: rgba(211,47,47,0.15); color: var(--red); border: 1px solid rgba(211,47,47,0.3); }
+.kill-switch-btns {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.ks-btn {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 9px 20px;
+  border-radius: 3px;
+  cursor: pointer;
+  border: 1px solid var(--border2);
+  background: transparent;
+  color: var(--muted);
+  transition: all 0.15s;
+}
+.ks-btn:hover { color: var(--text); border-color: #555; }
+.ks-btn.active-normal    { background: rgba(67,160,71,0.15); color: var(--success); border-color: rgba(67,160,71,0.3); }
+.ks-btn.active-soft      { background: rgba(255,167,38,0.15); color: var(--accent); border-color: rgba(255,167,38,0.3); }
+.ks-btn.active-emergency { background: rgba(211,47,47,0.15); color: var(--red); border-color: rgba(211,47,47,0.3); }
+.kill-switch-note {
+  margin-top: 12px;
+  font-size: 12px;
+  color: var(--muted);
+  padding: 10px 14px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+}
+.kill-switch-note.warn {
+  color: var(--accent);
+  background: rgba(255,167,38,0.05);
+  border-color: rgba(255,167,38,0.15);
+}
+.kill-switch-note.danger {
+  color: var(--red);
+  background: rgba(211,47,47,0.05);
+  border-color: rgba(211,47,47,0.2);
+}
+
+/* Admin two-col layout */
+.admin-cols {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 20px;
+}
+.admin-panel {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  overflow: hidden;
+}
+.admin-panel-header {
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.admin-panel-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.7);
+}
+.admin-panel-badge {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  background: rgba(30,136,229,0.12);
+  color: #42a5f5;
+  border: 1px solid rgba(30,136,229,0.2);
+  padding: 2px 8px;
+  border-radius: 2px;
+}
+
+/* Bookings table */
+.data-table { width: 100%; border-collapse: collapse; }
+.data-table th {
+  padding: 10px 16px;
+  text-align: left;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--muted);
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+}
+.data-table td {
+  padding: 12px 16px;
+  font-size: 13px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text);
+}
+.data-table tr:last-child td { border-bottom: none; }
+.data-table tr:hover td { background: rgba(255,255,255,0.02); }
+.ref-code {
+  font-family: 'Barlow Condensed', monospace;
+  font-size: 13px;
+  color: #42a5f5;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+}
+.type-tag {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border-radius: 2px;
+}
+.tag-walkon  { background: rgba(30,136,229,0.12); color: #42a5f5; border: 1px solid rgba(30,136,229,0.2); }
+.tag-rental  { background: rgba(67,160,71,0.1);   color: #66bb6a; border: 1px solid rgba(67,160,71,0.2); }
+.tag-paid    { background: rgba(67,160,71,0.1);   color: var(--success); }
+.tag-pending { background: rgba(255,167,38,0.1);  color: var(--accent); }
+
+/* Sessions overview */
+.session-overview-item {
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--border);
+}
+.session-overview-item:last-child { border-bottom: none; }
+.session-overview-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 8px;
+}
+.session-overview-name {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #fff;
+}
+.session-overview-date { font-size: 12px; color: var(--muted); }
+.session-overview-pct {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 20px;
+  font-weight: 900;
+  color: var(--accent);
+}
+
+/* ── ATTENDANCE ── */
+#view-attendance {
+  background: var(--bg);
+  padding: 0;
+}
+.checkin-layout {
+  display: grid;
+  grid-template-columns: 340px 1fr;
+  gap: 0;
+  min-height: calc(100vh - var(--nav-h) - 46px);
+}
+.checkin-panel {
+  background: var(--panel);
+  border-right: 1px solid var(--border);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.checkin-panel-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 10px;
+}
+.checkin-counter {
+  background: var(--panel2);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 20px;
+  text-align: center;
+}
+.checkin-nums {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 52px;
+  font-weight: 900;
+  color: #fff;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.checkin-nums span { color: var(--muted); font-size: 32px; }
+.checkin-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 12px;
+}
+.checkin-main {
+  padding: 24px;
+  flex: 1;
+}
+.select-input {
+  width: 100%;
+  background: var(--panel2);
+  border: 1px solid var(--border2);
+  border-radius: 4px;
+  padding: 10px 12px;
+  color: var(--text);
+  font-family: 'Barlow', sans-serif;
+  font-size: 14px;
+  outline: none;
+  margin-bottom: 0;
+  appearance: none;
+  cursor: pointer;
+}
+.checkin-ref-input {
+  width: 100%;
+  background: var(--panel2);
+  border: 2px solid var(--border2);
+  border-radius: 6px;
+  padding: 16px 18px;
+  color: #fff;
+  font-family: 'Barlow Condensed', monospace;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  outline: none;
+  text-align: center;
+  transition: border-color 0.2s;
+  margin-bottom: 12px;
+}
+.checkin-ref-input::placeholder { color: var(--muted); font-size: 14px; letter-spacing: 0.06em; }
+.checkin-ref-input:focus { border-color: var(--red); }
+.checkin-hint {
+  font-size: 12px;
+  color: var(--muted);
+  text-align: center;
+  margin-bottom: 20px;
+}
+.checkin-result {
+  border-radius: 6px;
+  padding: 20px;
+  margin-bottom: 20px;
+  display: none;
+  animation: fadeUp 0.3s ease;
+}
+.checkin-result.success-result {
+  display: block;
+  background: rgba(67,160,71,0.08);
+  border: 1px solid rgba(67,160,71,0.25);
+}
+.checkin-result.error-result {
+  display: block;
+  background: rgba(211,47,47,0.07);
+  border: 1px solid rgba(211,47,47,0.2);
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.checkin-result-name {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 22px;
+  font-weight: 900;
+  color: #fff;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+.checkin-result-detail { font-size: 13px; color: rgba(255,255,255,0.6); }
+
+/* Attendee list */
+.attendee-list { margin-top: 20px; }
+.attendee-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--border);
+  font-size: 13px;
+  transition: background 0.15s;
+}
+.attendee-item:hover { background: rgba(255,255,255,0.02); }
+.attendee-name { color: var(--text); font-weight: 500; }
+.attendee-ref { font-family: monospace; font-size: 12px; color: var(--muted); }
+.attendee-status {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border-radius: 2px;
+}
+.status-in  { background: rgba(67,160,71,0.12); color: var(--success); }
+.status-out { background: rgba(255,255,255,0.05); color: var(--muted); }
+
+/* ── HEALTH VIEW ── */
+#view-health {
+  background: var(--bg);
+  padding: 0;
+}
+.health-content { padding: 24px 20px; max-width: 900px; }
+.health-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-bottom: 28px;
+}
+.health-card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 22px 20px;
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  transition: border-color 0.2s;
+}
+.health-card:hover { border-color: var(--border2); }
+.health-status-dot {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  margin-top: 5px;
+  flex-shrink: 0;
+  animation: blink 2s ease-in-out infinite;
+}
+.dot-ok      { background: var(--success); box-shadow: 0 0 8px rgba(67,160,71,0.4); }
+.dot-warn    { background: var(--accent); animation: none; }
+.dot-error   { background: var(--red); }
+.health-card-body { flex: 1; }
+.health-service {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 17px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #fff;
+  margin-bottom: 2px;
+}
+.health-val {
+  font-size: 22px;
+  font-weight: 900;
+  color: var(--success);
+  line-height: 1.2;
+  margin-bottom: 4px;
+}
+.health-meta { font-size: 12px; color: var(--muted); }
+.health-action {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding: 3px 10px;
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  cursor: pointer;
+  background: none;
+  align-self: center;
+  transition: all 0.15s;
+}
+.health-action:hover { color: var(--text); border-color: var(--border2); }
+
+.health-info-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+.health-info-card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 18px;
+}
+.health-info-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+.health-info-val {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 22px;
+  font-weight: 900;
+  color: #fff;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  .stats-grid { grid-template-columns: repeat(2, 1fr); }
+  .admin-cols { grid-template-columns: 1fr; }
+  .checkin-layout { grid-template-columns: 1fr; }
+  .checkin-panel { border-right: none; border-bottom: 1px solid var(--border); }
+  .health-grid { grid-template-columns: 1fr; }
+  .health-info-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 600px) {
+  .stats-grid { grid-template-columns: 1fr 1fr; }
+  .sessions-grid { grid-template-columns: 1fr; }
+  .booking-type-row { grid-template-columns: 1fr; }
+  .form-row { grid-template-columns: 1fr; }
+  .health-info-grid { grid-template-columns: 1fr; }
+  #top-nav { padding: 0 14px; }
+  .nav-subtitle { display: none; }
+  .nav-separator { display: none; }
 }
 </style>
 </head>
 <body>
 
-<!-- Nav -->
-<nav class="nav">
-  <div class="nav-brand"><span>RED 1</span> AIRSOFT</div>
-  <div class="nav-links">
-    <a href="#">Sites</a>
-    <a href="#">Events</a>
-    <a href="#">Rental</a>
-    <a href="#">Contact</a>
+<!-- ── TOP NAV ── -->
+<nav id="top-nav">
+  <div style="display:flex;align-items:center;gap:12px">
+    <div class="nav-brand">
+      <img src="images/RED1logo.webp" alt="Red 1 Airsoft" style="height:36px;width:auto;object-fit:contain;vertical-align:middle" onerror="this.style.display='none';document.getElementById('nav-text-brand').style.display='flex'">
+      <span id="nav-text-brand" style="display:none;align-items:center"><span class="nav-brand-red">Red 1</span>&nbsp;Airsoft</span>
+    </div>
+    <div class="nav-separator"></div>
+    <span class="nav-subtitle">Platform Demo</span>
+  </div>
+  <div style="display:flex;align-items:center;gap:10px">
+    <button onclick="showLanding()" style="background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);color:#fff;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:5px 12px;border-radius:3px;cursor:pointer;">⇐ Choose App</button>
+    <div class="live-badge"><div class="live-dot"></div>Live Demo</div>
   </div>
 </nav>
 
-<!-- Hero -->
-<section class="hero">
-  <div class="hero-eyebrow">South East England's Premier Airsoft</div>
-  <h1>Book Your<br>Game Day Online</h1>
-  <p class="hero-sub">Three unique sites, real-time availability, instant confirmation. Walk-on or full rental — we've got you covered.</p>
+<!-- ══════════════════════════════════════════════ -->
+<!-- ── LANDING / CHOOSE SCREEN (shown first) ── -->
+<!-- ══════════════════════════════════════════════ -->
+<div id="view-landing" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:calc(100vh - 56px);padding:40px 24px;background:radial-gradient(ellipse at 50% 0%,rgba(211,47,47,0.12) 0%,transparent 70%),#0d0d0d">
 
-  <div class="pricing-row">
-    <div class="price-card featured">
-      <div class="price-card-label">Walk-On</div>
-      <div class="price-card-amount"><span class="currency">£</span>30</div>
-      <div class="price-card-sub">per player</div>
-      <span class="badge green">Available</span>
+  <img src="images/RED1logo.webp" alt="Red 1 Airsoft" style="height:64px;width:auto;object-fit:contain;margin-bottom:28px" onerror="this.style.display='none'">
+  <div style="font-family:'Barlow Condensed',sans-serif;font-size:clamp(28px,6vw,52px);font-weight:900;text-transform:uppercase;letter-spacing:.04em;color:#fff;text-align:center;margin-bottom:8px">
+    Choose Your <span style="color:#d32f2f">Platform</span>
+  </div>
+  <p style="font-size:14px;color:#888;margin-bottom:48px;text-align:center;max-width:480px">
+    Red 1 Airsoft runs two products: a Shopify Embedded Booking App and a standalone website (for future use). Choose which to demo.
+  </p>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;width:100%;max-width:720px">
+
+    <!-- Shopify App card -->
+    <div onclick="launchApp('shopify')" style="background:#1a1a1a;border:1px solid #2a2a2a;border-radius:10px;padding:32px 28px;cursor:pointer;transition:border-color .2s,transform .15s;text-align:left" onmouseover="this.style.borderColor='#d32f2f';this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='#2a2a2a';this.style.transform='none'">
+      <div style="font-size:36px;margin-bottom:16px">🛒</div>
+      <div style="font-family:'Barlow Condensed',sans-serif;font-size:24px;font-weight:900;text-transform:uppercase;color:#fff;margin-bottom:8px">Shopify Booking App</div>
+      <p style="font-size:13px;color:#888;line-height:1.6;margin-bottom:20px">Embedded Shopify admin app for game day bookings. Polaris UI, App Bridge, sessions management, attendance check-in, and system health monitoring.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:6px">
+        <span style="font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:3px 8px;background:rgba(211,47,47,.15);border:1px solid rgba(211,47,47,.3);border-radius:2px;color:#ef9a9a">Storefront</span>
+        <span style="font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:3px 8px;background:rgba(211,47,47,.15);border:1px solid rgba(211,47,47,.3);border-radius:2px;color:#ef9a9a">Admin</span>
+        <span style="font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:3px 8px;background:rgba(211,47,47,.15);border:1px solid rgba(211,47,47,.3);border-radius:2px;color:#ef9a9a">Check-In</span>
+        <span style="font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:3px 8px;background:rgba(211,47,47,.15);border:1px solid rgba(211,47,47,.3);border-radius:2px;color:#ef9a9a">Health</span>
+      </div>
     </div>
-    <div class="price-card">
-      <div class="price-card-label">Adult Rental</div>
-      <div class="price-card-amount"><span class="currency">£</span>60</div>
-      <div class="price-card-sub">entry + M4 + BBs + protection + lunch</div>
-      <span class="badge amber">Limited slots</span>
+
+    <!-- Website card -->
+    <div onclick="launchApp('website')" style="background:#1a1a1a;border:1px solid #2a2a2a;border-radius:10px;padding:32px 28px;cursor:pointer;transition:border-color .2s,transform .15s;text-align:left" onmouseover="this.style.borderColor='#ffa726';this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='#2a2a2a';this.style.transform='none'">
+      <div style="font-size:36px;margin-bottom:16px">🌐</div>
+      <div style="font-family:'Barlow Condensed',sans-serif;font-size:24px;font-weight:900;text-transform:uppercase;color:#fff;margin-bottom:8px">Red 1 Website</div>
+      <p style="font-size:13px;color:#888;line-height:1.6;margin-bottom:20px">Full standalone red1airsoft.com website. Built for when they transition away from Shopify. Includes product catalog, UKARA compliance, booking integration, and more.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:6px">
+        <span style="font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:3px 8px;background:rgba(255,167,38,.12);border:1px solid rgba(255,167,38,.3);border-radius:2px;color:#ffa726">Products</span>
+        <span style="font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:3px 8px;background:rgba(255,167,38,.12);border:1px solid rgba(255,167,38,.3);border-radius:2px;color:#ffa726">Booking</span>
+        <span style="font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:3px 8px;background:rgba(255,167,38,.12);border:1px solid rgba(255,167,38,.3);border-radius:2px;color:#ffa726">UKARA</span>
+        <span style="font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:3px 8px;background:rgba(255,167,38,.12);border:1px solid rgba(255,167,38,.3);border-radius:2px;color:#ffa726">Full Site</span>
+      </div>
     </div>
-    <div class="price-card">
-      <div class="price-card-label">Junior Rental</div>
-      <div class="price-card-amount"><span class="currency">£</span>45</div>
-      <div class="price-card-sub">junior-sized kit + same includes</div>
-      <span class="badge amber">Limited slots</span>
-    </div>
-    <div class="price-card">
-      <div class="price-card-label">Private Hire</div>
-      <div class="price-card-amount" style="font-size:22px;line-height:1.4;">Contact<br>Us</div>
-      <div class="price-card-sub">full-site exclusive</div>
-      <span class="badge grey">Enquire</span>
-    </div>
+
   </div>
 
-  <div class="fps-box">
-    <div class="fps-item">
-      <span class="fps-item-label">AEG</span>
-      <span class="fps-item-val">350fps</span>
-    </div>
-    <div class="fps-item">
-      <span class="fps-item-label">DMR</span>
-      <span class="fps-item-val">450fps</span>
-    </div>
-    <div class="fps-item">
-      <span class="fps-item-label">Sniper</span>
-      <span class="fps-item-val">500fps</span>
-    </div>
-    <div class="fps-item">
-      <span class="fps-item-label">Sniper MED</span>
-      <span class="fps-item-val">30m</span>
-    </div>
+  <p style="margin-top:36px;font-size:12px;color:#555">Red 1 Airsoft — 75 London Rd, St Albans AL1 1LN &nbsp;·&nbsp; 01727 846069 &nbsp;·&nbsp; support@red1airsoft.com</p>
+</div>
+
+<!-- Website iframe view -->
+<div id="view-website" style="display:none;flex:1;flex-direction:column">
+  <div style="background:#1a1a1a;border-bottom:1px solid #2a2a2a;padding:8px 16px;display:flex;align-items:center;gap:10px">
+    <div style="display:flex;gap:5px"><div style="width:12px;height:12px;border-radius:50%;background:#ef4444"></div><div style="width:12px;height:12px;border-radius:50%;background:#fbbf24"></div><div style="width:12px;height:12px;border-radius:50%;background:#22c55e"></div></div>
+    <div style="flex:1;background:#111;border:1px solid #333;border-radius:4px;padding:4px 12px;font-size:12px;color:#888;font-family:monospace">red1airsoft.com</div>
   </div>
+  <iframe src="website/index.html" style="flex:1;border:none;width:100%;height:calc(100vh - 56px - 42px)" title="Red 1 Airsoft Website"></iframe>
+</div>
 
-  <div class="sites-row">
-    <div class="site-info-card">
-      <div class="site-info-card-name">Red 1 CQB</div>
-      <div class="site-info-card-addr">Langleybury Lane, Sarratt<br>Kings Langley WD4 8RN</div>
-      <a href="https://maps.google.com/?q=WD4+8RN" target="_blank" rel="noopener">View on Google Maps ↗</a>
-    </div>
-    <div class="site-info-card">
-      <div class="site-info-card-name">Oblivion Airsoft</div>
-      <div class="site-info-card-addr">Berrybushes Farm, Langleybury Lane<br>Kings Langley WD4 8RL</div>
-      <a href="https://maps.google.com/?q=WD4+8RL" target="_blank" rel="noopener">View on Google Maps ↗</a>
-    </div>
-    <div class="site-info-card">
-      <div class="site-info-card-name">Red 1 Fawkham</div>
-      <div class="site-info-card-addr">School Lane, Horton Kirby<br>Longfield DA3 8ER</div>
-      <a href="https://maps.google.com/?q=DA3+8ER" target="_blank" rel="noopener">View on Google Maps ↗</a>
-    </div>
+<!-- ── TAB BAR ── -->
+<div id="tab-bar" style="display:none">
+  <div class="tab active" data-view="storefront">
+    <span class="tab-icon">🛒</span>
+    <span class="tab-label">Storefront</span>
   </div>
-</section>
-
-<!-- Booking Widget -->
-<div class="booking-section">
-  <div class="booking-section-title">Book a Session</div>
-  <div class="booking-section-sub">Select your site, choose a date, pick your booking type and confirm.</div>
-
-  <!-- Stepper -->
-  <div class="stepper" id="stepper">
-    <div class="step active" id="step-ind-1">
-      <div class="step-dot">1</div>
-      <span class="step-label">Site &amp; Date</span>
-    </div>
-    <div class="step" id="step-ind-2">
-      <div class="step-dot">2</div>
-      <span class="step-label">Session Type</span>
-    </div>
-    <div class="step" id="step-ind-3">
-      <div class="step-dot">3</div>
-      <span class="step-label">Your Details</span>
-    </div>
-    <div class="step" id="step-ind-4">
-      <div class="step-dot">4</div>
-      <span class="step-label">Confirm</span>
-    </div>
+  <div class="tab" data-view="admin">
+    <span class="tab-icon">📊</span>
+    <span class="tab-label">Admin Dashboard</span>
   </div>
-
-  <!-- Step 1: Site selector + calendar -->
-  <div class="step-panel active" id="panel-1">
-    <div class="site-tabs" id="site-tabs">
-      <button class="site-tab active" data-site="0">
-        Red 1 CQB
-        <span class="site-tab-sub">Kings Langley</span>
-      </button>
-      <button class="site-tab" data-site="1">
-        Oblivion Airsoft
-        <span class="site-tab-sub">Kings Langley</span>
-      </button>
-      <button class="site-tab" data-site="2">
-        Red 1 Fawkham
-        <span class="site-tab-sub">Horton Kirby</span>
-      </button>
-    </div>
-
-    <div class="calendar-container" id="calendar-container"></div>
-
-    <div class="btn-nav-row" style="justify-content:flex-end;margin-top:14px;">
-      <span id="cal-hint" style="font-size:13px;color:var(--muted);">Select a highlighted date to continue</span>
-    </div>
+  <div class="tab" data-view="attendance">
+    <span class="tab-icon">✅</span>
+    <span class="tab-label">Attendance</span>
   </div>
-
-  <!-- Step 2: Session + type -->
-  <div class="step-panel" id="panel-2">
-    <div class="session-card" id="session-info-card"></div>
-
-    <div class="type-cards" id="type-cards">
-      <div class="type-card" id="card-walkon" onclick="selectType('walkon')">
-        <div class="type-card-radio">
-          <div class="type-radio-dot"><div class="type-radio-inner"></div></div>
-          <div class="type-card-name">Walk-On</div>
-        </div>
-        <div class="type-card-price">£30<span style="font-size:16px;font-weight:400;color:var(--muted);"> / player</span></div>
-        <div class="type-card-price-sub">Bring your own AEG &amp; kit. Adults and juniors same price.</div>
-        <div class="type-card-includes">
-          <span>Entry &amp; full day games</span>
-          <span>Lunch break (site dependent)</span>
-          <span>Marshal support</span>
-        </div>
-      </div>
-      <div class="type-card" id="card-rental" onclick="selectType('rental')">
-        <div class="type-card-radio">
-          <div class="type-radio-dot"><div class="type-radio-inner"></div></div>
-          <div class="type-card-name">Rental</div>
-        </div>
-        <div class="type-card-price">£60 <span style="font-size:16px;font-weight:400;color:var(--muted);">adult</span></div>
-        <div class="type-card-price-sub">Junior rental £45. Includes everything below.</div>
-        <div class="type-card-includes">
-          <span>Entry &amp; full day games</span>
-          <span>M4 rifle + 3000 BBs</span>
-          <span>Full-face protection</span>
-          <span>Lunch included</span>
-          <span>Marshal support</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="btn-nav-row">
-      <button class="btn btn-ghost btn-sm" onclick="goStep(1)">&#8592; Back</button>
-      <button class="btn btn-primary btn-sm" id="step2-next" onclick="goStep(3)" disabled>Next: Your Details &#8594;</button>
-    </div>
-  </div>
-
-  <!-- Step 3: Details form -->
-  <div class="step-panel" id="panel-3">
-    <div class="form-panel">
-      <div class="form-panel-title">Your Details</div>
-      <div class="form-row">
-        <div class="form-group">
-          <label for="f-name">Full Name *</label>
-          <input type="text" id="f-name" placeholder="Jane Smith">
-        </div>
-        <div class="form-group">
-          <label for="f-email">Email Address *</label>
-          <input type="email" id="f-email" placeholder="jane@example.com">
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="form-group">
-          <label for="f-phone">Phone Number *</label>
-          <input type="tel" id="f-phone" placeholder="+44 7700 000000">
-        </div>
-      </div>
-
-      <div class="toggle-row">
-        <input type="checkbox" id="guest-toggle">
-        <label for="guest-toggle">Booking for someone else?</label>
-      </div>
-
-      <div id="guest-fields" style="display:none;">
-        <div class="info-note blue" style="margin-bottom:14px;">Your details (booker) will be on the confirmation. Your guest's name will be on the day.</div>
-        <div class="form-row">
-          <div class="form-group">
-            <label for="g-name">Guest Name *</label>
-            <input type="text" id="g-name" placeholder="Guest's full name">
-          </div>
-          <div class="form-group">
-            <label for="g-email">Guest Email *</label>
-            <input type="email" id="g-email" placeholder="guest@example.com">
-          </div>
-        </div>
-        <div class="form-row">
-          <div class="form-group">
-            <label for="g-phone">Guest Phone</label>
-            <input type="tel" id="g-phone" placeholder="+44 7700 000001">
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="form-panel" id="qty-panel">
-      <div class="form-panel-title" id="qty-panel-title">Player Count</div>
-      <div id="qty-fields"></div>
-    </div>
-
-    <div class="form-panel">
-      <div class="form-panel-title">Additional</div>
-      <div class="form-group" style="margin-bottom:14px;">
-        <label for="f-notes">Notes / Special Requirements</label>
-        <textarea id="f-notes" placeholder="Allergies, accessibility needs, group name, etc."></textarea>
-      </div>
-      <div class="toggle-row">
-        <input type="checkbox" id="waiver-cb">
-        <label for="waiver-cb">I agree to the <a href="#" style="color:var(--primary);">waiver &amp; site rules</a>. I confirm all players meet age requirements and will follow marshal instructions.</label>
-      </div>
-    </div>
-
-    <div class="btn-nav-row">
-      <button class="btn btn-ghost btn-sm" onclick="goStep(2)">&#8592; Back</button>
-      <button class="btn btn-primary btn-sm" onclick="goStep(4)">Review Booking &#8594;</button>
-    </div>
-  </div>
-
-  <!-- Step 4: Summary + confirm -->
-  <div class="step-panel" id="panel-4">
-    <div class="summary-panel" id="summary-panel"></div>
-
-    <div class="info-note blue" style="margin-bottom:16px;">
-      On the real site, this adds to your Shopify basket — you can also purchase BBs, accessories, and other items before checking out.
-    </div>
-
-    <div class="form-panel" style="padding:16px 20px;">
-      <div class="toggle-row" style="margin-bottom:0;">
-        <input type="checkbox" id="confirm-waiver-cb">
-        <label for="confirm-waiver-cb">I confirm all details are correct and agree to the cancellation policy.</label>
-      </div>
-    </div>
-
-    <button class="btn btn-success" style="margin-top:16px;" onclick="submitBooking()">&#10003; Confirm Booking</button>
-
-    <div class="btn-nav-row" style="justify-content:flex-start;margin-top:12px;">
-      <button class="btn btn-ghost btn-sm" onclick="goStep(3)">&#8592; Edit Details</button>
-    </div>
-  </div>
-
-  <!-- Step 5: Success -->
-  <div class="step-panel" id="panel-5">
-    <div class="success-screen" id="success-screen"></div>
+  <div class="tab" data-view="health">
+    <span class="tab-icon">💚</span>
+    <span class="tab-label">System Health</span>
   </div>
 </div>
 
-<!-- Reviews -->
-<div class="reviews-section">
-  <div class="section-heading">What Players Say</div>
-  <div class="reviews-grid">
-    <div class="review-card">
-      <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-      <div class="review-text">"Brilliant site, well organised marshals and great varied games. Been going for a few years now and always love it."</div>
-      <div class="review-author">TheSponge77</div>
+<!-- ══════════════════════════════════════ -->
+<!-- ── VIEW: STOREFRONT ── -->
+<!-- ══════════════════════════════════════ -->
+<div class="view active" id="view-storefront">
+
+  <!-- Hero -->
+  <div class="sf-hero">
+    <div class="sf-hero-deco">RED 1</div>
+    <div class="sf-hero-eyebrow">Live Booking System</div>
+    <h1>Red 1 <span>Airsoft</span></h1>
+    <p class="sf-hero-sub">The UK's Premier Airsoft Experience</p>
+    <div class="sf-hero-pills">
+      <div class="pill">🎮 3 Sites</div>
+      <div class="pill">📅 Every Weekend</div>
+      <div class="pill">🚪 Gates 08:00</div>
+      <div class="pill">👤 Ages 12+</div>
+      <div class="pill">🎯 Walk-On from £30</div>
     </div>
-    <div class="review-card">
-      <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-      <div class="review-text">"Great experience at Red 1 CQB. The jungle area is amazing."</div>
-      <div class="review-author">Dawid L</div>
+  </div>
+
+  <div class="sf-content">
+    <div class="sf-section-title">Upcoming Sessions — Click to Book</div>
+    <div class="sessions-grid" id="sessionsGrid">
+      <!-- Injected by JS -->
     </div>
-    <div class="review-card">
-      <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-      <div class="review-text">"Came as a first timer with the rental gear — everything was explained so well, gear was great condition. Will definitely be back!"</div>
-      <div class="review-author">Sarah B</div>
+  </div>
+
+</div>
+
+<!-- ══════════════════════════════════════ -->
+<!-- ── VIEW: ADMIN DASHBOARD ── -->
+<!-- ══════════════════════════════════════ -->
+<div class="view" id="view-admin">
+  <div class="admin-content">
+
+    <div class="page-header">
+      <div class="page-title">Admin Dashboard</div>
+      <div class="page-sub">Manage sessions, bookings, and system controls</div>
     </div>
-    <div class="review-card featured">
-      <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733; <span class="badge" style="vertical-align:middle;margin-left:6px;">Featured</span></div>
-      <div class="review-text">"Our team has been using Red 1 sites for over 3 years. The variety across CQB, Oblivion and Fawkham keeps every game day fresh. The marshals are professional, safety is always paramount, and the rental gear is high quality. Red 1 is simply the best airsoft operation in the south-east. Cannot recommend highly enough."</div>
-      <div class="review-author">The Dark Marksmen</div>
+
+    <!-- Stats -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-card-label">Total Bookings</div>
+        <div class="stat-val">247</div>
+        <div class="stat-trend trend-up">▲ 12% this week</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card-label">Revenue</div>
+        <div class="stat-val green">£8,420</div>
+        <div class="stat-sub">This month</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card-label">Upcoming Sessions</div>
+        <div class="stat-val blue">12</div>
+        <div class="stat-sub">Next 4 weeks</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card-label">Kill Switch</div>
+        <div class="stat-val" id="ks-stat-val" style="color:var(--success);font-size:22px;padding-top:6px">NORMAL</div>
+        <div class="stat-sub">Booking system</div>
+      </div>
     </div>
-    <div class="review-card">
-      <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-      <div class="review-text">"Fawkham's village area is an incredible setup. Best airsoft day I've had in years."</div>
-      <div class="review-author">Cameron Aburrow</div>
+
+    <!-- Kill switch -->
+    <div class="kill-switch-panel">
+      <div class="kill-switch-header">
+        <div class="kill-switch-title">⚡ Kill Switch Control</div>
+        <span class="kill-switch-status ks-normal" id="ks-status-badge">NORMAL</span>
+      </div>
+      <div class="kill-switch-btns">
+        <button class="ks-btn active-normal" id="ks-normal"    onclick="setKillSwitch('normal')">Normal Operation</button>
+        <button class="ks-btn"              id="ks-soft"      onclick="setKillSwitch('soft')">Soft Disable</button>
+        <button class="ks-btn"              id="ks-emergency" onclick="setKillSwitch('emergency')">⚠ Emergency Stop</button>
+      </div>
+      <div class="kill-switch-note" id="ks-note">
+        All systems normal. Bookings are being accepted.
+      </div>
+    </div>
+
+    <!-- Two column layout -->
+    <div class="admin-cols">
+
+      <!-- Recent bookings -->
+      <div class="admin-panel">
+        <div class="admin-panel-header">
+          <div class="admin-panel-title">Recent Bookings</div>
+          <span class="admin-panel-badge">Live</span>
+        </div>
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Ref</th>
+              <th>Player</th>
+              <th>Session</th>
+              <th>Type</th>
+              <th>Total</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="ref-code">R1W-8F4A2C1B</span></td>
+              <td>James Harrington</td>
+              <td>Red 1 CQB — Sat</td>
+              <td><span class="type-tag tag-walkon">Walk-On</span></td>
+              <td>£60</td>
+              <td><span class="type-tag tag-paid">Paid</span></td>
+            </tr>
+            <tr>
+              <td><span class="ref-code">R1W-3D9E5F7A</span></td>
+              <td>Sophie Clarke</td>
+              <td>Oblivion — Sat</td>
+              <td><span class="type-tag tag-rental">Rental</span></td>
+              <td>£120</td>
+              <td><span class="type-tag tag-paid">Paid</span></td>
+            </tr>
+            <tr>
+              <td><span class="ref-code">R1W-7B2C8D1E</span></td>
+              <td>Marcus Webb</td>
+              <td>Red 1 CQB — Sat</td>
+              <td><span class="type-tag tag-walkon">Walk-On</span></td>
+              <td>£30</td>
+              <td><span class="type-tag tag-paid">Paid</span></td>
+            </tr>
+            <tr>
+              <td><span class="ref-code">R1W-1A5F3E9C</span></td>
+              <td>Priya Sharma</td>
+              <td>Fawkham — Sat</td>
+              <td><span class="type-tag tag-rental">Rental</span></td>
+              <td>£60</td>
+              <td><span class="type-tag tag-pending">Pending</span></td>
+            </tr>
+            <tr>
+              <td><span class="ref-code">R1W-6E4A2B8F</span></td>
+              <td>Oliver Dunn</td>
+              <td>Oblivion — Sat</td>
+              <td><span class="type-tag tag-walkon">Walk-On</span></td>
+              <td>£90</td>
+              <td><span class="type-tag tag-paid">Paid</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Sessions overview -->
+      <div class="admin-panel">
+        <div class="admin-panel-header">
+          <div class="admin-panel-title">Sessions Overview</div>
+        </div>
+        <div id="adminSessionsList">
+          <!-- Injected by JS -->
+        </div>
+      </div>
+
     </div>
   </div>
 </div>
 
-<!-- Footer -->
-<footer class="footer">
-  <p>Red 1 Airsoft &mdash; Demo booking widget &mdash; Powered by <strong>StyleIdeas Shopify Events Plugin</strong></p>
-  <p style="margin-top:6px;"><a href="#">Privacy Policy</a> &middot; <a href="#">Terms &amp; Conditions</a> &middot; <a href="#">Contact</a></p>
-</footer>
+<!-- ══════════════════════════════════════ -->
+<!-- ── VIEW: ATTENDANCE ── -->
+<!-- ══════════════════════════════════════ -->
+<div class="view" id="view-attendance">
+  <div class="checkin-layout">
+
+    <!-- Left panel: counter + session select -->
+    <div class="checkin-panel">
+      <div>
+        <div class="checkin-panel-title">Session</div>
+        <select class="select-input" id="checkinSession" onchange="updateCheckinCounter()">
+          <option value="cqb-sat">Red 1 CQB — Saturday</option>
+          <option value="oblivion-sat">Oblivion Airsoft — Saturday</option>
+          <option value="fawkham-sat">Red 1 Fawkham — Saturday</option>
+          <option value="cqb-sat2">Red 1 CQB — Following Saturday</option>
+        </select>
+      </div>
+
+      <div class="checkin-counter">
+        <div class="checkin-nums" id="checkinCounter">23 <span>/ 70</span></div>
+        <div class="checkin-label">Checked In</div>
+        <div class="progress-bar" style="margin-bottom:0">
+          <div class="progress-fill fill-walkon" id="checkinProgress" style="width:33%"></div>
+        </div>
+      </div>
+
+      <div>
+        <div class="checkin-panel-title" style="margin-bottom:8px">Breakdown</div>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <div style="display:flex;justify-content:space-between;font-size:13px;color:var(--muted)">
+            <span>Walk-On</span><span style="color:var(--text);font-family:'Barlow Condensed',sans-serif;font-weight:700" id="ciWalkOn">18</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;font-size:13px;color:var(--muted)">
+            <span>Rental</span><span style="color:var(--text);font-family:'Barlow Condensed',sans-serif;font-weight:700" id="ciRental">5</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;font-size:13px;color:var(--muted)">
+            <span>Awaiting</span><span style="color:var(--accent);font-family:'Barlow Condensed',sans-serif;font-weight:700" id="ciAwaiting">47</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right: check-in input + list -->
+    <div class="checkin-main">
+      <div style="max-width:520px;margin-bottom:28px">
+        <div class="checkin-panel-title" style="font-size:13px;color:var(--text);margin-bottom:12px">Check In Player</div>
+        <input
+          class="checkin-ref-input"
+          id="checkinRefInput"
+          type="text"
+          placeholder="Scan QR or type booking ref..."
+          autocomplete="off"
+          autocorrect="off"
+          spellcheck="false"
+        >
+        <div class="checkin-hint">Type a booking reference and press Enter &nbsp;·&nbsp; Try: <strong>R1W-ABC123</strong></div>
+
+        <div class="checkin-result" id="checkinResult"></div>
+      </div>
+
+      <div class="checkin-panel-title" style="margin-bottom:4px">Attendee List</div>
+      <div class="admin-panel" style="background:var(--panel)">
+        <div class="attendee-list" id="attendeeList">
+          <!-- Injected by JS -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════ -->
+<!-- ── VIEW: SYSTEM HEALTH ── -->
+<!-- ══════════════════════════════════════ -->
+<div class="view" id="view-health">
+  <div class="health-content">
+
+    <div class="page-header">
+      <div class="page-title">System Health</div>
+      <div class="page-sub">Real-time status of all platform components</div>
+    </div>
+
+    <div class="health-grid">
+
+      <div class="health-card">
+        <div class="health-status-dot dot-ok"></div>
+        <div class="health-card-body">
+          <div class="health-service">PostgreSQL</div>
+          <div class="health-val">✅ Healthy</div>
+          <div class="health-meta">Response: 2ms &nbsp;·&nbsp; Connections: 4/20 &nbsp;·&nbsp; Size: 42 MB</div>
+        </div>
+        <button class="health-action">Details</button>
+      </div>
+
+      <div class="health-card">
+        <div class="health-status-dot dot-ok"></div>
+        <div class="health-card-body">
+          <div class="health-service">Redis Cache</div>
+          <div class="health-val">✅ Connected</div>
+          <div class="health-meta">Memory: 1.2 MB used &nbsp;·&nbsp; Keys: 847 &nbsp;·&nbsp; Uptime: 14 days</div>
+        </div>
+        <button class="health-action">Details</button>
+      </div>
+
+      <div class="health-card">
+        <div class="health-status-dot dot-ok"></div>
+        <div class="health-card-body">
+          <div class="health-service">Queue System</div>
+          <div class="health-val">✅ Processing</div>
+          <div class="health-meta">Jobs in queue: 0 &nbsp;·&nbsp; Processed today: 1,284 &nbsp;·&nbsp; Workers: 2</div>
+        </div>
+        <button class="health-action">Details</button>
+      </div>
+
+      <div class="health-card">
+        <div class="health-status-dot dot-ok"></div>
+        <div class="health-card-body">
+          <div class="health-service">Mail Service</div>
+          <div class="health-val">✅ Operational</div>
+          <div class="health-meta">Provider: SendGrid &nbsp;·&nbsp; Sent today: 47 &nbsp;·&nbsp; Failed: 0</div>
+        </div>
+        <button class="health-action">Details</button>
+      </div>
+
+    </div>
+
+    <div class="health-info-grid">
+      <div class="health-info-card">
+        <div class="health-info-label">Version</div>
+        <div class="health-info-val">2.0.0</div>
+      </div>
+      <div class="health-info-card">
+        <div class="health-info-label">Environment</div>
+        <div class="health-info-val">Production</div>
+      </div>
+      <div class="health-info-card">
+        <div class="health-info-label">Platform Uptime</div>
+        <div class="health-info-val" style="color:var(--success)">99.97%</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ── BOOKING MODAL ── -->
+<div class="modal-overlay" id="bookingModal">
+  <div class="modal" id="modalBox">
+
+    <div class="modal-header">
+      <div>
+        <div class="modal-title" id="modalTitle">Book Session</div>
+        <div class="modal-site" id="modalSite"></div>
+      </div>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+
+    <!-- Step 1 -->
+    <div id="modalStep1">
+      <div class="modal-body">
+        <div class="modal-steps">
+          <div class="modal-step active">
+            <div class="modal-step-num">1</div>
+            <span>Choose</span>
+          </div>
+          <div class="modal-step">
+            <div class="modal-step-num">2</div>
+            <span>Details</span>
+          </div>
+          <div class="modal-step">
+            <div class="modal-step-num">3</div>
+            <span>Confirm</span>
+          </div>
+        </div>
+
+        <div class="booking-type-row">
+          <div class="booking-type-card selected" id="typeWalkOn" onclick="selectType('walkon')">
+            <div class="booking-type-label">Walk-On</div>
+            <div class="booking-type-price">£30</div>
+            <div class="booking-type-desc">Own kit</div>
+          </div>
+          <div class="booking-type-card" id="typeRental" onclick="selectType('rental')">
+            <div class="booking-type-label">Rental</div>
+            <div class="booking-type-price">£60</div>
+            <div class="booking-type-desc">Full kit included</div>
+          </div>
+        </div>
+
+        <div class="qty-row">
+          <div class="qty-label">Number of players</div>
+          <div class="qty-controls">
+            <button class="qty-btn" onclick="changeQty(-1)">−</button>
+            <div class="qty-num" id="qtyDisplay">1</div>
+            <button class="qty-btn" onclick="changeQty(1)">+</button>
+          </div>
+        </div>
+
+        <div class="booking-total">
+          <div class="booking-total-label">Total</div>
+          <div class="booking-total-val" id="bookingTotal">£30</div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" onclick="closeModal()">Cancel</button>
+        <button class="btn btn-primary" onclick="goToStep2()">Continue →</button>
+      </div>
+    </div>
+
+    <!-- Step 2 -->
+    <div id="modalStep2" style="display:none">
+      <div class="modal-body">
+        <div class="modal-steps">
+          <div class="modal-step done">
+            <div class="modal-step-num">✓</div>
+            <span>Choose</span>
+          </div>
+          <div class="modal-step active">
+            <div class="modal-step-num">2</div>
+            <span>Details</span>
+          </div>
+          <div class="modal-step">
+            <div class="modal-step-num">3</div>
+            <span>Confirm</span>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">First Name</label>
+            <input class="form-input" id="fFirstName" type="text" placeholder="John">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Last Name</label>
+            <input class="form-input" id="fLastName" type="text" placeholder="Smith">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Email Address</label>
+          <input class="form-input" id="fEmail" type="email" placeholder="john@example.com">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Phone Number</label>
+          <input class="form-input" id="fPhone" type="tel" placeholder="07700 900123">
+        </div>
+        <div class="booking-total" style="margin-top:4px">
+          <div class="booking-total-label">Order total</div>
+          <div class="booking-total-val" id="bookingTotal2">£30</div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" onclick="goBackStep1()">← Back</button>
+        <button class="btn btn-primary" onclick="confirmBooking()">Confirm &amp; Pay →</button>
+      </div>
+    </div>
+
+    <!-- Loading -->
+    <div id="modalLoading" style="display:none">
+      <div class="modal-loading">
+        <div class="spinner"></div>
+        <div class="loading-text">Processing booking...</div>
+      </div>
+    </div>
+
+    <!-- Success -->
+    <div id="modalSuccess" style="display:none">
+      <div class="modal-success">
+        <div class="success-icon">✓</div>
+        <div class="success-title">Booking Confirmed!</div>
+        <div class="success-ref" id="successRef">R1W-8F4A2C1B</div>
+        <div class="success-text">Confirmation sent to your email address.<br>Gates open at 08:00. See you on the field!</div>
+      </div>
+      <div class="modal-footer" style="justify-content:center">
+        <button class="btn btn-success" onclick="closeModal()">Done</button>
+      </div>
+    </div>
+
+  </div>
+</div>
 
 <script>
-// ─────────────────────────────────────────────────────────────────────────────
-// BOOKING RULE (do not change):
-// Walk-on → decrements player_capacity_used ONLY
-// Rental  → decrements BOTH player_capacity_used AND rental_capacity_used
-// (rental includes entry fee — the player takes a player slot AND a kit slot)
-// ─────────────────────────────────────────────────────────────────────────────
+// ── DATA ──
+const today = new Date();
+function nextWeekday(dayOfWeek) {
+  const d = new Date(today);
+  const diff = (dayOfWeek - d.getDay() + 7) % 7 || 7;
+  d.setDate(d.getDate() + diff);
+  return d;
+}
+function fmtDate(d) {
+  return d.toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'long', year: 'numeric' });
+}
+const nextSat  = nextWeekday(6);
+const nextSat2 = new Date(nextSat); nextSat2.setDate(nextSat2.getDate() + 7);
 
-const BOOKING_FEE_PCT        = 1.5;
-const BOOKING_FEE_FLAT_PENCE = 20;
-
-const WALKON_PRICE_PENCE  = 3000;
-const RENTAL_ADULT_PENCE  = 6000;
-const RENTAL_JUNIOR_PENCE = 4500;
-
-// ── Site definitions ──────────────────────────────────────────────────────────
-const SITES = [
+const sessions = [
   {
-    id: 'red1-cqb',
-    name: 'Red 1 CQB',
-    address: 'Langleybury Lane, Sarratt, Kings Langley WD4 8RN',
-    fps: 'AEG 350fps / DMR 450fps / Sniper 500fps (30m MED)',
+    id: 's1',
+    site: 'Red 1 CQB',
+    date: nextSat,
+    type: 'CQB',
+    typeClass: 'type-cqb',
+    walkOnBooked: 38, walkOnMax: 60,
+    rentalBooked: 9,  rentalMax: 20,
+    walkOnPrice: 30,  rentalPrice: 60,
   },
   {
-    id: 'oblivion',
-    name: 'Oblivion Airsoft',
-    address: 'Berrybushes Farm, Langleybury Lane, Kings Langley WD4 8RL',
-    fps: 'AEG 350fps / DMR 450fps / Sniper 500fps (30m MED)',
+    id: 's2',
+    site: 'Oblivion Airsoft',
+    date: nextSat,
+    type: 'Large Field',
+    typeClass: 'type-field',
+    walkOnBooked: 55, walkOnMax: 80,
+    rentalBooked: 14, rentalMax: 20,
+    walkOnPrice: 30,  rentalPrice: 60,
   },
   {
-    id: 'red1-fawkham',
-    name: 'Red 1 Fawkham',
-    address: 'School Lane, Horton Kirby, Longfield DA3 8ER',
-    fps: 'AEG 350fps / DMR 450fps / Sniper 500fps (30m MED)',
-  },
-];
-
-// ── Mock sessions ─────────────────────────────────────────────────────────────
-const SESSIONS = [
-  {
-    id: 'S001',
-    site_index: 0,
-    date: '2026-05-23',
-    gates: '08:00', start: '09:30', end: '15:30',
-    player_capacity: 70, player_capacity_used: 65,
-    rental_capacity: 10, rental_capacity_used: 8,
-    notes: null,
+    id: 's3',
+    site: 'Red 1 Fawkham',
+    date: nextSat,
+    type: 'Urban CQB',
+    typeClass: 'type-urban',
+    walkOnBooked: 22, walkOnMax: 50,
+    rentalBooked: 6,  rentalMax: 15,
+    walkOnPrice: 30,  rentalPrice: 60,
   },
   {
-    id: 'S002',
-    site_index: 0,
-    date: '2026-06-13',
-    gates: '08:00', start: '09:30', end: '15:30',
-    player_capacity: 70, player_capacity_used: 22,
-    rental_capacity: 10, rental_capacity_used: 3,
-    notes: null,
-  },
-  {
-    id: 'S003',
-    site_index: 1,
-    date: '2026-05-30',
-    gates: '08:00', start: '09:30', end: '16:00',
-    player_capacity: 70, player_capacity_used: 30,
-    rental_capacity: 10, rental_capacity_used: 4,
-    notes: 'Large field — great for squad play.',
-  },
-  {
-    id: 'S004',
-    site_index: 2,
-    date: '2026-06-06',
-    gates: '08:00', chrono: '09:00', start: '09:30', end: '15:30', lunch: '12:30',
-    player_capacity: 70, player_capacity_used: 18,
-    rental_capacity: 10, rental_capacity_used: 2,
-    notes: 'Village + tower combat. Hotdog or cheeseburger lunch included.',
-  },
-  {
-    id: 'S005',
-    site_index: 2,
-    date: '2026-06-20',
-    gates: '08:00', chrono: '09:00', start: '09:30', end: '15:30', lunch: '12:30',
-    player_capacity: 70, player_capacity_used: 5,
-    rental_capacity: 10, rental_capacity_used: 1,
-    notes: 'Village + tower combat. Hotdog or cheeseburger lunch included.',
+    id: 's4',
+    site: 'Red 1 CQB',
+    date: nextSat2,
+    type: 'CQB',
+    typeClass: 'type-cqb',
+    walkOnBooked: 18, walkOnMax: 60,
+    rentalBooked: 3,  rentalMax: 20,
+    walkOnPrice: 30,  rentalPrice: 60,
   },
 ];
 
-// ── State ─────────────────────────────────────────────────────────────────────
-const state = {
-  currentSite: 0,
-  currentStep: 1,
-  selectedSession: null,
-  selectedType: null,  // 'walkon' | 'rental'
-  adultQty: 1,
-  juniorQty: 0,
-};
-
-// ── Utility ───────────────────────────────────────────────────────────────────
-function pence(p) {
-  return '£' + (p / 100).toFixed(2);
-}
-
-function formatDate(dateStr) {
-  const d = new Date(dateStr + 'T12:00:00');
-  return d.toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
-}
-
-function bookingFee(subtotalPence) {
-  return Math.round(subtotalPence * BOOKING_FEE_PCT / 100) + BOOKING_FEE_FLAT_PENCE;
-}
-
-function calcSubtotal() {
-  const s = state;
-  if (!s.selectedSession || !s.selectedType) return 0;
-  if (s.selectedType === 'walkon') {
-    return (s.adultQty + s.juniorQty) * WALKON_PRICE_PENCE;
-  } else {
-    return s.adultQty * RENTAL_ADULT_PENCE + s.juniorQty * RENTAL_JUNIOR_PENCE;
-  }
-}
-
-function genRef() {
-  const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
-  let r = 'R1W-';
-  for (let i = 0; i < 8; i++) r += chars[Math.floor(Math.random() * chars.length)];
-  return r;
-}
-
-function sessionForDate(siteIndex, dateStr) {
-  return SESSIONS.find(s => s.site_index === siteIndex && s.date === dateStr) || null;
-}
-
-function sessionsForSite(siteIndex) {
-  return SESSIONS.filter(s => s.site_index === siteIndex);
-}
-
-// ── Step navigation ───────────────────────────────────────────────────────────
-function goStep(n) {
-  // Validation
-  if (n === 3 && !state.selectedType) {
-    alert('Please select a booking type (Walk-On or Rental).');
-    return;
-  }
-  if (n === 4) {
-    const name  = document.getElementById('f-name').value.trim();
-    const email = document.getElementById('f-email').value.trim();
-    const phone = document.getElementById('f-phone').value.trim();
-    if (!name || !email || !phone) {
-      alert('Please fill in your Name, Email and Phone.');
-      return;
-    }
-    const guestOn = document.getElementById('guest-toggle').checked;
-    if (guestOn) {
-      const gn = document.getElementById('g-name').value.trim();
-      const ge = document.getElementById('g-email').value.trim();
-      if (!gn || !ge) {
-        alert('Please fill in the guest name and email.');
-        return;
-      }
-    }
-    if (!document.getElementById('waiver-cb').checked) {
-      alert('Please agree to the waiver and site rules.');
-      return;
-    }
-    buildSummary();
-  }
-
-  // Hide all panels
-  document.querySelectorAll('.step-panel').forEach(p => p.classList.remove('active'));
-  document.getElementById('panel-' + n).classList.add('active');
-
-  // Update stepper
-  document.querySelectorAll('.step').forEach((el, i) => {
-    el.classList.remove('active', 'done');
-    const num = i + 1;
-    if (num < n) el.classList.add('done');
-    else if (num === n) el.classList.add('active');
-  });
-
-  state.currentStep = n;
-
-  // Replace step-dot check marks
-  document.querySelectorAll('.step.done .step-dot').forEach(dot => {
-    dot.textContent = '✓';
-  });
-  document.querySelectorAll('.step:not(.done) .step-dot').forEach((dot, i) => {
-    dot.textContent = i + 1 + (document.querySelectorAll('.step.done').length);
-  });
-  // Re-number correctly
-  let doneCount = document.querySelectorAll('.step.done').length;
-  document.querySelectorAll('.step').forEach((el, i) => {
-    const dot = el.querySelector('.step-dot');
-    if (el.classList.contains('done')) {
-      dot.textContent = '✓';
-    } else {
-      dot.textContent = i + 1;
-    }
-  });
-
-  window.scrollTo({ top: document.querySelector('.booking-section').offsetTop - 70, behavior: 'smooth' });
-}
-
-// ── Calendar render ───────────────────────────────────────────────────────────
-function renderCalendars() {
-  const container = document.getElementById('calendar-container');
-  container.innerHTML = '';
-  const site = state.currentSite;
-
-  // Show current month (May 2026) and next month (June 2026)
-  const months = [
-    { year: 2026, month: 4 }, // May (0-indexed)
-    { year: 2026, month: 5 }, // June
-  ];
-
-  months.forEach(({ year, month }) => {
-    container.appendChild(buildMonthCalendar(year, month, site));
-  });
-}
-
-function buildMonthCalendar(year, month, siteIndex) {
-  const monthNames = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-  const weekdays = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
-
-  const firstDay = new Date(year, month, 1);
-  const lastDay  = new Date(year, month + 1, 0);
-  const totalDays = lastDay.getDate();
-
-  // Monday-first offset
-  let startOffset = firstDay.getDay() - 1;
-  if (startOffset < 0) startOffset = 6;
-
-  const siteSessions = sessionsForSite(siteIndex);
-  const sessionDates = new Set(siteSessions.map(s => s.date));
-
-  const today = new Date();
-  const todayStr = today.toISOString().slice(0, 10);
-
-  const wrap = document.createElement('div');
-  wrap.className = 'calendar-month';
-
-  // Header
-  wrap.innerHTML = `
-    <div class="cal-header">
-      <div>
-        <span class="cal-month-name">${monthNames[month]}</span>
-        <span class="cal-year">${year}</span>
-      </div>
-      <div class="cal-legend">
-        <span><span class="cal-legend-dot" style="background:var(--primary);"></span> Session</span>
-        <span><span class="cal-legend-dot" style="background:#555;"></span> Full</span>
-      </div>
-    </div>
-    <div class="cal-grid">
-      <div class="cal-weekdays">
-        ${weekdays.map(d => `<div class="cal-weekday">${d}</div>`).join('')}
-      </div>
-      <div class="cal-days" id="cal-days-${year}-${month}"></div>
-    </div>
-  `;
-
-  const daysContainer = wrap.querySelector(`#cal-days-${year}-${month}`);
-
-  // Empty cells before first day
-  for (let i = 0; i < startOffset; i++) {
-    const blank = document.createElement('div');
-    blank.className = 'cal-day';
-    daysContainer.appendChild(blank);
-  }
-
-  // Day cells
-  for (let d = 1; d <= totalDays; d++) {
-    const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
-    const hasSession = sessionDates.has(dateStr);
-    const sess = hasSession ? SESSIONS.find(s => s.site_index === siteIndex && s.date === dateStr) : null;
-    const isFull = sess && (sess.player_capacity_used >= sess.player_capacity);
-    const isToday = dateStr === todayStr;
-    const isSelected = state.selectedSession && state.selectedSession.date === dateStr;
-
-    const cell = document.createElement('div');
-    let cls = 'cal-day in-month';
-    if (isToday) cls += ' today';
-    if (hasSession && !isFull) cls += ' has-session';
-    if (hasSession && isFull) cls += ' has-session session-full';
-    if (isSelected) cls += ' selected';
-    cell.className = cls;
-    cell.textContent = d;
-
-    if (hasSession) {
-      const dot = document.createElement('div');
-      dot.className = 'cal-dot';
-      cell.appendChild(dot);
-
-      if (!isFull) {
-        cell.title = `Session available — click to select`;
-        cell.addEventListener('click', () => selectDate(sess));
-      } else {
-        cell.title = 'Session full';
-      }
-    }
-
-    daysContainer.appendChild(cell);
-  }
-
-  return wrap;
-}
-
-// ── Date selection ────────────────────────────────────────────────────────────
-function selectDate(sess) {
-  state.selectedSession = sess;
-  renderCalendars(); // re-render to update selected state
-  buildSessionCard();
-  goStep(2);
-}
-
-// ── Site tab switch ───────────────────────────────────────────────────────────
-document.getElementById('site-tabs').addEventListener('click', e => {
-  const tab = e.target.closest('.site-tab');
-  if (!tab) return;
-  const idx = parseInt(tab.dataset.site, 10);
-  state.currentSite = idx;
-  state.selectedSession = null;
-  document.querySelectorAll('.site-tab').forEach(t => t.classList.remove('active'));
-  tab.classList.add('active');
-  renderCalendars();
-});
-
-// ── Session card build ────────────────────────────────────────────────────────
-function capBarColour(used, total) {
-  const pct = used / total;
-  if (pct >= 0.9) return 'red';
-  if (pct >= 0.7) return 'amber';
+// ── RENDER SESSIONS (storefront) ──
+function capClass(booked, max) {
+  const pct = booked / max;
+  if (pct >= 1) return 'full';
+  if (pct >= 0.8) return 'low';
   return '';
 }
-
-function buildSessionCard() {
-  const sess = state.selectedSession;
-  if (!sess) return;
-  const site = SITES[sess.site_index];
-
-  const playerLeft  = sess.player_capacity - sess.player_capacity_used;
-  const rentalLeft  = sess.rental_capacity - sess.rental_capacity_used;
-  const playerPct   = Math.round((sess.player_capacity_used / sess.player_capacity) * 100);
-  const rentalPct   = Math.round((sess.rental_capacity_used / sess.rental_capacity) * 100);
-  const playerCol   = capBarColour(sess.player_capacity_used, sess.player_capacity);
-  const rentalCol   = capBarColour(sess.rental_capacity_used, sess.rental_capacity);
-
-  let timesHtml = `
-    <div class="session-time-item">Gates open: <span class="session-time-val">&nbsp;${sess.gates}</span></div>
-    ${sess.chrono ? `<div class="session-time-item">Chrono: <span class="session-time-val">&nbsp;${sess.chrono}</span></div>` : ''}
-    <div class="session-time-item">Game start: <span class="session-time-val">&nbsp;${sess.start}</span></div>
-    <div class="session-time-item">End: <span class="session-time-val">&nbsp;${sess.end}</span></div>
-    ${sess.lunch ? `<div class="session-time-item">Lunch: <span class="session-time-val">&nbsp;${sess.lunch}</span></div>` : ''}
-  `;
-
-  const card = document.getElementById('session-info-card');
-  card.innerHTML = `
-    <div class="session-card-title">${site.name}</div>
-    <div class="session-card-date">${formatDate(sess.date)}</div>
-    <div class="session-times">${timesHtml}</div>
-    <div class="capacity-bars">
-      <div class="cap-bar-row">
-        <div class="cap-bar-label">Player slots</div>
-        <div class="cap-bar-track"><div class="cap-bar-fill ${playerCol}" style="width:${playerPct}%"></div></div>
-        <div class="cap-bar-count">${playerLeft} left</div>
-      </div>
-      <div class="cap-bar-row">
-        <div class="cap-bar-label">Rental kits</div>
-        <div class="cap-bar-track"><div class="cap-bar-fill ${rentalCol}" style="width:${rentalPct}%"></div></div>
-        <div class="cap-bar-count">${rentalLeft} left</div>
-      </div>
-    </div>
-    ${sess.notes ? `<div style="margin-top:12px;font-size:13px;color:var(--muted);">${sess.notes}</div>` : ''}
-  `;
+function fillClass(booked, max) {
+  const pct = booked / max;
+  if (pct >= 0.9) return 'fill-danger';
+  if (pct >= 0.7) return 'fill-warning';
+  return 'fill-walkon';
 }
-
-// ── Type selector ─────────────────────────────────────────────────────────────
-function selectType(type) {
-  state.selectedType = type;
-  document.getElementById('card-walkon').classList.toggle('selected', type === 'walkon');
-  document.getElementById('card-rental').classList.toggle('selected', type === 'rental');
-  document.getElementById('step2-next').disabled = false;
-  buildQtyFields();
-}
-
-// ── Qty fields ────────────────────────────────────────────────────────────────
-function buildQtyFields() {
-  const panel = document.getElementById('qty-panel');
-  const title = document.getElementById('qty-panel-title');
-  const fields = document.getElementById('qty-fields');
-
-  if (state.selectedType === 'walkon') {
-    title.textContent = 'Player Count (Walk-On)';
-    fields.innerHTML = `
-      <div class="qty-row">
-        <div class="qty-row-label">Adults <span style="color:var(--muted);font-size:12px;">(£30 each)</span></div>
-        <div class="spinner-group">
-          <button class="spinner-btn" onclick="changeQty('adult',-1)">−</button>
-          <div class="spinner-val" id="adult-val">1</div>
-          <button class="spinner-btn" onclick="changeQty('adult',1)">+</button>
+function renderSessions() {
+  const grid = document.getElementById('sessionsGrid');
+  grid.innerHTML = sessions.map(s => {
+    const woPct   = Math.round((s.walkOnBooked / s.walkOnMax) * 100);
+    const renPct  = Math.round((s.rentalBooked / s.rentalMax) * 100);
+    const woCls   = capClass(s.walkOnBooked, s.walkOnMax);
+    const renCls  = capClass(s.rentalBooked, s.rentalMax);
+    const sold    = woCls === 'full' && renCls === 'full';
+    return `
+      <div class="session-card ${sold ? 'sold-out' : ''}" onclick="${sold ? '' : `openBookingModal('${s.id}')`}">
+        <div class="session-card-top">
+          <div>
+            <div class="session-site">${s.site}</div>
+            <div class="session-date">${fmtDate(s.date)}</div>
+          </div>
+          <span class="session-type-badge ${s.typeClass}">${s.type}</span>
         </div>
-      </div>
-      <div class="qty-row">
-        <div class="qty-row-label">Juniors <span style="color:var(--muted);font-size:12px;">(£30 each)</span></div>
-        <div class="spinner-group">
-          <button class="spinner-btn" onclick="changeQty('junior',-1)">−</button>
-          <div class="spinner-val" id="junior-val">0</div>
-          <button class="spinner-btn" onclick="changeQty('junior',1)">+</button>
+        <div class="session-card-body">
+          <div class="cap-row">
+            <span class="cap-label">Walk-On</span>
+            <span class="cap-count ${woCls}">${s.walkOnBooked} / ${s.walkOnMax}</span>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-fill ${fillClass(s.walkOnBooked, s.walkOnMax)}" data-target="${woPct}" style="width:0%"></div>
+          </div>
+          <div class="cap-row">
+            <span class="cap-label">Rental</span>
+            <span class="cap-count ${renCls}">${s.rentalBooked} / ${s.rentalMax}</span>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-fill fill-rental" data-target="${renPct}" style="width:0%"></div>
+          </div>
+        </div>
+        <div class="session-card-footer">
+          <div class="session-price">£${s.walkOnPrice} <span>walk-on</span></div>
+          ${sold
+            ? '<span style="font-family:\'Barlow Condensed\',sans-serif;font-size:12px;font-weight:700;letter-spacing:.1em;color:var(--red);text-transform:uppercase">SOLD OUT</span>'
+            : `<button class="session-book-btn" onclick="event.stopPropagation();openBookingModal('${s.id}')">Book Now</button>`}
         </div>
       </div>
     `;
-  } else {
-    title.textContent = 'Rental Kit Count';
-    fields.innerHTML = `
-      <div class="qty-row">
-        <div class="qty-row-label">Adult kits <span style="color:var(--muted);font-size:12px;">(£60 each)</span></div>
-        <div class="spinner-group">
-          <button class="spinner-btn" onclick="changeQty('adult',-1)">−</button>
-          <div class="spinner-val" id="adult-val">1</div>
-          <button class="spinner-btn" onclick="changeQty('adult',1)">+</button>
+  }).join('');
+  // Animate bars after a tick
+  setTimeout(() => {
+    document.querySelectorAll('.progress-fill[data-target]').forEach(bar => {
+      bar.style.width = bar.dataset.target + '%';
+    });
+  }, 80);
+}
+
+// ── RENDER ADMIN SESSIONS ──
+function renderAdminSessions() {
+  const el = document.getElementById('adminSessionsList');
+  el.innerHTML = sessions.map(s => {
+    const totalBooked = s.walkOnBooked + s.rentalBooked;
+    const totalMax    = s.walkOnMax + s.rentalMax;
+    const pct         = Math.round((totalBooked / totalMax) * 100);
+    return `
+      <div class="session-overview-item">
+        <div class="session-overview-top">
+          <div>
+            <div class="session-overview-name">${s.site}</div>
+            <div class="session-overview-date">${fmtDate(s.date)}</div>
+          </div>
+          <div class="session-overview-pct">${pct}%</div>
+        </div>
+        <div class="cap-row" style="margin-bottom:5px">
+          <span class="cap-label">Capacity</span>
+          <span class="cap-count ${capClass(totalBooked, totalMax)}">${totalBooked} / ${totalMax}</span>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-fill ${fillClass(totalBooked, totalMax)}" style="width:${pct}%"></div>
         </div>
       </div>
-      <div class="qty-row">
-        <div class="qty-row-label">Junior kits <span style="color:var(--muted);font-size:12px;">(£45 each)</span></div>
-        <div class="spinner-group">
-          <button class="spinner-btn" onclick="changeQty('junior',-1)">−</button>
-          <div class="spinner-val" id="junior-val">0</div>
-          <button class="spinner-btn" onclick="changeQty('junior',1)">+</button>
-        </div>
-      </div>
-      <div id="junior-rental-note" style="display:none;" class="info-note">Under-18s must be accompanied by a parent or guardian.</div>
     `;
-  }
-
-  state.adultQty  = 1;
-  state.juniorQty = 0;
+  }).join('');
 }
 
-function changeQty(type, delta) {
-  if (type === 'adult') {
-    state.adultQty = Math.max(0, state.adultQty + delta);
-    // At least 1 total
-    if (state.adultQty === 0 && state.juniorQty === 0) state.adultQty = 1;
-    const el = document.getElementById('adult-val');
-    if (el) el.textContent = state.adultQty;
-  } else {
-    state.juniorQty = Math.max(0, state.juniorQty + delta);
-    if (state.adultQty === 0 && state.juniorQty === 0) state.juniorQty = 1;
-    const el = document.getElementById('junior-val');
-    if (el) el.textContent = state.juniorQty;
-  }
+// ── BOOKING MODAL STATE ──
+let currentSessionId = null;
+let bookingType = 'walkon';
+let bookingQty  = 1;
 
-  // Show/hide junior note for rental
-  if (state.selectedType === 'rental') {
-    const note = document.getElementById('junior-rental-note');
-    if (note) note.style.display = state.juniorQty > 0 ? 'block' : 'none';
-  }
+function openBookingModal(sessionId) {
+  currentSessionId = sessionId;
+  const s = sessions.find(x => x.id === sessionId);
+  bookingType = 'walkon';
+  bookingQty  = 1;
+
+  document.getElementById('modalTitle').textContent = 'Book Session';
+  document.getElementById('modalSite').textContent  = s.site + ' — ' + fmtDate(s.date);
+  document.getElementById('modalStep1').style.display   = '';
+  document.getElementById('modalStep2').style.display   = 'none';
+  document.getElementById('modalLoading').style.display = 'none';
+  document.getElementById('modalSuccess').style.display = 'none';
+
+  document.getElementById('typeWalkOn').classList.add('selected');
+  document.getElementById('typeRental').classList.remove('selected');
+  document.getElementById('qtyDisplay').textContent = '1';
+  document.getElementById('bookingTotal').textContent = '£30';
+
+  document.getElementById('bookingModal').classList.add('open');
 }
-
-// ── Guest fields toggle ───────────────────────────────────────────────────────
-document.getElementById('guest-toggle').addEventListener('change', function() {
-  document.getElementById('guest-fields').style.display = this.checked ? 'block' : 'none';
+function closeModal() {
+  document.getElementById('bookingModal').classList.remove('open');
+  currentSessionId = null;
+}
+document.getElementById('bookingModal').addEventListener('click', e => {
+  if (e.target === document.getElementById('bookingModal')) closeModal();
 });
 
-// ── Summary ───────────────────────────────────────────────────────────────────
-function buildSummary() {
-  const sess = state.selectedSession;
-  const site = SITES[sess.site_index];
-  const sub  = calcSubtotal();
-  const fee  = bookingFee(sub);
-  const total = sub + fee;
+function selectType(type) {
+  bookingType = type;
+  document.getElementById('typeWalkOn').classList.toggle('selected', type === 'walkon');
+  document.getElementById('typeRental').classList.toggle('selected', type === 'rental');
+  updateTotal();
+}
+function changeQty(delta) {
+  bookingQty = Math.max(1, Math.min(10, bookingQty + delta));
+  document.getElementById('qtyDisplay').textContent = bookingQty;
+  updateTotal();
+}
+function getUnitPrice() {
+  const s = sessions.find(x => x.id === currentSessionId);
+  return bookingType === 'walkon' ? s.walkOnPrice : s.rentalPrice;
+}
+function updateTotal() {
+  const total = getUnitPrice() * bookingQty;
+  document.getElementById('bookingTotal').textContent  = '£' + total;
+  document.getElementById('bookingTotal2').textContent = '£' + total;
+}
 
-  const feeDisplay = `${BOOKING_FEE_PCT}% + ${BOOKING_FEE_FLAT_PENCE}p`;
+function goToStep2() {
+  document.getElementById('modalStep1').style.display = 'none';
+  document.getElementById('modalStep2').style.display = '';
+  const total = getUnitPrice() * bookingQty;
+  document.getElementById('bookingTotal2').textContent = '£' + total;
+}
+function goBackStep1() {
+  document.getElementById('modalStep1').style.display = '';
+  document.getElementById('modalStep2').style.display = 'none';
+}
 
-  let lineItems = '';
-  if (state.selectedType === 'walkon') {
-    const total_players = state.adultQty + state.juniorQty;
-    lineItems += `<div class="summary-item"><span class="summary-item-label">Walk-On × ${total_players} player${total_players !== 1 ? 's' : ''}</span><span class="summary-item-val">${pence(total_players * WALKON_PRICE_PENCE)}</span></div>`;
+function confirmBooking() {
+  document.getElementById('modalStep2').style.display   = 'none';
+  document.getElementById('modalLoading').style.display = '';
+
+  // Simulate processing
+  setTimeout(() => {
+    // Update session data
+    const s = sessions.find(x => x.id === currentSessionId);
+    if (bookingType === 'walkon') s.walkOnBooked = Math.min(s.walkOnMax, s.walkOnBooked + bookingQty);
+    else                          s.rentalBooked = Math.min(s.rentalMax, s.rentalBooked + bookingQty);
+
+    // Generate ref
+    const ref = 'R1W-' + [...Array(8)].map(() => '0123456789ABCDEF'[Math.floor(Math.random() * 16)]).join('');
+    document.getElementById('successRef').textContent = ref;
+
+    document.getElementById('modalLoading').style.display = 'none';
+    document.getElementById('modalSuccess').style.display = '';
+
+    // Re-render to show updated bars
+    renderSessions();
+    renderAdminSessions();
+  }, 1600);
+}
+
+// ── KILL SWITCH ──
+let ksState = 'normal';
+function setKillSwitch(state) {
+  ksState = state;
+  const btns = { normal: 'ks-normal', soft: 'ks-soft', emergency: 'ks-emergency' };
+  Object.entries(btns).forEach(([k, id]) => {
+    const el = document.getElementById(id);
+    el.className = 'ks-btn' + (k === state ? ` active-${k}` : '');
+  });
+  const badge = document.getElementById('ks-status-badge');
+  const note  = document.getElementById('ks-note');
+  const statVal = document.getElementById('ks-stat-val');
+  if (state === 'normal') {
+    badge.className = 'kill-switch-status ks-normal';
+    badge.textContent = 'NORMAL';
+    note.className = 'kill-switch-note';
+    note.textContent = 'All systems normal. Bookings are being accepted.';
+    statVal.style.color = 'var(--success)';
+    statVal.textContent = 'NORMAL';
+  } else if (state === 'soft') {
+    badge.className = 'kill-switch-status ks-soft';
+    badge.textContent = 'SOFT DISABLE';
+    note.className = 'kill-switch-note warn';
+    note.textContent = '⚠ Soft disable active. New bookings are paused. Existing bookings unaffected.';
+    statVal.style.color = 'var(--accent)';
+    statVal.textContent = 'PAUSED';
   } else {
-    if (state.adultQty > 0) {
-      lineItems += `<div class="summary-item"><span class="summary-item-label">Adult Rental × ${state.adultQty}</span><span class="summary-item-val">${pence(state.adultQty * RENTAL_ADULT_PENCE)}</span></div>`;
-    }
-    if (state.juniorQty > 0) {
-      lineItems += `<div class="summary-item"><span class="summary-item-label">Junior Rental × ${state.juniorQty}</span><span class="summary-item-val">${pence(state.juniorQty * RENTAL_JUNIOR_PENCE)}</span></div>`;
-    }
+    badge.className = 'kill-switch-status ks-emergency';
+    badge.textContent = 'EMERGENCY STOP';
+    note.className = 'kill-switch-note danger';
+    note.textContent = '🚨 Emergency stop active. All booking endpoints are disabled immediately.';
+    statVal.style.color = 'var(--red)';
+    statVal.textContent = 'STOPPED';
   }
-
-  const guestOn = document.getElementById('guest-toggle').checked;
-  const nameDisplay = guestOn
-    ? `${document.getElementById('f-name').value.trim()} (booker) / ${document.getElementById('g-name').value.trim()} (guest on day)`
-    : document.getElementById('f-name').value.trim();
-
-  document.getElementById('summary-panel').innerHTML = `
-    <div class="summary-panel-title">Booking Summary</div>
-    <div class="summary-item"><span class="summary-item-label">Site</span><span class="summary-item-val">${site.name}</span></div>
-    <div class="summary-item"><span class="summary-item-label">Date</span><span class="summary-item-val">${formatDate(sess.date)}</span></div>
-    <div class="summary-item"><span class="summary-item-label">Session</span><span class="summary-item-val">${sess.start} – ${sess.end}</span></div>
-    <div class="summary-item"><span class="summary-item-label">Type</span><span class="summary-item-val">${state.selectedType === 'walkon' ? 'Walk-On' : 'Rental'}</span></div>
-    <div class="summary-item"><span class="summary-item-label">Name</span><span class="summary-item-val">${nameDisplay}</span></div>
-    <div class="summary-item"><span class="summary-item-label">Email</span><span class="summary-item-val">${document.getElementById('f-email').value.trim()}</span></div>
-    ${lineItems}
-    <div class="summary-item"><span class="summary-item-label">Subtotal</span><span class="summary-item-val">${pence(sub)}</span></div>
-    <div class="summary-item"><span class="summary-item-label">Booking fee (${feeDisplay})</span><span class="summary-item-val">${pence(fee)}</span></div>
-    <div class="summary-total">
-      <span class="summary-total-label">Total</span>
-      <span class="summary-total-val">${pence(total)}</span>
-    </div>
-  `;
 }
 
-// ── Submit ────────────────────────────────────────────────────────────────────
-function submitBooking() {
-  if (!document.getElementById('confirm-waiver-cb').checked) {
-    alert('Please confirm your details and agree to the cancellation policy.');
-    return;
-  }
+// ── ATTENDANCE ──
+const checkinData = {
+  'cqb-sat':     { checked: 23, total: 70, walkon: 18, rental: 5 },
+  'oblivion-sat':{ checked: 41, total: 100, walkon: 32, rental: 9 },
+  'fawkham-sat': { checked: 9,  total: 65, walkon: 7, rental: 2 },
+  'cqb-sat2':    { checked: 0,  total: 70, walkon: 0, rental: 0 },
+};
 
-  const sess = state.selectedSession;
-  const site = SITES[sess.site_index];
-  const sub  = calcSubtotal();
-  const fee  = bookingFee(sub);
-  const total = sub + fee;
-  const ref  = genRef();
-  const email = document.getElementById('f-email').value.trim();
-
-  // ── Update mock capacities ────────────────────────────────────────────────
-  // Walk-on → decrements player_capacity_used ONLY
-  // Rental  → decrements BOTH player_capacity_used AND rental_capacity_used
-  const totalPlayers = state.adultQty + state.juniorQty;
-  const sessObj = SESSIONS.find(s => s.id === sess.id);
-  if (sessObj) {
-    sessObj.player_capacity_used += totalPlayers;
-    if (state.selectedType === 'rental') {
-      sessObj.rental_capacity_used += totalPlayers;
-    }
-    state.selectedSession = sessObj; // update reference
-  }
-
-  const typeLabel = state.selectedType === 'walkon' ? 'Walk-On' : 'Rental';
-
-  document.getElementById('success-screen').innerHTML = `
-    <div class="success-icon">&#10003;</div>
-    <div class="success-title">Booking Confirmed</div>
-    <div class="success-ref">${ref}</div>
-
-    <div class="success-details">
-      <div class="success-detail-row"><span class="success-detail-label">Site</span><span class="success-detail-val">${site.name}</span></div>
-      <div class="success-detail-row"><span class="success-detail-label">Date</span><span class="success-detail-val">${formatDate(sess.date)}</span></div>
-      <div class="success-detail-row"><span class="success-detail-label">Gates open</span><span class="success-detail-val">${sess.gates}</span></div>
-      <div class="success-detail-row"><span class="success-detail-label">Game start</span><span class="success-detail-val">${sess.start}</span></div>
-      <div class="success-detail-row"><span class="success-detail-label">Type</span><span class="success-detail-val">${typeLabel}</span></div>
-      <div class="success-detail-row"><span class="success-detail-label">Players</span><span class="success-detail-val">${state.adultQty > 0 ? state.adultQty + ' adult' + (state.adultQty > 1 ? 's' : '') : ''}${state.juniorQty > 0 ? (state.adultQty > 0 ? ', ' : '') + state.juniorQty + ' junior' + (state.juniorQty > 1 ? 's' : '') : ''}</span></div>
-      <div class="success-detail-row"><span class="success-detail-label">Total paid</span><span class="success-detail-val">${pence(total)}</span></div>
-    </div>
-
-    <div class="success-note">
-      <strong>&#9888; Cancellation policy:</strong> Cancellations within 48 hours of game start incur a 50% fee. Please contact us as soon as possible if you need to cancel.
-    </div>
-    <div class="success-note" style="margin-top:8px;">
-      A confirmation email has been sent to <strong style="color:var(--text);">${email}</strong>. Please check your spam folder if you don't see it within a few minutes.
-    </div>
-    <button class="btn btn-ghost" style="margin-top:24px;" onclick="resetBooking()">&#8592; Book Another Session</button>
-  `;
-
-  // Hide stepper on success
-  document.getElementById('stepper').style.display = 'none';
-  document.querySelectorAll('.step-panel').forEach(p => p.classList.remove('active'));
-  document.getElementById('panel-5').classList.add('active');
-  window.scrollTo({ top: document.querySelector('.booking-section').offsetTop - 70, behavior: 'smooth' });
+function updateCheckinCounter() {
+  const val = document.getElementById('checkinSession').value;
+  const d   = checkinData[val];
+  const pct = Math.round((d.checked / d.total) * 100);
+  document.getElementById('checkinCounter').innerHTML = `${d.checked} <span>/ ${d.total}</span>`;
+  document.getElementById('checkinProgress').style.width = pct + '%';
+  document.getElementById('ciWalkOn').textContent  = d.walkon;
+  document.getElementById('ciRental').textContent  = d.rental;
+  document.getElementById('ciAwaiting').textContent = d.total - d.checked;
 }
 
-// ── Reset ─────────────────────────────────────────────────────────────────────
-function resetBooking() {
-  state.currentSite     = 0;
-  state.currentStep     = 1;
-  state.selectedSession = null;
-  state.selectedType    = null;
-  state.adultQty        = 1;
-  state.juniorQty       = 0;
+const sampleAttendees = [
+  { name: 'James Harrington', ref: 'R1W-8F4A2C1B', type: 'Walk-On', in: true },
+  { name: 'Sophie Clarke',    ref: 'R1W-3D9E5F7A', type: 'Rental',  in: true },
+  { name: 'Marcus Webb',      ref: 'R1W-7B2C8D1E', type: 'Walk-On', in: true },
+  { name: 'Oliver Dunn',      ref: 'R1W-6E4A2B8F', type: 'Walk-On', in: true },
+  { name: 'Chloe Bennett',    ref: 'R1W-2C9F4A7D', type: 'Rental',  in: false },
+  { name: 'Dan Fletcher',     ref: 'R1W-5A1B8C3E', type: 'Walk-On', in: false },
+  { name: 'Zoe Marsh',        ref: 'R1W-9D7E2F1A', type: 'Walk-On', in: false },
+  { name: 'Tom Holloway',     ref: 'R1W-ABC123',   type: 'Walk-On', in: false },
+];
 
-  document.getElementById('stepper').style.display = '';
-  document.getElementById('f-name').value  = '';
-  document.getElementById('f-email').value = '';
-  document.getElementById('f-phone').value = '';
-  document.getElementById('f-notes').value = '';
-  document.getElementById('waiver-cb').checked = false;
-  document.getElementById('guest-toggle').checked = false;
-  document.getElementById('guest-fields').style.display = 'none';
-  document.querySelectorAll('.site-tab').forEach((t, i) => t.classList.toggle('active', i === 0));
-
-  renderCalendars();
-  goStep(1);
+function renderAttendees() {
+  document.getElementById('attendeeList').innerHTML = sampleAttendees.map(a => `
+    <div class="attendee-item">
+      <div>
+        <div class="attendee-name">${a.name}</div>
+        <div class="attendee-ref">${a.ref} &middot; ${a.type}</div>
+      </div>
+      <span class="attendee-status ${a.in ? 'status-in' : 'status-out'}">${a.in ? 'Checked In' : 'Awaiting'}</span>
+    </div>
+  `).join('');
 }
 
-// ── Init ──────────────────────────────────────────────────────────────────────
-renderCalendars();
+const mockCheckins = {
+  'R1W-ABC123': { name: 'Tom Holloway', type: 'Walk-On', site: 'Red 1 CQB' },
+  'R1W-8F4A2C1B': { name: 'James Harrington', type: 'Walk-On', site: 'Red 1 CQB' },
+  'R1W-3D9E5F7A': { name: 'Sophie Clarke', type: 'Rental', site: 'Oblivion Airsoft' },
+};
+
+document.getElementById('checkinRefInput').addEventListener('keydown', function(e) {
+  if (e.key !== 'Enter') return;
+  const val = this.value.trim().toUpperCase();
+  const result = document.getElementById('checkinResult');
+  const booking = mockCheckins[val];
+
+  if (booking) {
+    result.className = 'checkin-result success-result';
+    result.innerHTML = `
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px">
+        <span style="font-size:24px">✅</span>
+        <span style="font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--success)">Checked In</span>
+      </div>
+      <div class="checkin-result-name">${booking.name}</div>
+      <div class="checkin-result-detail">${booking.type} &nbsp;·&nbsp; ${booking.site} &nbsp;·&nbsp; Ref: <strong>${val}</strong></div>
+    `;
+    // Mark in attendee list
+    const attendee = sampleAttendees.find(a => a.ref.toUpperCase() === val);
+    if (attendee) { attendee.in = true; renderAttendees(); }
+  } else {
+    result.className = 'checkin-result error-result';
+    result.innerHTML = `
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px">
+        <span style="font-size:20px">❌</span>
+        <span style="font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--red)">Not Found</span>
+      </div>
+      <div style="font-size:13px;color:rgba(255,255,255,0.6)">Booking reference <strong>${val}</strong> not found in this session.</div>
+    `;
+  }
+  this.value = '';
+});
+
+// ── TABS ──
+document.querySelectorAll('.tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById('view-' + tab.dataset.view).classList.add('active');
+  });
+});
+
+// ── INIT ──
+renderSessions();
+renderAdminSessions();
+renderAttendees();
 </script>
 </body>
 </html>
