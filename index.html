@@ -1202,6 +1202,172 @@ h1,h2,h3,h4,h5,
   .nav-subtitle { display: none; }
   .nav-separator { display: none; }
 }
+
+/* ── DEMO CALENDAR ── */
+.demo-cal {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px;
+  max-width: 360px;
+  margin-bottom: 28px;
+}
+.dc-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+.dc-month {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  color: #fff;
+}
+.dc-nav {
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 18px;
+  width: 30px; height: 30px;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: all .15s;
+  line-height: 1;
+}
+.dc-nav:hover { border-color: var(--red); color: #fff; }
+.dc-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+}
+.dc-dayname {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-align: center;
+  padding: 4px 0 8px;
+}
+.dc-cell {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  color: var(--muted);
+  border-radius: 4px;
+  position: relative;
+}
+.dc-past  { opacity: .3; }
+.dc-today { color: #fff; font-weight: 700; }
+.dc-today::after {
+  content: '';
+  position: absolute;
+  bottom: 2px; left: 50%; transform: translateX(-50%);
+  width: 3px; height: 3px;
+  border-radius: 50%;
+  background: var(--muted);
+}
+.dc-game {
+  background: rgba(211,47,47,.2);
+  border: 1px solid rgba(211,47,47,.5);
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background .15s, transform .1s;
+}
+.dc-game::before {
+  content: '●';
+  position: absolute;
+  top: 1px; right: 2px;
+  font-size: 4px;
+  color: var(--red);
+}
+.dc-game:hover { background: rgba(211,47,47,.4); transform: scale(1.1); }
+.dc-selected { background: var(--red) !important; border-color: var(--red) !important; color: #fff !important; }
+.dc-legend {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 12px;
+  font-size: 11px;
+  color: var(--muted);
+}
+.dc-dot {
+  display: inline-block;
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--red);
+  margin-right: 4px;
+}
+.dc-clear {
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 11px;
+  padding: 3px 8px;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: all .15s;
+}
+.dc-clear:hover { border-color: var(--red); color: #fff; }
+
+/* ── ANALYTICS BARS ── */
+.analytics-bar-row { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+.analytics-bar-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+  color: var(--muted); min-width: 40px; text-align: right;
+}
+.analytics-bar-track { flex: 1; height: 20px; background: rgba(255,255,255,.05); border-radius: 3px; overflow: hidden; }
+.analytics-bar-fill {
+  height: 100%; background: var(--red); border-radius: 3px;
+  transition: width .9s cubic-bezier(.25,1,.5,1);
+  display: flex; align-items: center; justify-content: flex-end; padding-right: 6px;
+}
+.analytics-bar-val { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; font-weight: 700; color: rgba(255,255,255,.85); white-space: nowrap; }
+
+/* ── FLAGS ── */
+.flag-row { display: flex; align-items: center; justify-content: space-between; padding: 14px 18px; border-bottom: 1px solid var(--border); }
+.flag-row:last-child { border-bottom: none; }
+.flag-name { font-family: 'Barlow Condensed', sans-serif; font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: #fff; margin-bottom: 2px; }
+.flag-desc { font-size: 12px; color: var(--muted); }
+.toggle { width: 44px; height: 24px; background: var(--border2); border-radius: 12px; position: relative; cursor: pointer; transition: background .2s; flex-shrink: 0; border: none; }
+.toggle.on { background: var(--success); }
+.toggle::after { content: ''; position: absolute; top: 3px; left: 3px; width: 18px; height: 18px; border-radius: 50%; background: #fff; transition: transform .2s; }
+.toggle.on::after { transform: translateX(20px); }
+
+/* ── NOTIFICATIONS ── */
+.notif-item { display: flex; align-items: flex-start; gap: 12px; padding: 16px 18px; border-bottom: 1px solid var(--border); }
+.notif-item:last-child { border-bottom: none; }
+.notif-icon { font-size: 20px; flex-shrink: 0; margin-top: 2px; }
+.notif-title { font-family: 'Barlow Condensed', sans-serif; font-size: 15px; font-weight: 700; color: #fff; margin-bottom: 2px; }
+.notif-body { font-size: 13px; color: var(--muted); line-height: 1.5; }
+.notif-time { font-size: 11px; color: #555; margin-top: 4px; }
+.notif-severity-warn { border-left: 3px solid var(--accent); }
+.notif-severity-info { border-left: 3px solid var(--info); }
+.notif-severity-ok   { border-left: 3px solid var(--success); }
+.notif-severity-err  { border-left: 3px solid var(--red); }
+
+/* ── STAFF ── */
+.staff-row { display: flex; align-items: center; gap: 14px; padding: 14px 18px; border-bottom: 1px solid var(--border); }
+.staff-row:last-child { border-bottom: none; }
+.staff-avatar {
+  width: 36px; height: 36px; border-radius: 50%;
+  background: var(--panel2); border: 1px solid var(--border2);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Barlow Condensed', sans-serif; font-size: 14px; font-weight: 900; color: var(--muted); flex-shrink: 0;
+}
+.staff-name { font-family: 'Barlow Condensed', sans-serif; font-size: 15px; font-weight: 700; color: #fff; margin-bottom: 2px; }
+.staff-email { font-size: 12px; color: var(--muted); }
+.role-badge { font-family: 'Barlow Condensed', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; padding: 2px 8px; border-radius: 2px; }
+.role-owner  { background: rgba(211,47,47,.15); color: #ef9a9a; border: 1px solid rgba(211,47,47,.3); }
+.role-admin  { background: rgba(255,167,38,.12); color: var(--accent); border: 1px solid rgba(255,167,38,.25); }
+.role-staff  { background: rgba(30,136,229,.12); color: #42a5f5; border: 1px solid rgba(30,136,229,.2); }
 </style>
 </head>
 <body>
@@ -1231,9 +1397,16 @@ h1,h2,h3,h4,h5,
   <div style="font-family:'Barlow Condensed',sans-serif;font-size:clamp(28px,6vw,52px);font-weight:900;text-transform:uppercase;letter-spacing:.04em;color:#fff;text-align:center;margin-bottom:8px">
     Choose Your <span style="color:#d32f2f">Platform</span>
   </div>
-  <p style="font-size:14px;color:#888;margin-bottom:48px;text-align:center;max-width:480px">
-    Red 1 Airsoft runs two products: a Shopify Embedded Booking App and a standalone website (for future use). Choose which to demo.
+  <p style="font-size:14px;color:#888;margin-bottom:16px;text-align:center;max-width:560px">
+    Red 1 Airsoft operates two products. The <strong style="color:#e0e0e0">Shopify Booking App</strong> is a temporary bridge — it keeps game-day bookings running on the existing Shopify store while the full standalone website is being built. When the website is ready, Shopify gets cancelled and the app is retired.
   </p>
+  <div style="display:flex;align-items:center;gap:8px;margin-bottom:40px;font-size:12px;color:#555;text-align:center">
+    <span style="padding:2px 10px;background:rgba(211,47,47,.12);border:1px solid rgba(211,47,47,.25);border-radius:100px;color:#ef9a9a;font-weight:700;font-size:10px;letter-spacing:.1em;text-transform:uppercase">Current</span>
+    <span style="color:#444">Shopify plugin (events only)</span>
+    <span style="color:#333;font-size:16px">→</span>
+    <span style="padding:2px 10px;background:rgba(255,167,38,.08);border:1px solid rgba(255,167,38,.2);border-radius:100px;color:#ffa726;font-weight:700;font-size:10px;letter-spacing:.1em;text-transform:uppercase">Future</span>
+    <span style="color:#444">Standalone site (full e-commerce)</span>
+  </div>
 
   <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;width:100%;max-width:720px">
 
@@ -1279,28 +1452,52 @@ h1,h2,h3,h4,h5,
 
 <!-- ── TAB BAR ── -->
 <div id="tab-bar" style="display:none">
-  <div class="tab active" data-view="storefront">
+  <div class="tab" data-view="storefront">
     <span class="tab-icon">🛒</span>
     <span class="tab-label">Storefront</span>
   </div>
   <div class="tab" data-view="admin">
     <span class="tab-icon">📊</span>
-    <span class="tab-label">Admin Dashboard</span>
+    <span class="tab-label">Dashboard</span>
+  </div>
+  <div class="tab" data-view="bookings">
+    <span class="tab-icon">📋</span>
+    <span class="tab-label">Bookings</span>
+  </div>
+  <div class="tab" data-view="sessions">
+    <span class="tab-icon">📅</span>
+    <span class="tab-label">Sessions</span>
   </div>
   <div class="tab" data-view="attendance">
     <span class="tab-icon">✅</span>
     <span class="tab-label">Attendance</span>
   </div>
+  <div class="tab" data-view="analytics">
+    <span class="tab-icon">📈</span>
+    <span class="tab-label">Analytics</span>
+  </div>
+  <div class="tab" data-view="notifications">
+    <span class="tab-icon">🔔</span>
+    <span class="tab-label">Alerts</span>
+  </div>
+  <div class="tab" data-view="staff">
+    <span class="tab-icon">👥</span>
+    <span class="tab-label">Staff</span>
+  </div>
+  <div class="tab" data-view="flags">
+    <span class="tab-icon">🚩</span>
+    <span class="tab-label">Flags</span>
+  </div>
   <div class="tab" data-view="health">
     <span class="tab-icon">💚</span>
-    <span class="tab-label">System Health</span>
+    <span class="tab-label">Health</span>
   </div>
 </div>
 
 <!-- ══════════════════════════════════════ -->
 <!-- ── VIEW: STOREFRONT ── -->
 <!-- ══════════════════════════════════════ -->
-<div class="view active" id="view-storefront">
+<div class="view" id="view-storefront">
 
   <!-- Hero -->
   <div class="sf-hero">
@@ -1318,7 +1515,9 @@ h1,h2,h3,h4,h5,
   </div>
 
   <div class="sf-content">
-    <div class="sf-section-title">Upcoming Sessions — Click to Book</div>
+    <div class="sf-section-title">Select a Game Day</div>
+    <div id="demo-cal"></div>
+    <div class="sf-section-title" id="sessionsTitle">Upcoming Sessions — Click to Book</div>
     <div class="sessions-grid" id="sessionsGrid">
       <!-- Injected by JS -->
     </div>
@@ -1599,6 +1798,408 @@ h1,h2,h3,h4,h5,
   </div>
 </div>
 
+<!-- ══════════════════════════════════════ -->
+<!-- ── VIEW: BOOKINGS ── -->
+<!-- ══════════════════════════════════════ -->
+<div class="view" id="view-bookings">
+  <div class="admin-content">
+    <div class="page-header">
+      <div class="page-title">Bookings</div>
+      <div class="page-sub">All booking records — search, filter, and manage</div>
+    </div>
+    <div style="display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap">
+      <select class="select-input" style="max-width:220px;background:var(--panel2);border:1px solid var(--border2);border-radius:4px;padding:8px 12px;color:var(--text);font-size:13px;outline:none">
+        <option>All Sessions</option>
+        <option>Red 1 CQB — Sat</option>
+        <option>Oblivion — Sat</option>
+        <option>Red 1 Fawkham — Sat</option>
+      </select>
+      <select class="select-input" style="max-width:140px;background:var(--panel2);border:1px solid var(--border2);border-radius:4px;padding:8px 12px;color:var(--text);font-size:13px;outline:none">
+        <option>All Types</option>
+        <option>Walk-On</option>
+        <option>Rental</option>
+      </select>
+      <select class="select-input" style="max-width:140px;background:var(--panel2);border:1px solid var(--border2);border-radius:4px;padding:8px 12px;color:var(--text);font-size:13px;outline:none">
+        <option>All Status</option>
+        <option>Paid</option>
+        <option>Pending</option>
+        <option>Cancelled</option>
+      </select>
+    </div>
+    <div class="admin-panel">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Ref</th><th>Name</th><th>Session</th><th>Type</th>
+            <th>Qty</th><th>Total</th><th>Status</th><th>Booked</th><th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="ref-code">R1W-8F4A2C1B</span></td>
+            <td>James Harrington</td><td>Red 1 CQB — Sat</td>
+            <td><span class="type-tag tag-walkon">Walk-On</span></td>
+            <td>2</td><td>£60</td><td><span class="type-tag tag-paid">Paid</span></td>
+            <td style="color:var(--muted);font-size:12px">Today 09:14</td>
+            <td><button class="btn btn-sm btn-secondary">Cancel</button></td>
+          </tr>
+          <tr>
+            <td><span class="ref-code">R1W-3D9E5F7A</span></td>
+            <td>Sophie Clarke</td><td>Oblivion — Sat</td>
+            <td><span class="type-tag tag-rental">Rental</span></td>
+            <td>2</td><td>£120</td><td><span class="type-tag tag-paid">Paid</span></td>
+            <td style="color:var(--muted);font-size:12px">Today 08:52</td>
+            <td><button class="btn btn-sm btn-secondary">Cancel</button></td>
+          </tr>
+          <tr>
+            <td><span class="ref-code">R1W-7B2C8D1E</span></td>
+            <td>Marcus Webb</td><td>Red 1 CQB — Sat</td>
+            <td><span class="type-tag tag-walkon">Walk-On</span></td>
+            <td>1</td><td>£30</td><td><span class="type-tag tag-paid">Paid</span></td>
+            <td style="color:var(--muted);font-size:12px">Yesterday</td>
+            <td><button class="btn btn-sm btn-secondary">Cancel</button></td>
+          </tr>
+          <tr>
+            <td><span class="ref-code">R1W-1A5F3E9C</span></td>
+            <td>Priya Sharma</td><td>Red 1 Fawkham — Sat</td>
+            <td><span class="type-tag tag-rental">Rental</span></td>
+            <td>1</td><td>£60</td><td><span class="type-tag tag-pending">Pending</span></td>
+            <td style="color:var(--muted);font-size:12px">Yesterday</td>
+            <td><button class="btn btn-sm btn-secondary">Cancel</button></td>
+          </tr>
+          <tr>
+            <td><span class="ref-code">R1W-6E4A2B8F</span></td>
+            <td>Oliver Dunn</td><td>Oblivion — Sat</td>
+            <td><span class="type-tag tag-walkon">Walk-On</span></td>
+            <td>3</td><td>£90</td><td><span class="type-tag tag-paid">Paid</span></td>
+            <td style="color:var(--muted);font-size:12px">2 days ago</td>
+            <td><button class="btn btn-sm btn-secondary">Cancel</button></td>
+          </tr>
+          <tr>
+            <td><span class="ref-code">R1W-4C8B1D5F</span></td>
+            <td>Emma Hughes</td><td>Red 1 CQB — Sat</td>
+            <td><span class="type-tag tag-rental">Rental</span></td>
+            <td>1</td><td>£60</td><td><span class="type-tag tag-paid">Paid</span></td>
+            <td style="color:var(--muted);font-size:12px">2 days ago</td>
+            <td><button class="btn btn-sm btn-secondary">Cancel</button></td>
+          </tr>
+          <tr>
+            <td><span class="ref-code">R1W-9D2E7F3A</span></td>
+            <td>Ryan Mitchell</td><td>Red 1 Fawkham — Sat</td>
+            <td><span class="type-tag tag-walkon">Walk-On</span></td>
+            <td>4</td><td>£120</td><td><span class="type-tag tag-paid">Paid</span></td>
+            <td style="color:var(--muted);font-size:12px">3 days ago</td>
+            <td><button class="btn btn-sm btn-secondary">Cancel</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════ -->
+<!-- ── VIEW: SESSIONS ADMIN ── -->
+<!-- ══════════════════════════════════════ -->
+<div class="view" id="view-sessions">
+  <div class="admin-content">
+    <div class="page-header" style="display:flex;justify-content:space-between;align-items:flex-start">
+      <div>
+        <div class="page-title">Sessions</div>
+        <div class="page-sub">Create and manage game day sessions</div>
+      </div>
+      <button class="btn btn-primary">+ New Session</button>
+    </div>
+    <div class="admin-panel">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Site</th><th>Date</th><th>Type</th>
+            <th>Walk-On Cap.</th><th>Rental Cap.</th><th>Status</th><th>Bookings</th><th></th>
+          </tr>
+        </thead>
+        <tbody id="adminSessionsTable"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════ -->
+<!-- ── VIEW: ANALYTICS ── -->
+<!-- ══════════════════════════════════════ -->
+<div class="view" id="view-analytics">
+  <div class="admin-content" style="max-width:900px">
+    <div class="page-header">
+      <div class="page-title">Analytics</div>
+      <div class="page-sub">Booking trends and revenue breakdown</div>
+    </div>
+    <div class="stats-grid" style="grid-template-columns:repeat(3,1fr);margin-bottom:24px">
+      <div class="stat-card">
+        <div class="stat-card-label">Total Revenue</div>
+        <div class="stat-val green">£8,420</div>
+        <div class="stat-trend trend-up">▲ 18% vs last month</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card-label">Total Bookings</div>
+        <div class="stat-val">247</div>
+        <div class="stat-trend trend-up">▲ 12% vs last month</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card-label">Avg. Occupancy</div>
+        <div class="stat-val blue">73%</div>
+        <div class="stat-sub">Across all sessions</div>
+      </div>
+    </div>
+    <div class="admin-cols">
+      <div class="admin-panel">
+        <div class="admin-panel-header">
+          <div class="admin-panel-title">Revenue by Month</div>
+        </div>
+        <div style="padding:18px" id="revenueChart"></div>
+      </div>
+      <div class="admin-panel">
+        <div class="admin-panel-header">
+          <div class="admin-panel-title">Booking Type Split</div>
+        </div>
+        <div style="padding:18px">
+          <div class="analytics-bar-row">
+            <div class="analytics-bar-label">Walk-On</div>
+            <div class="analytics-bar-track">
+              <div class="analytics-bar-fill" data-atarget="68" style="width:0%">
+                <span class="analytics-bar-val">68% · 168</span>
+              </div>
+            </div>
+          </div>
+          <div class="analytics-bar-row" style="margin-bottom:20px">
+            <div class="analytics-bar-label">Rental</div>
+            <div class="analytics-bar-track">
+              <div class="analytics-bar-fill" data-atarget="32" style="width:0%;background:var(--accent)">
+                <span class="analytics-bar-val">32% · 79</span>
+              </div>
+            </div>
+          </div>
+          <div class="admin-panel-title" style="margin-bottom:10px">By Site</div>
+          <div class="analytics-bar-row">
+            <div class="analytics-bar-label" style="min-width:58px">CQB</div>
+            <div class="analytics-bar-track">
+              <div class="analytics-bar-fill" data-atarget="45" style="width:0%">
+                <span class="analytics-bar-val">45%</span>
+              </div>
+            </div>
+          </div>
+          <div class="analytics-bar-row">
+            <div class="analytics-bar-label" style="min-width:58px">Oblivion</div>
+            <div class="analytics-bar-track">
+              <div class="analytics-bar-fill" data-atarget="33" style="width:0%;background:var(--info)">
+                <span class="analytics-bar-val">33%</span>
+              </div>
+            </div>
+          </div>
+          <div class="analytics-bar-row">
+            <div class="analytics-bar-label" style="min-width:58px">Fawkham</div>
+            <div class="analytics-bar-track">
+              <div class="analytics-bar-fill" data-atarget="22" style="width:0%;background:var(--success)">
+                <span class="analytics-bar-val">22%</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════ -->
+<!-- ── VIEW: NOTIFICATIONS ── -->
+<!-- ══════════════════════════════════════ -->
+<div class="view" id="view-notifications">
+  <div class="admin-content" style="max-width:740px">
+    <div class="page-header">
+      <div class="page-title">Notifications</div>
+      <div class="page-sub">System alerts and event log</div>
+    </div>
+    <div class="admin-panel">
+      <div class="notif-item notif-severity-ok">
+        <div class="notif-icon">✅</div>
+        <div style="flex:1">
+          <div class="notif-title">Booking System Healthy</div>
+          <div class="notif-body">All booking endpoints responding normally. Kill switch: Normal.</div>
+          <div class="notif-time">Just now</div>
+        </div>
+      </div>
+      <div class="notif-item notif-severity-warn">
+        <div class="notif-icon">⚠️</div>
+        <div style="flex:1">
+          <div class="notif-title">Capacity Warning — Oblivion Walk-On</div>
+          <div class="notif-body">Walk-on spots for Oblivion Saturday are at 69% (55/80). Consider monitoring closely.</div>
+          <div class="notif-time">15 minutes ago</div>
+        </div>
+      </div>
+      <div class="notif-item notif-severity-info">
+        <div class="notif-icon">📧</div>
+        <div style="flex:1">
+          <div class="notif-title">Email Queue Processed</div>
+          <div class="notif-body">47 confirmation emails sent successfully via Proton Mail Bridge. 0 failures. Queue depth: 0.</div>
+          <div class="notif-time">1 hour ago</div>
+        </div>
+      </div>
+      <div class="notif-item notif-severity-info">
+        <div class="notif-icon">🔐</div>
+        <div style="flex:1">
+          <div class="notif-title">Admin Login — jason_clarke2009 (Owner)</div>
+          <div class="notif-body">Successful login from 87.112.xx.xx · Chrome 124 · Windows</div>
+          <div class="notif-time">3 hours ago</div>
+        </div>
+      </div>
+      <div class="notif-item notif-severity-ok">
+        <div class="notif-icon">💾</div>
+        <div style="flex:1">
+          <div class="notif-title">Database Backup Complete</div>
+          <div class="notif-body">Scheduled backup completed. Size: 42 MB. Retained 30 days.</div>
+          <div class="notif-time">Today 03:00</div>
+        </div>
+      </div>
+      <div class="notif-item notif-severity-info">
+        <div class="notif-icon">🔄</div>
+        <div style="flex:1">
+          <div class="notif-title">Redis Cache Cleared</div>
+          <div class="notif-body">Session capacity cache evicted and refreshed after booking system restart.</div>
+          <div class="notif-time">Yesterday 22:14</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════ -->
+<!-- ── VIEW: STAFF ── -->
+<!-- ══════════════════════════════════════ -->
+<div class="view" id="view-staff">
+  <div class="admin-content" style="max-width:740px">
+    <div class="page-header" style="display:flex;justify-content:space-between;align-items:flex-start">
+      <div>
+        <div class="page-title">Staff</div>
+        <div class="page-sub">Manage access roles and permissions</div>
+      </div>
+      <button class="btn btn-primary">+ Add Staff</button>
+    </div>
+    <div class="admin-panel">
+      <div class="staff-row">
+        <div class="staff-avatar" style="border-color:rgba(211,47,47,.4);color:#ef9a9a">JC</div>
+        <div style="flex:1">
+          <div class="staff-name">Jason Clarke</div>
+          <div class="staff-email">jason_clarke2009+shopifystore@proton.me</div>
+        </div>
+        <span class="role-badge role-owner">Owner</span>
+      </div>
+      <div class="staff-row">
+        <div class="staff-avatar">SM</div>
+        <div style="flex:1">
+          <div class="staff-name">Sarah Mitchell</div>
+          <div class="staff-email">sarah.m@red1airsoft.com</div>
+        </div>
+        <span class="role-badge role-admin">Admin</span>
+        <button class="btn btn-sm btn-secondary" style="margin-left:12px">Remove</button>
+      </div>
+      <div class="staff-row">
+        <div class="staff-avatar">DW</div>
+        <div style="flex:1">
+          <div class="staff-name">Dan Wilson</div>
+          <div class="staff-email">dan.w@red1airsoft.com</div>
+        </div>
+        <span class="role-badge role-staff">Staff</span>
+        <button class="btn btn-sm btn-secondary" style="margin-left:12px">Remove</button>
+      </div>
+      <div class="staff-row">
+        <div class="staff-avatar">AK</div>
+        <div style="flex:1">
+          <div class="staff-name">Amy Knight</div>
+          <div class="staff-email">amy.k@red1airsoft.com</div>
+        </div>
+        <span class="role-badge role-staff">Staff</span>
+        <button class="btn btn-sm btn-secondary" style="margin-left:12px">Remove</button>
+      </div>
+    </div>
+    <div style="margin-top:16px;padding:16px 18px;background:var(--panel);border:1px solid var(--border);border-radius:6px">
+      <div class="admin-panel-title" style="margin-bottom:10px">Role Reference</div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px;font-size:13px;color:var(--muted)">
+        <div><span class="role-badge role-owner" style="display:inline-block;margin-bottom:4px">Owner</span><br>Full access, billing, delete</div>
+        <div><span class="role-badge role-admin" style="display:inline-block;margin-bottom:4px">Admin</span><br>Sessions, bookings, settings</div>
+        <div><span class="role-badge role-staff" style="display:inline-block;margin-bottom:4px">Staff</span><br>Check-in, view bookings only</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════ -->
+<!-- ── VIEW: FEATURE FLAGS ── -->
+<!-- ══════════════════════════════════════ -->
+<div class="view" id="view-flags">
+  <div class="admin-content" style="max-width:740px">
+    <div class="page-header">
+      <div class="page-title">Feature Flags</div>
+      <div class="page-sub">Enable or disable platform features without a redeployment</div>
+    </div>
+    <div class="admin-panel">
+      <div class="flag-row">
+        <div style="flex:1">
+          <div class="flag-name">Rental Bookings</div>
+          <div class="flag-desc">Allow customers to book rental kit packages</div>
+        </div>
+        <button class="toggle on" onclick="this.classList.toggle('on')"></button>
+      </div>
+      <div class="flag-row">
+        <div style="flex:1">
+          <div class="flag-name">Guest Players</div>
+          <div class="flag-desc">Allow adding 2nd / 3rd players to a single booking</div>
+        </div>
+        <button class="toggle on" onclick="this.classList.toggle('on')"></button>
+      </div>
+      <div class="flag-row">
+        <div style="flex:1">
+          <div class="flag-name">Walk-On Bookings</div>
+          <div class="flag-desc">Allow own-kit (walk-on) players to book</div>
+        </div>
+        <button class="toggle on" onclick="this.classList.toggle('on')"></button>
+      </div>
+      <div class="flag-row">
+        <div style="flex:1">
+          <div class="flag-name">Attendance Check-In</div>
+          <div class="flag-desc">Enable QR scan / ref lookup on game day</div>
+        </div>
+        <button class="toggle on" onclick="this.classList.toggle('on')"></button>
+      </div>
+      <div class="flag-row">
+        <div style="flex:1">
+          <div class="flag-name">Email Confirmations</div>
+          <div class="flag-desc">Send booking confirmation emails via Proton Mail Bridge</div>
+        </div>
+        <button class="toggle on" onclick="this.classList.toggle('on')"></button>
+      </div>
+      <div class="flag-row">
+        <div style="flex:1">
+          <div class="flag-name">Capacity Warnings</div>
+          <div class="flag-desc">Notify admin when a session exceeds 80% capacity</div>
+        </div>
+        <button class="toggle on" onclick="this.classList.toggle('on')"></button>
+      </div>
+      <div class="flag-row">
+        <div style="flex:1">
+          <div class="flag-name">Waitlist</div>
+          <div class="flag-desc">Let players join a waitlist when a session is full</div>
+        </div>
+        <button class="toggle" onclick="this.classList.toggle('on')"></button>
+      </div>
+      <div class="flag-row">
+        <div style="flex:1">
+          <div class="flag-name">Junior Discount</div>
+          <div class="flag-desc">Show under-18 walk-on booking option (£30)</div>
+        </div>
+        <button class="toggle" onclick="this.classList.toggle('on')"></button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- ── BOOKING MODAL ── -->
 <div class="modal-overlay" id="bookingModal">
   <div class="modal" id="modalBox">
@@ -1791,6 +2392,100 @@ const sessions = [
   },
 ];
 
+// ── LANDING / NAV ──
+function showLanding() {
+  document.getElementById('view-landing').style.display = 'flex';
+  document.getElementById('view-website').style.display = 'none';
+  document.getElementById('tab-bar').style.display = 'none';
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+}
+
+function launchApp(type) {
+  document.getElementById('view-landing').style.display = 'none';
+  if (type === 'website') {
+    document.getElementById('view-website').style.display = 'flex';
+    document.getElementById('tab-bar').style.display = 'none';
+    document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+  } else {
+    document.getElementById('view-website').style.display = 'none';
+    document.getElementById('tab-bar').style.display = 'flex';
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+    document.querySelector('.tab[data-view="storefront"]').classList.add('active');
+    document.getElementById('view-storefront').classList.add('active');
+    renderDemoCalendar();
+  }
+}
+
+// ── DEMO CALENDAR ──
+let calFilter = null;
+let calViewMonth = new Date(today.getFullYear(), today.getMonth(), 1);
+
+function renderDemoCalendar() {
+  const gameDateStrings = new Set(sessions.map(s => s.date.toDateString()));
+  const year = calViewMonth.getFullYear();
+  const month = calViewMonth.getMonth();
+  const monthName = new Date(year, month, 1).toLocaleDateString('en-GB', { month: 'long', year: 'numeric' });
+  const firstDay = new Date(year, month, 1).getDay();
+  const offset = (firstDay + 6) % 7;
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+  let cells = '';
+  for (let i = 0; i < offset; i++) cells += '<div class="dc-cell dc-empty"></div>';
+  for (let d = 1; d <= daysInMonth; d++) {
+    const date = new Date(year, month, d);
+    const isToday = date.toDateString() === today.toDateString();
+    const isGame  = gameDateStrings.has(date.toDateString());
+    const isPast  = date < new Date(today.getFullYear(), today.getMonth(), today.getDate());
+    const isSel   = calFilter && date.toDateString() === calFilter;
+    let cls = 'dc-cell';
+    if (isPast) cls += ' dc-past';
+    if (isToday) cls += ' dc-today';
+    if (isGame && !isPast) cls += ' dc-game';
+    if (isSel) cls += ' dc-selected';
+    const handler = isGame && !isPast ? `onclick="calPickDate('${date.toDateString()}')"` : '';
+    cells += `<div class="${cls}" ${handler}>${d}</div>`;
+  }
+
+  const el = document.getElementById('demo-cal');
+  if (!el) return;
+  el.innerHTML = `
+    <div class="demo-cal">
+      <div class="dc-header">
+        <button class="dc-nav" onclick="calPrev()">‹</button>
+        <span class="dc-month">${monthName.toUpperCase()}</span>
+        <button class="dc-nav" onclick="calNext()">›</button>
+      </div>
+      <div class="dc-grid">
+        ${['Mo','Tu','We','Th','Fr','Sa','Su'].map(n => `<div class="dc-dayname">${n}</div>`).join('')}
+        ${cells}
+      </div>
+      <div class="dc-legend">
+        <span><span class="dc-dot"></span> Game Day — click to filter</span>
+        ${calFilter ? '<button class="dc-clear" onclick="calClear()">Clear</button>' : ''}
+      </div>
+    </div>
+  `;
+}
+
+function calPickDate(dateStr) {
+  calFilter = dateStr;
+  renderDemoCalendar();
+  renderSessions();
+  const titleEl = document.getElementById('sessionsTitle');
+  const d = new Date(dateStr);
+  if (titleEl) titleEl.textContent = 'Sessions — ' + d.toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long' });
+}
+function calClear() {
+  calFilter = null;
+  renderDemoCalendar();
+  renderSessions();
+  const titleEl = document.getElementById('sessionsTitle');
+  if (titleEl) titleEl.textContent = 'Upcoming Sessions — Click to Book';
+}
+function calPrev() { calViewMonth.setMonth(calViewMonth.getMonth() - 1); renderDemoCalendar(); }
+function calNext() { calViewMonth.setMonth(calViewMonth.getMonth() + 1); renderDemoCalendar(); }
+
 // ── RENDER SESSIONS (storefront) ──
 function capClass(booked, max) {
   const pct = booked / max;
@@ -1806,7 +2501,12 @@ function fillClass(booked, max) {
 }
 function renderSessions() {
   const grid = document.getElementById('sessionsGrid');
-  grid.innerHTML = sessions.map(s => {
+  const filtered = calFilter ? sessions.filter(s => s.date.toDateString() === calFilter) : sessions;
+  if (filtered.length === 0) {
+    grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:48px 20px;color:var(--muted)"><div style="font-size:36px;margin-bottom:10px">📅</div>No sessions on this date.<br><button onclick="calClear()" style="color:var(--red);background:none;border:none;cursor:pointer;font-weight:700;font-size:13px;margin-top:10px;font-family:inherit">Show all sessions</button></div>';
+    return;
+  }
+  grid.innerHTML = filtered.map(s => {
     const woPct   = Math.round((s.walkOnBooked / s.walkOnMax) * 100);
     const renPct  = Math.round((s.rentalBooked / s.rentalMax) * 100);
     const woCls   = capClass(s.walkOnBooked, s.walkOnMax);
@@ -2087,20 +2787,80 @@ document.getElementById('checkinRefInput').addEventListener('keydown', function(
   this.value = '';
 });
 
+// ── ADMIN SESSIONS TABLE ──
+function renderAdminSessionsTable() {
+  const el = document.getElementById('adminSessionsTable');
+  if (!el) return;
+  el.innerHTML = sessions.map(s => {
+    const totalBooked = s.walkOnBooked + s.rentalBooked;
+    const totalMax    = s.walkOnMax + s.rentalMax;
+    return `
+      <tr>
+        <td style="font-weight:700;color:#fff">${s.site}</td>
+        <td>${fmtDate(s.date)}</td>
+        <td><span class="session-type-badge ${s.typeClass}" style="font-size:10px">${s.type}</span></td>
+        <td>${s.walkOnMax}</td>
+        <td>${s.rentalMax}</td>
+        <td><span class="type-tag" style="background:rgba(67,160,71,.1);color:var(--success);border:1px solid rgba(67,160,71,.2)">Active</span></td>
+        <td><span class="cap-count ${capClass(totalBooked, totalMax)}">${totalBooked} / ${totalMax}</span></td>
+        <td style="display:flex;gap:6px;padding:12px 8px">
+          <button class="btn btn-sm btn-secondary">Edit</button>
+          <button class="btn btn-sm" style="background:rgba(211,47,47,.1);color:var(--red);border:1px solid rgba(211,47,47,.2)">Delete</button>
+        </td>
+      </tr>`;
+  }).join('');
+}
+
+// ── REVENUE CHART ──
+function renderRevenueChart() {
+  const el = document.getElementById('revenueChart');
+  if (!el) return;
+  const data = [
+    { month: 'Nov', val: 4200, max: 10000 },
+    { month: 'Dec', val: 5800, max: 10000 },
+    { month: 'Jan', val: 3100, max: 10000 },
+    { month: 'Feb', val: 4600, max: 10000 },
+    { month: 'Mar', val: 6200, max: 10000 },
+    { month: 'Apr', val: 7140, max: 10000 },
+    { month: 'May', val: 8420, max: 10000 },
+  ];
+  el.innerHTML = data.map(d => `
+    <div class="analytics-bar-row">
+      <div class="analytics-bar-label">${d.month}</div>
+      <div class="analytics-bar-track">
+        <div class="analytics-bar-fill" data-rtarget="${Math.round(d.val / d.max * 100)}" style="width:0%">
+          <span class="analytics-bar-val">£${d.val.toLocaleString()}</span>
+        </div>
+      </div>
+    </div>`).join('');
+  setTimeout(() => {
+    el.querySelectorAll('[data-rtarget]').forEach(b => { b.style.width = b.dataset.rtarget + '%'; });
+    document.querySelectorAll('[data-atarget]').forEach(b => { b.style.width = b.dataset.atarget + '%'; });
+  }, 120);
+}
+
 // ── TABS ──
 document.querySelectorAll('.tab').forEach(tab => {
   tab.addEventListener('click', () => {
     document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
     document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
     tab.classList.add('active');
-    document.getElementById('view-' + tab.dataset.view).classList.add('active');
+    const viewId = 'view-' + tab.dataset.view;
+    document.getElementById(viewId).classList.add('active');
+    // lazy-render analytics bars when switching to that tab
+    if (tab.dataset.view === 'analytics') renderRevenueChart();
+    if (tab.dataset.view === 'sessions')  renderAdminSessionsTable();
+    if (tab.dataset.view === 'storefront') renderDemoCalendar();
   });
 });
 
 // ── INIT ──
 renderSessions();
 renderAdminSessions();
+renderAdminSessionsTable();
 renderAttendees();
+// Start on landing screen — views hidden until user chooses
+showLanding();
 </script>
 </body>
 </html>
